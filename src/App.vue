@@ -1,26 +1,39 @@
 <template>
   <div id="app">
-    <el-container>
-    <el-header>
-      <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-        <el-menu-item index="1">处理中心</el-menu-item>
-        <el-submenu index="2">
-          <template slot="title">我的工作台</template>
-          <el-menu-item index="2-1">选项1</el-menu-item>
-          <el-menu-item index="2-2">选项2</el-menu-item>
-          <el-menu-item index="2-3">选项3</el-menu-item>
-        </el-submenu>
-        <el-menu-item index="3"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>
-      </el-menu>
-    </el-header>
-    <el-main>
-      <el-row :gutter="20" style="width:100%;">
-        <el-col :span="6">
-          <el-card class="box-card">
-            放头像
-          </el-card>
-        </el-col>
-        <el-col :span="12">
+    <el-container class="size">
+      <el-aside width="400px">
+        <el-card style="width:90%;margin:5%;">
+          <div class="demo-type" style="text-align:center;">
+            <el-avatar :size="70" src="https://img-blog.csdnimg.cn/20200522154246646.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0RCQ18xMjE=,size_16,color_FFFFFF,t_70" @error="true">
+              <img src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png"/>
+            </el-avatar>
+            <div style="text-align:center;margin-top:10px;"><b>DengBoCong</b></div>
+            <p style="text-align:center;margin-top:10px;fontSize:13px;color:#868686;">依旧相信梦想，始终年轻，始终热泪盈眶</p>
+          </div>
+          <el-divider content-position="center">介绍</el-divider>
+          <div>
+            <p style="fontSize:13px;color:#868686;"><i class="el-icon-user"></i>    CV & Java爱好者</p></br>
+            <p style="fontSize:13px;color:#868686;"><i class="el-icon-medal"></i>    华中科技大学-硕士在读-智能计算技术与应用</p></br>
+            <p style="fontSize:13px;color:#868686;"><i class="el-icon-house"></i>    浙江省杭州市</p>
+          </div>
+          <el-divider content-position="center">社区</el-divider>
+          <div>
+            <div>
+              <el-link :underline="false" type="primary" href="https://github.com/DengBoCong">GitHub</el-link>
+              <el-divider direction="vertical"></el-divider>
+              <span><el-link :underline="false" type="primary" href="https://dengbocong.blog.csdn.net/">CSDN</el-link></span>
+            </div>
+          </div>
+          <el-divider content-position="center">标签</el-divider>
+          <div style="padding:10px;">
+            <el-tag>标签一</el-tag>
+            <el-tag type="success">标签二</el-tag>
+            <el-tag type="info">标签三</el-tag>
+            <el-tag type="warning">标签四</el-tag>
+            <el-tag type="danger">标签五</el-tag>
+          </div>
+        </el-card>
+        <el-card style="width:90%;margin:5%;">
           <div class="block">
             <el-carousel height="150px">
               <el-carousel-item v-for="item in 4" :key="item">
@@ -28,45 +41,100 @@
               </el-carousel-item>
             </el-carousel>
           </div>
-          <ScrollBar style="height:500px;">
-            <el-container>
-              <el-card class="box-card">
-                <div slot="header" class="clearfix">
-                  <span>卡片名称</span>
-                  <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>
-                </div>
-                <div v-for="o in 4" :key="o" class="text item">
-                  {{'列表内容 ' + o }}
-                </div>
-              </el-card>
-            </el-container>
-            <el-container>
-              <el-card class="box-card">
-                <div slot="header" class="clearfix">
-                  <span>卡片名称</span>
-                  <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>
-                </div>
-                <div v-for="o in 4" :key="o" class="text item">
-                  {{'列表内容 ' + o }}
-                </div>
-              </el-card>
-            </el-container>
-          </ScrollBar>
-        </el-col>
-        <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
-      </el-row>
-    </el-main>
-    <el-footer>
-      <el-card class="box-card">
-        <el-popover
-          placement="top-start"
-          trigger="click">
-          <p></p>
-          <el-button type="text" slot="reference">DengBoCong版权所有，保留一切权利</el-button>
-        </el-popover>
-      </el-card>
-    </el-footer>
-  </el-container>
+        </el-card>
+      </el-aside>
+      <el-container>
+        <el-header>
+          <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+            <el-menu-item index="1">后台中心</el-menu-item>
+            <el-submenu index="2">
+              <template slot="title">我的工作台</template>
+              <el-menu-item index="2-1">入口1</el-menu-item>
+              <el-menu-item index="2-2">入口2</el-menu-item>
+              <el-menu-item index="2-3">入口3</el-menu-item>
+            </el-submenu>
+            <el-menu-item index="3"><a href="#" target="_blank">项目中心</a></el-menu-item>
+          </el-menu>
+        </el-header>
+        <el-main>
+          <el-container>
+            <el-tabs tab-position="right" v-model="activeName" @tab-click="handleClick" class="size">
+              <el-tab-pane label="好好谈谈Java" lazy="true" name="first">
+                <el-table
+                  :data="tableData"
+                  style="width: 100%;height:100%;"
+                  max-height="100%"
+                  show-header="false">
+                  <el-table-column>
+                    <template slot-scope="scope">
+                      <div style="margin-top:10px;"><b>标题</b></div>
+                      <div style="margin-top:10px;"><b>
+                        <el-tag type="info" size="medium">中等标签</el-tag></b>
+                        <el-tag type="info" size="medium">中等标签</el-tag>
+                        <el-tag type="info" size="medium">中等标签</el-tag>
+                      </div>
+                      <div style="margin-top:10px;"><p>段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。</p></div>
+                      <div style="margin-top:10px;">
+                        <el-avatar size="small" src="https://img-blog.csdnimg.cn/20200522154246646.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0RCQ18xMjE=,size_16,color_FFFFFF,t_70" @error="true">
+                          <img src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png"/>
+                        </el-avatar>
+                        <span style="font-size:13px;"><el-link :underline="false" type="primary">DengBoCong </el-link> 发布于 2020-05-22 15:09</span>
+                      </div>
+                      <div style="margin-top:10px;">
+                        <span><i class="el-icon-view">161</i></span>
+                        <el-divider direction="vertical"></el-divider>
+                        <span><i class="el-icon-thumb">161</i></span>
+                        <el-divider direction="vertical"></el-divider>
+                        <span><i class="el-icon-star-off">161</i></span>
+                        <el-divider direction="vertical"></el-divider>
+                        <span><i class="el-icon-chat-dot-round">161</i></span>
+                      </div>
+                      <!-- <el-popover trigger="hover" placement="top">
+                        <p>姓名: {{ scope.row.name }}</p>
+                        <p>住址: {{ scope.row.address }}</p>
+                        <div slot="reference" class="name-wrapper">
+                          <el-tag size="medium">{{ scope.row.name }}</el-tag>
+                        </div>
+                      </el-popover> -->
+                    </template>
+                  </el-table-column>
+                </el-table>
+                
+                <el-container>
+                  <div class="block" style="margin-left:auto; margin-right:auto">
+                    <el-pagination
+                      @size-change="handleSizeChange"
+                      @current-change="handleCurrentChange"
+                      :current-page="currentPage4"
+                      :page-sizes="[100, 200, 300, 400]"
+                      :page-size="100"
+                      layout="total, sizes, prev, pager, next, jumper"
+                      :total="400">
+                    </el-pagination>
+                  </div>
+                </el-container>
+              </el-tab-pane>
+              <el-tab-pane label="数据结构" name="second">配置管理</el-tab-pane>
+              <el-tab-pane label="人工智能-CV" name="third">角色管理</el-tab-pane>
+              <el-tab-pane label="定时任务补偿" name="fourth">定时任务补偿</el-tab-pane>
+            </el-tabs>
+          </el-container>
+        </el-main>
+        <el-footer style="padding:0;margin:0;">
+          <el-card style="width:100%;margin:0;padding:0;">
+            <el-popover
+              placement="top-start"
+              width="400"
+              trigger="click">
+              <p>个人喜欢钻研技术，主要倒腾Java和视觉算法，前端也会玩一下。</p>
+              <el-link target="_blank" href="https://github.com/DengBoCong" type="primary">GitHub</el-link>--目前public的项目不多，主要private自己玩<br>
+              <el-link target="_blank" href="https://dengbocong.blog.csdn.net/" type="primary">CSDN社区</el-link>--目前是博客专家，欢迎关注和留言
+              <el-button type="text" slot="reference" style="margin-left:40%;left:-400px;margin-top:-10px;">DengBoCong版权所有，保留一切权利 赣ICP备20002291号</el-button>
+            </el-popover>
+          </el-card>
+        </el-footer>
+      </el-container>
+    </el-container>
   </div>
   <!-- <div id="app">
     <div id="nav">
@@ -89,19 +157,69 @@ import ScrollBar from 'components/ScrollBar'
         activeIndex: '1',
         screenWidth: document.body.clientWidth + "px", // 屏幕宽度
         screenHeight: document.body.clientHeight + "px", // 屏幕高度
+        currentPage4: 4,
+        activeName: 'first',
+        tableData: [{
+          date: '2016-05-02',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
+        }, {
+          date: '2016-05-04',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1517 弄'
+        },{
+          date: '2016-05-02',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
+        }, {
+          date: '2016-05-04',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1517 弄'
+        }]
       };
     },
     methods: {
       handleSelect(key, keyPath) {
         console.log(key, keyPath);
+      },
+      handleSizeChange(val) {
+        console.log(`每页 ${val} 条`);
+      },
+      handleCurrentChange(val) {
+        console.log(`当前页: ${val}`);
+      },
+      handleClick(tab, event) {
+        console.log(tab, event);
       }
     }
   }
 </script>
 
 
-<style>
+<style lang="less">
 @import "assets/css/base.css";
+.size{
+  width: 100%;
+  height: 100%;
+}
+html,body{
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+#app {
+  width: 100%;
+  height: 100%;
+}
+
+.el-scrollbar__wrap {
+  overflow-x: hidden;
+}
+
+
  .text {
     font-size: 14px;
   }
@@ -145,11 +263,6 @@ import ScrollBar from 'components/ScrollBar'
     clear: both
   }
 
-  .box-card {
-    width: 100%;
-  }
-
-  
 /* #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
