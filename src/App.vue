@@ -24,16 +24,16 @@
               <span><el-link :underline="false" type="primary" href="https://dengbocong.blog.csdn.net/">CSDN</el-link></span>
             </div>
           </div>
-          <el-divider content-position="center">标签</el-divider>
-          <div style="padding:10px;">
-            <el-tag>标签一</el-tag>
-            <el-tag type="success">标签二</el-tag>
-            <el-tag type="info">标签三</el-tag>
-            <el-tag type="warning">标签四</el-tag>
-            <el-tag type="danger">标签五</el-tag>
+          <el-divider content-position="center">通告</el-divider>
+          <div class="block">
+            <el-carousel height="120px">
+              <el-carousel-item v-for="item in 4" :key="item">
+                <h3 class="small">{{ item }}</h3>
+              </el-carousel-item>
+            </el-carousel>
           </div>
         </el-card>
-        <el-card style="width:90%;margin:5%;">
+        <!-- <el-card style="width:90%;margin:5%;">
           <div class="block">
             <el-carousel height="150px">
               <el-carousel-item v-for="item in 4" :key="item">
@@ -41,7 +41,7 @@
               </el-carousel-item>
             </el-carousel>
           </div>
-        </el-card>
+        </el-card> -->
       </el-aside>
       <el-container>
         <el-header>
@@ -59,60 +59,60 @@
         <el-main>
           <el-container>
             <el-tabs tab-position="right" v-model="activeName" @tab-click="handleClick" class="size">
-              <el-tab-pane label="好好谈谈Java" lazy="true" name="first">
-                <el-table
-                  :data="tableData"
-                  style="width: 100%;height:100%;"
-                  max-height="100%"
-                  show-header="false">
-                  <el-table-column>
-                    <template slot-scope="scope">
-                      <div style="margin-top:10px;"><b>标题</b></div>
-                      <div style="margin-top:10px;"><b>
-                        <el-tag type="info" size="medium">中等标签</el-tag></b>
-                        <el-tag type="info" size="medium">中等标签</el-tag>
-                        <el-tag type="info" size="medium">中等标签</el-tag>
+              <el-tab-pane label="好好谈谈Java"  name="first" :style="height">
+                <el-scrollbar style="height:100%;" >
+                    <el-table
+                      :data="tableData"
+                      style="width: 100%;height:100%;"
+                      max-height="100%">
+                      <el-table-column>
+                        <template slot-scope="scope">
+                          <div style="margin-top:10px;"><b>标题</b></div>
+                          <div style="margin-top:10px;"><b>
+                            <el-tag type="info" size="medium">中等标签</el-tag></b>
+                            <el-tag type="info" size="medium">中等标签</el-tag>
+                            <el-tag type="info" size="medium">中等标签</el-tag>
+                          </div>
+                          <div style="margin-top:10px;"><p>段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。</p></div>
+                          <div style="margin-top:10px;">
+                            <el-avatar size="small" src="https://img-blog.csdnimg.cn/20200522154246646.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0RCQ18xMjE=,size_16,color_FFFFFF,t_70" @error="true">
+                              <img src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png"/>
+                            </el-avatar>
+                            <span style="font-size:13px;"><el-link :underline="false" type="primary">DengBoCong </el-link> 发布于 2020-05-22 15:09</span>
+                          </div>
+                          <div style="margin-top:10px;">
+                            <span><i class="el-icon-view">161</i></span>
+                            <el-divider direction="vertical"></el-divider>
+                            <span><i class="el-icon-thumb">161</i></span>
+                            <el-divider direction="vertical"></el-divider>
+                            <span><i class="el-icon-star-off">161</i></span>
+                            <el-divider direction="vertical"></el-divider>
+                            <span><i class="el-icon-chat-dot-round">161</i></span>
+                          </div>
+                          <!-- <el-popover trigger="hover" placement="top">
+                            <p>姓名: {{ scope.row.name }}</p>
+                            <p>住址: {{ scope.row.address }}</p>
+                            <div slot="reference" class="name-wrapper">
+                              <el-tag size="medium">{{ scope.row.name }}</el-tag>
+                            </div>
+                          </el-popover> -->
+                        </template>
+                      </el-table-column>
+                    </el-table>
+                    <el-container>
+                      <div class="block" style="margin-left:auto; margin-right:auto">
+                        <el-pagination
+                          @size-change="handleSizeChange"
+                          @current-change="handleCurrentChange"
+                          :current-page="currentPage4"
+                          :page-sizes="[100, 200, 300, 400]"
+                          :page-size="100"
+                          layout="total, sizes, prev, pager, next, jumper"
+                          :total="400">
+                        </el-pagination>
                       </div>
-                      <div style="margin-top:10px;"><p>段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。</p></div>
-                      <div style="margin-top:10px;">
-                        <el-avatar size="small" src="https://img-blog.csdnimg.cn/20200522154246646.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0RCQ18xMjE=,size_16,color_FFFFFF,t_70" @error="true">
-                          <img src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png"/>
-                        </el-avatar>
-                        <span style="font-size:13px;"><el-link :underline="false" type="primary">DengBoCong </el-link> 发布于 2020-05-22 15:09</span>
-                      </div>
-                      <div style="margin-top:10px;">
-                        <span><i class="el-icon-view">161</i></span>
-                        <el-divider direction="vertical"></el-divider>
-                        <span><i class="el-icon-thumb">161</i></span>
-                        <el-divider direction="vertical"></el-divider>
-                        <span><i class="el-icon-star-off">161</i></span>
-                        <el-divider direction="vertical"></el-divider>
-                        <span><i class="el-icon-chat-dot-round">161</i></span>
-                      </div>
-                      <!-- <el-popover trigger="hover" placement="top">
-                        <p>姓名: {{ scope.row.name }}</p>
-                        <p>住址: {{ scope.row.address }}</p>
-                        <div slot="reference" class="name-wrapper">
-                          <el-tag size="medium">{{ scope.row.name }}</el-tag>
-                        </div>
-                      </el-popover> -->
-                    </template>
-                  </el-table-column>
-                </el-table>
-                
-                <el-container>
-                  <div class="block" style="margin-left:auto; margin-right:auto">
-                    <el-pagination
-                      @size-change="handleSizeChange"
-                      @current-change="handleCurrentChange"
-                      :current-page="currentPage4"
-                      :page-sizes="[100, 200, 300, 400]"
-                      :page-size="100"
-                      layout="total, sizes, prev, pager, next, jumper"
-                      :total="400">
-                    </el-pagination>
-                  </div>
-                </el-container>
+                    </el-container>
+                </el-scrollbar>
               </el-tab-pane>
               <el-tab-pane label="数据结构" name="second">配置管理</el-tab-pane>
               <el-tab-pane label="人工智能-CV" name="third">角色管理</el-tab-pane>
@@ -152,11 +152,17 @@ import ScrollBar from 'components/ScrollBar'
     components: {
       ScrollBar,
     },
+    computed:{
+      height(){
+        if(this.screenHeight <= 720) return `height:${this.screenHeight*0.5}px`;
+        else return `height:${this.screenHeight*0.8}px`;
+      }
+    },
     data() {
       return {
         activeIndex: '1',
-        screenWidth: document.body.clientWidth + "px", // 屏幕宽度
-        screenHeight: document.body.clientHeight + "px", // 屏幕高度
+        screenWidth: 0,
+        screenHeight:0,
         currentPage4: 4,
         activeName: 'first',
         tableData: [{
@@ -177,6 +183,10 @@ import ScrollBar from 'components/ScrollBar'
           address: '上海市普陀区金沙江路 1517 弄'
         }]
       };
+    },
+    mounted(){
+      this.screenWidth = document.body.clientWidth; 
+      this.screenHeight = document.body.clientHeight; 
     },
     methods: {
       handleSelect(key, keyPath) {
