@@ -1,5 +1,5 @@
 <template>
-  <el-tabs tab-position="right" v-model="activeName" @tab-click="handleClick" class="size">
+  <el-tabs tab-position="right" v-model="activeName" @tab-click="handleClick" class="size" style="margin-top:1px;">
     <el-tab-pane label="好好谈谈Java"  name="first" :style="height">
       <el-scrollbar style="height:100%;" >
           <el-table

@@ -7,7 +7,7 @@
     @select="handleSelect">
     <el-submenu index="1">
       <template slot="title">技术中心</template><!-- <i class="el-icon-position"></i> -->
-      <el-menu-item index="1-1">博客</el-menu-item>
+      <el-menu-item index="home">博客</el-menu-item>
       <el-menu-item index="1-2">技术学习</el-menu-item>
       <el-menu-item index="1-3">资源列表</el-menu-item>
       <el-menu-item index="1-4">API文档</el-menu-item>
@@ -22,7 +22,7 @@
     <el-submenu index="3">
       <template slot="title">关于</template><!-- <i class="el-icon-user"></i> -->
       <el-menu-item index="3-1">吐槽说明</el-menu-item>
-      <el-menu-item index="3-2">个人简历</el-menu-item>
+      <el-menu-item index="3-2">个人履历</el-menu-item>
       <el-menu-item index="3-3">我的标签</el-menu-item>
       <el-menu-item index="3-4">生活和爱情</el-menu-item>
       <el-menu-item index="3-5">兴趣爱好</el-menu-item>
