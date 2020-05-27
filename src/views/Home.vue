@@ -54,5 +54,8 @@ import ContentDetail from 'views/ContentDetail';
 
 
 <style>
-
+.size{
+  width: 100%;
+  height: 100%;
+}
 </style>

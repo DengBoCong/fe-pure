@@ -16,7 +16,7 @@ const router = new VueRouter({
   routes
 })
 
-const LOGIN_PAGE_NAME = 'login'
+const NOACCESS_PAGE_NAME = '403'
 
 // 解决跳转同一地址出错问题
 const originalPush = VueRouter.prototype.push;
@@ -29,7 +29,7 @@ const turnTo = (to, access, next) => {
   else next({ replace: true, name: 'error_401' }) // 无权限，重定向到401页面
 }
 
-var _TheArray = new Array("home", "main", "article", "interfile");
+var _TheArray = new Array("");
 
 router.beforeEach((to, from, next) => {
   // setToken('')
@@ -39,24 +39,17 @@ router.beforeEach((to, from, next) => {
   
   const token = getToken()
 
-  if(hasOneOf(_TheArray, new Array(to.name))){
+  if(!hasOneOf(_TheArray, new Array(to.name))){
     console.log("卧槽");
-    // 未登陆且要跳转的页面是登录页
+    // 无需权限访问页面，直接跳转
     next() // 跳转
-  }else if (!token && to.name !== LOGIN_PAGE_NAME) {
-    // 未登录且要跳转的页面不是登录页
+  }else if (!token) {
+    // 需要权限，未登录，跳转403页面
     next({
-      name: LOGIN_PAGE_NAME // 跳转到登录页
-    })
-  } else if (!token && to.name === LOGIN_PAGE_NAME) {
-    // 未登陆且要跳转的页面是登录页
-    next() // 跳转
-  } else if (token && to.name === LOGIN_PAGE_NAME) {
-    // 已登录且要跳转的页面是登录页
-    next({
-      name: homeName // 跳转到homeName页
+      name: NOACCESS_PAGE_NAME // 跳转到403
     })
   } else {
+    // 需要权限，已登录，进一步权限验证
     if (store.state.user.hasGetInfo) {
       turnTo(to, store.state.user.access, next)
     } else {

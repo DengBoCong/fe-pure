@@ -89,7 +89,7 @@ export default {
   },
   computed: {
     height(){
-      return `height:${this.screenHeight-60}px`;
+      return `height:${this.screenHeight-61}px`;
     }
   },
   data() {

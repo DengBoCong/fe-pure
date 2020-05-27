@@ -41,7 +41,7 @@
       <template slot="title">工作台</template><!-- <i class="el-icon-bank-card"></i> -->
       <el-menu-item index="5-1">提交工单</el-menu-item>
       <el-menu-item index="5-2">账号空间</el-menu-item>
-      <el-menu-item index="5-3">后台管理</el-menu-item>
+      <el-menu-item index="admin">后台管理</el-menu-item>
       <el-menu-item index="5-4">六小六系统</el-menu-item>
       <el-menu-item index="5-5">中心系统</el-menu-item>
     </el-submenu>

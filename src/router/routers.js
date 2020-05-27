@@ -15,9 +15,9 @@ export default [
       name: 'home',
       meta: {
         hideInMenu: true,
-        title: 'Pure - 首页',
+        title: '',
         notCache: true,
-        icon: 'el-icon-position'
+        // icon: 'el-icon-position'
       },
       component: () => import('views/Home'),
       children: [{
@@ -25,17 +25,16 @@ export default [
         name: 'main',
         component: () => import('views/MainTabPane'),
         meta: {
-          title: 'Pure - 首页',
+          title: '首页',
           hideInMenu: true,
           notCache: true,
-          icon: 'el-icon-bangzhu'
         },
       },{
         path: '/article/:id',
         name: 'article',
         component: () => import('views/ContentDetail'),
         meta: {
-          title: 'Pure - 博客',
+          title: '博客',
           hideInMenu: true,
         },
       },{
@@ -46,7 +45,7 @@ export default [
         // which is lazy-loaded when the route is visited.
         component: () => import('views/Interfile.vue'),
         meta: {
-          title: 'Pure - 技术中心-归档',
+          title: '技术中心-归档',
           hideInMenu: true,
         },
       }]
@@ -59,14 +58,37 @@ export default [
     path: '/login',
     name: 'login',
     meta: {
-      title: 'Pure - 登录',
+      title: '登录',
       hideInMenu: true,
       notCache: true,
-      icon: 'el-icon-bangzhu'
     },
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ 'views/Login')
+  },
+  {
+    path: '/403',
+    name: '403',
+    meta: {
+      title: '无权访问',
+      hideInMenu: true,
+      notCache: true,
+    },
+    component: () => import('views/403')
+  },
+
+// **************************后台***************************************
+// **************************相关***************************************
+  //后台首页
+  {
+    path: '/admin',
+    name: 'admin',
+    meta: {
+      title: '后台首页',
+      hideInMenu: true,
+      notCache: true,
+    },
+    component: () => import('views/admin/Home')
   }
 ]
