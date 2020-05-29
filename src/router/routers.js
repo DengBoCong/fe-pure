@@ -83,12 +83,33 @@ export default [
   //后台首页
   {
     path: '/admin',
-    name: 'admin',
+    name: '_admin',
     meta: {
       title: '后台首页',
       hideInMenu: true,
       notCache: true,
     },
-    component: () => import('views/admin/Home')
+    component: () => import('views/admin/Home'),
+    children: [{
+      path: '/',
+      name: 'adminmain',
+      meta: {
+        hideInMenu: true,
+        title: '',
+        notCache: true,
+        // icon: 'el-icon-position'
+      },
+      component: () => import('views/admin/Main')
+    },{
+      path: '/admin/technique/blog',
+      name: 'adminblog',
+      meta: {
+        hideInMenu: true,
+        title: '',
+        notCache: true,
+        // icon: 'el-icon-position'
+      },
+      component: () => import('views/admin/Blog'),
+    }],
   }
 ]

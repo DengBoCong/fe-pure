@@ -19,7 +19,7 @@
               <i class="el-icon-location"></i>
               <span slot="title">技术中心</span>
             </template>
-            <el-menu-item index="博客">博客</el-menu-item>
+            <el-menu-item index="admin/technique/blog">博客</el-menu-item>
             <el-menu-item index="1-2">技术学习</el-menu-item>
             <el-menu-item index="1-3">资源列表</el-menu-item>
             <el-menu-item index="1-4">API文档</el-menu-item>
@@ -277,12 +277,20 @@
             </el-row>
           </el-tab-pane> -->
          <el-tab-pane
-            key="1"
+            key="admin"
             label="工作台"
-            name="1">
+            name="admin">
+          </el-tab-pane>
+          <el-tab-pane
+            v-for="(item, index) in editableTabs"
+            :key="item.name"
+            :label="item.title"
+            closable 
+            :name="item.name">
           </el-tab-pane>
         </el-tabs>
-        <component v-bind:is="currentTabComponent" class="tab" style="background:#efefef"></component>
+        <!-- <component v-bind:is="currentTabComponent" class="tab" style="background:#efefef"></component> -->
+        <router-view style="background:#efefef"></router-view>
       </el-main>
     </el-container>
   </el-container>
@@ -305,9 +313,14 @@ export default {
       screenHeight:0,
       isCollapse: true,
       buttonIcon: "el-icon-s-fold",
-      editableTabsValue: '1',
+      editableTabsValue: 'admin',
       editableTabs: [],
-      tabIndex: 1,
+      // tabIndex: 1,
+      // curTab: 'admin',
+      map: new Map([
+        ['admin', '工作台'],
+        ['admin/technique/blog', '博客'],
+      ]),
     }
   },
   methods: {
@@ -326,13 +339,14 @@ export default {
       console.log(key, keyPath);
     },
     addTab(index, indexPath) {
-      let newTabName = ++this.tabIndex + '';
+      // let newTabName = ++this.tabIndex + '';
       this.editableTabs.push({
-        title: index,
-        name: newTabName,
-        content: "<Blog></Blog>"
+        title: this.map.get(index),
+        name: index,
       });
-      this.editableTabsValue = newTabName;
+      // this.curTab = index;
+      this.editableTabsValue = index;
+      this.$router.push('/' + index);
     },
     removeTab(targetName) {
       let tabs = this.editableTabs;
@@ -344,13 +358,15 @@ export default {
             if (nextTab) {
               activeName = nextTab.name;
             } else{
-              activeName = "1";
+              activeName = "admin";
             }
           }
         });
       }
       
       this.editableTabsValue = activeName;
+      // this.curTab = activeName;
+      this.$router.push('/' + activeName);
       this.editableTabs = tabs.filter(tab => tab.name !== targetName);
     },
     getFullCreeen(){
@@ -390,7 +406,7 @@ export default {
       return `height:${this.screenHeight + 20}px`;
     },
     currentTabComponent: function() {
-      return "Main";
+      return this.curTab;
     }
   },
   mounted() {
