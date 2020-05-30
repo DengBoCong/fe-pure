@@ -297,14 +297,14 @@
 </template>
 
 <script>
-import Blog from './Blog';
-import Main from './Main';
+// import Blog from './Blog';
+// import Main from './Main';
 
 export default {
   name: 'AdminHome',
   components: {
-    Blog,
-    Main,
+    // Blog,
+    // Main,
   },
   data() {
     return {

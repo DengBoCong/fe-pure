@@ -6,11 +6,15 @@ import ElementUI from 'element-ui'
 import i18n from '@/locale'
 import config from '@/config'
 import 'element-ui/lib/theme-chalk/index.css'
+import mavonEditor from 'mavon-editor'
+import 'mavon-editor/dist/css/index.css'
 import './main.less'
 
 Vue.use(ElementUI, {
   i18n: (key, value) => i18n.t(key, value)
 })
+
+Vue.use(mavonEditor)
 
 /**
  * @description 生产环境关掉提示

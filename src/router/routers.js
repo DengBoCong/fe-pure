@@ -109,7 +109,17 @@ export default [
         notCache: true,
         // icon: 'el-icon-position'
       },
-      component: () => import('views/admin/Blog'),
+      component: () => import('views/admin/blog/Blog'),
+    },{
+      path: '/admin/technique/blog/editbolg',
+      name: 'admineditblog',
+      meta: {
+        hideInMenu: true,
+        title: '',
+        notCache: true,
+        // icon: 'el-icon-position'
+      },
+      component: () => import('views/admin/blog/EditBlog'),
     }],
   }
 ]
