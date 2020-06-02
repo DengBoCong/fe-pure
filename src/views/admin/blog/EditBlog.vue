@@ -10,5 +10,10 @@ export default {
   components: {
     //
   },
+  data() {
+    return {
+      value: '',
+    }
+  }
 }
 </script>

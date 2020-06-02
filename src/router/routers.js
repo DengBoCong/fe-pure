@@ -92,7 +92,7 @@ export default [
     component: () => import('views/admin/Home'),
     children: [{
       path: '/',
-      name: 'adminmain',
+      name: 'admin',
       meta: {
         hideInMenu: true,
         title: '',
