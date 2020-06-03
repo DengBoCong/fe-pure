@@ -17,7 +17,7 @@ export default {
    * @description api请求基础路径
    */
   baseUrl: {
-    dev: '#',
+    dev: 'http://localhost:8080/',
     pro: '#'
   },
   /**
@@ -27,10 +27,10 @@ export default {
   /**
    * @description 需要加载的插件
    */
-  // plugin: {
-  //   'error-store': {
-  //     showInHeader: true, // 设为false后不会在顶部显示错误日志徽标
-  //     developmentOff: true // 设为true后在开发环境不会收集错误信息，方便开发中排查错误
-  //   }
-  // }
+  plugin: {
+    'error-store': {
+      showInHeader: true, // 设为false后不会在顶部显示错误日志徽标
+      developmentOff: true // 设为true后在开发环境不会收集错误信息，方便开发中排查错误
+    }
+  }
 }

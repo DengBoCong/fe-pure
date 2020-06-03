@@ -57,6 +57,7 @@
 
 <script>
 import ArticleItem from 'components/context/ArticleItem';
+import { getTableData } from '@/api/data'
 
 export default {
   name: 'MainTabPane',
@@ -75,28 +76,15 @@ export default {
       activeName: 'first',
       screenWidth: 0,
       screenHeight:0,
-      tableData: [{
-        date: '2016-05-02',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-04',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1517 弄'
-      },{
-        date: '2016-05-02',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-04',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1517 弄'
-      }]
+      tableData: [],
     }
   },
   mounted() {
     this.screenWidth = document.body.clientWidth;
     this.screenHeight = document.body.clientHeight;
+    getTableData().then(res => {
+      this.tableData = res.data;
+    });
   },
   methods: {
     handleSizeChange(val) {
