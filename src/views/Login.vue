@@ -9,8 +9,10 @@
           <el-form :model="from" status-icon :rules="rules" ref="ruleForm">
             <el-form-item prop="platform">
               <el-select v-model="from.platform" placeholder="请选择登录平台" class="width">
-                <el-option label="大数据可视化平台" value="viewPlatform"></el-option>
-                <el-option label="主控制台" value="backPlatform"></el-option>
+                <el-option label="后台管理系统" value="viewPlatform"></el-option>
+                <el-option label="六小六系统" value="backPlatform"></el-option>
+                <el-option label="中心系统" value="te"></el-option>
+                <el-option label="服务器控制入口" value="te"></el-option>
               </el-select>
             </el-form-item>
             <el-form-item prop="account"><!--label="登录账户"-->

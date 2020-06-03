@@ -44,7 +44,12 @@ import ContentDetail from 'views/ContentDetail';
       };
     },
     mounted(){
-      //
+      const h = this.$createElement;
+      this.$notify({
+        title: '系统未开放通知',
+        message: h('i', { style: 'color: teal'}, '系统处于开发测试中，线上版本系统已被设置全禁止权限，仅限部分授权账号进行登录'),
+        duration: 6500,
+      });
     },
     methods: {
       //

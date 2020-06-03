@@ -43,15 +43,15 @@
                 :page-sizes="[100, 200, 300, 400]"
                 :page-size="100"
                 layout="total, sizes, prev, pager, next, jumper"
-                :total="400">
+                :total="4">
               </el-pagination>
             </div>
           </el-container>
       </el-scrollbar>
     </el-tab-pane>
-    <el-tab-pane label="数据结构" name="second">配置管理</el-tab-pane>
-    <el-tab-pane label="人工智能-CV" name="third">角色管理</el-tab-pane>
-    <el-tab-pane label="定时任务补偿" name="fourth">定时任务补偿</el-tab-pane>
+    <el-tab-pane label="数据结构" name="second">别看了，没数据</el-tab-pane>
+    <el-tab-pane label="人工智能-CV" name="third">别看了，没数据</el-tab-pane>
+    <el-tab-pane label="定时任务补偿" name="fourth">别看了，没数据</el-tab-pane>
   </el-tabs>
 </template>
 
@@ -76,15 +76,31 @@ export default {
       activeName: 'first',
       screenWidth: 0,
       screenHeight:0,
-      tableData: [],
+      tableData: [{
+        date: '2016-05-02',
+        name: '标题',
+        address: '上海市普陀区金沙江路 1518 弄'
+      },{
+        date: '2016-05-02',
+        name: '标题',
+        address: '上海市普陀区金沙江路 1518 弄'
+      },{
+        date: '2016-05-02',
+        name: '标题',
+        address: '上海市普陀区金沙江路 1518 弄'
+      },{
+        date: '2016-05-02',
+        name: '标题',
+        address: '上海市普陀区金沙江路 1518 弄'
+      }],
     }
   },
   mounted() {
     this.screenWidth = document.body.clientWidth;
     this.screenHeight = document.body.clientHeight;
-    getTableData().then(res => {
-      this.tableData = res.data;
-    });
+    // getTableData().then(res => {
+    //   this.tableData = res.data;
+    // });
   },
   methods: {
     handleSizeChange(val) {
