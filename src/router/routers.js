@@ -1,9 +1,9 @@
 import Main from '@/App'
 export default [
   //首页相关路由组件
+  //当有子路由的时候，父路由不应该有name属性
   {
     path: '/',
-    name: '_home',
     redirect: '/home',
     component: Main,
     meta: {
@@ -12,7 +12,6 @@ export default [
     },
     children: [{
       path: '/home',
-      name: 'home',
       meta: {
         hideInMenu: true,
         title: '',

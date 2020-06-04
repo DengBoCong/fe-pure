@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div style="margin-top:10px;"><b>{{itemData.name}}</b></div>
+    <div style="margin-top:10px;"><b>{{itemData.title}}</b></div>
     <div style="margin-top:10px;"><b>
       <el-tag type="info" size="medium">中等标签</el-tag></b>
       <el-tag type="info" size="medium">中等标签</el-tag>

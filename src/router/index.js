@@ -29,18 +29,18 @@ const turnTo = (to, access, next) => {
   else next({ replace: true, name: 'error_401' }) // 无权限，重定向到401页面
 }
 
-var _TheArray = new Array("admin");
+var _TheArray = new Array("");
 
 router.beforeEach((to, from, next) => {
   // setToken('')
   //   iView.LoadingBar.start()
-  console.log(to);
-  console.log(hasOneOf(_TheArray, new Array(to.name)));
+  // console.log(to);
+  // console.log(hasOneOf(_TheArray, new Array(to.name)));
   
   const token = getToken()
 
   if(!hasOneOf(_TheArray, new Array(to.name))){
-    console.log("卧槽");
+    // console.log("卧槽");
     // 无需权限访问页面，直接跳转
     next() // 跳转
   }else if (!token) {

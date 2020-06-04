@@ -46,7 +46,7 @@
     <el-table
       :data="tableData.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
       border
-      max-height="250"
+      :max-height="height"
       style="width: 100%;">
       <el-table-column
         fixed
@@ -143,9 +143,15 @@
         console.log(row);
       }
     },
-
+    computed: {
+      height(){
+        return this.screenHeight-350;
+      }
+    },
     data() {
       return {
+        screenWidth: 0,
+        screenHeight:0, 
         search: '',
         tableData: [{
           date: '2016-05-02',
@@ -569,6 +575,13 @@
           qy: 200333
         }]
       }
-    }
+    },
+    mounted() {
+      this.screenWidth = document.body.clientWidth;
+      this.screenHeight = document.body.clientHeight;
+      // getTableData().then(res => {
+      //   this.tableData = res.data;
+      // });
+    },
   }
 </script>
