@@ -10,9 +10,14 @@ export default {
   components: {
     //
   },
+  props: {
+    content: {
+      type: String,
+    },
+  },
   data() {
     return {
-      content: `<h1>Unicorns</h1><p>All the things</p><p>All the things</p><p>All the things</p><p>All the things</p><p>All the things</p><p>All the things</p><p>All the things</p><p>All the things</p><p>All the things</p><p>All the things</p><p>All the things</p><p>All the things</p><p>All the things</p><p>All the things</p><p>All the things</p><p>All the things</p><p>All the things</p><p>All the things</p><p>All the things</p><p>All the things</p><p>All the things</p>`
+      // content: `<h1>Unicorns</h1><p>All the things</p><p>All the things</p><p>All the things</p><p>All the things</p><p>All the things</p><p>All the things</p><p>All the things</p><p>All the things</p><p>All the things</p><p>All the things</p><p>All the things</p><p>All the things</p><p>All the things</p><p>All the things</p><p>All the things</p><p>All the things</p><p>All the things</p><p>All the things</p><p>All the things</p><p>All the things</p><p>All the things</p>`
     }
   }
 }

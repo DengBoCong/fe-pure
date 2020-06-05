@@ -15,7 +15,6 @@ Vue.use(ElementUI, {
 })
 
 Vue.use(mavonEditor)
-
 /**
  * @description 生产环境关掉提示
  */

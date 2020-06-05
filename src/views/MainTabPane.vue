@@ -8,7 +8,7 @@
             max-height="100%"
             @row-click="he">
             <el-table-column>
-              <template slot="header" slot-scope="scope">
+              <template slot="header">
                 <el-container>
                   <el-input
                     v-model="search"
@@ -43,7 +43,7 @@
                 :page-sizes="[100, 200, 300, 400]"
                 :page-size="100"
                 layout="total, sizes, prev, pager, next, jumper"
-                :total="4">
+                :total="1">
               </el-pagination>
             </div>
           </el-container>
@@ -72,7 +72,7 @@ export default {
   data() {
     return {
       search: '',
-      currentPage4: 4,
+      currentPage4: 1,
       activeName: 'first',
       screenWidth: 0,
       screenHeight:0,

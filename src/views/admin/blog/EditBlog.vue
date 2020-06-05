@@ -211,7 +211,7 @@ export default {
               title: this.titleInput, 
               subTitle: this.subTitleInput, 
               content: this.content, 
-              addTime: "12",
+              addTime: Math.floor(new Date().getTime() / 1000),
               status: this.status,
               summary: this.ruleForm.summary,
               classes: [{name: "safa"}],//this.ruleForm.class,

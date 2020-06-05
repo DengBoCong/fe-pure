@@ -6,7 +6,7 @@
       </div>
       <el-container :style="height" style="width:100%;">
         <el-scrollbar style="height:100%;width:100%;" >
-          <Markdown></Markdown>
+          <Markdown v-bind:content="content"></Markdown>
           <div style="height:100px;"></div>
         </el-scrollbar>
       </el-container>
@@ -26,6 +26,7 @@ export default {
     return {
       screenWidth: 0,
       screenHeight:0,
+      content: `<h1>Unicorns</h1><p>All the things</p><p>All the things</p><p>All the things</p><p>All the things</p><p>All the things</p><p>All the things</p><p>All the things</p><p>All the things</p><p>All the things</p><p>All the things</p><p>All the things</p><p>All the things</p><p>All the things</p><p>All the things</p><p>All the things</p><p>All the things</p><p>All the things</p><p>All the things</p><p>All the things</p><p>All the things</p><p>All the things</p>`,
     }
   },
   methods: {
