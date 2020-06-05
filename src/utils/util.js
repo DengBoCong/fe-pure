@@ -4,6 +4,26 @@ import config from '@/config'
 import { forEach, hasOneOf, objEqual } from 'utils/tools'
 const { title, cookieExpires, useI18n } = config
 
+/**
+ * @description 本地存储和获取标签导航列表
+ */
+export const setAdminTagNavListInLocalstorage = list => {
+  localStorage.adminTagNaveList = JSON.stringify(list)
+}
+/**
+ * @returns {Array} 其中的每个元素只包含路由原信息中的name, path, meta三项
+ */
+export const getAdminTagNavListFromLocalstorage = () => {
+  const list = localStorage.adminTagNaveList
+  return list ? JSON.parse(list) : []
+}
+
+
+
+// ***********************************************************************
+// ***********************************************************************
+
+
 export const TOKEN_KEY = 'token'
 
 export const setToken = (token) => {
@@ -102,20 +122,6 @@ export const showTitle = (item, vm) => {
     else title = vm.$t(item.name)
   } else title = (item.meta && item.meta.title) || item.name
   return title
-}
-
-/**
- * @description 本地存储和获取标签导航列表
- */
-export const setTagNavListInLocalstorage = list => {
-  localStorage.tagNaveList = JSON.stringify(list)
-}
-/**
- * @returns {Array} 其中的每个元素只包含路由原信息中的name, path, meta三项
- */
-export const getTagNavListFromLocalstorage = () => {
-  const list = localStorage.tagNaveList
-  return list ? JSON.parse(list) : []
 }
 
 /**

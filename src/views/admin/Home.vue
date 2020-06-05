@@ -100,7 +100,7 @@
         </el-container>
       </el-header>
       <el-main style="padding:0;">
-        <el-tabs v-model="editableTabsValue" type="card" @tab-remove="removeTab"><!-- -->
+        <el-tabs v-model="editableTabsValue" type="card" @tab-click="clickTab" @tab-remove="removeTab"><!-- -->
           <!-- <el-tab-pane
             key="1"
             label="工作台"
@@ -299,6 +299,7 @@
 <script>
 // import Blog from './Blog';
 // import Main from './Main';
+import { mapMutations } from 'vuex'
 
 export default {
   name: 'AdminHome',
@@ -313,8 +314,8 @@ export default {
       screenHeight:0,
       isCollapse: true,
       buttonIcon: "el-icon-s-fold",
-      editableTabsValue: 'admin',
-      editableTabs: [],
+      editableTabsValue: this.$store.state.app.currentAdminTag,
+      editableTabs: this.$store.state.app.adminTagNaveList,
       // tabIndex: 1,
       // curTab: 'admin',
       map: new Map([
@@ -324,6 +325,10 @@ export default {
     }
   },
   methods: {
+    ...mapMutations([
+      'setAdminTagNaveList',
+      'setAdminTag'
+    ]),
     open() {
       this.isCollapse = !this.isCollapse;
       if(this.buttonIcon === "el-icon-s-fold") this.buttonIcon = "el-icon-s-unfold";
@@ -338,17 +343,20 @@ export default {
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
     },
-    addTab(index, indexPath) {
+    addTab(index, indexPath) {//添加导航栏
       // let newTabName = ++this.tabIndex + '';
       this.editableTabs.push({
         title: this.map.get(index),
         name: index,
       });
       // this.curTab = index;
+      this.setAdminTagNaveList(this.editableTabs);
+      var array = new Array(index);
+      this.setAdminTag(index);
       this.editableTabsValue = index;
       this.$router.push('/' + index);
     },
-    removeTab(targetName) {
+    removeTab(targetName) {//移出导航栏
       let tabs = this.editableTabs;
       let activeName = this.editableTabsValue;
       if (activeName === targetName) {
@@ -366,8 +374,13 @@ export default {
       
       this.editableTabsValue = activeName;
       // this.curTab = activeName;
+      this.setAdminTagNaveList(this.editableTabs, activeName);
       this.$router.push('/' + activeName);
       this.editableTabs = tabs.filter(tab => tab.name !== targetName);
+    },
+    clickTab(targetName) {
+      this.editableTabsValue = targetName.name;
+      this.$router.push('/' + targetName.name);
     },
     getFullCreeen(){
       this.n++;
@@ -412,6 +425,8 @@ export default {
   mounted() {
     this.screenWidth = document.body.clientWidth;
     this.screenHeight = document.body.clientHeight;
+    console.log(this.$store.state.app.currentAdminTag);
+    console.log(this.$store.state.app.adminTagNaveList);
   },
 }
 </script>

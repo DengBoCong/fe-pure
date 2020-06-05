@@ -29,7 +29,7 @@ const turnTo = (to, access, next) => {
   else next({ replace: true, name: 'error_401' }) // 无权限，重定向到401页面
 }
 
-var _TheArray = new Array("admin");
+var _TheArray = new Array("");
 
 router.beforeEach((to, from, next) => {
   // setToken('')
