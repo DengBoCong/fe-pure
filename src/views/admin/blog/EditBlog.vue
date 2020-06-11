@@ -117,6 +117,9 @@
 <script>
 import { oneInsert } from '@/api/article'
 import { oneOf,dateToInt } from 'utils/tools'
+import {
+  arrayElementToObjectIsArticleType,
+  } from 'utils/util';
 
 export default {
   name: 'EditBlog',
@@ -191,7 +194,7 @@ export default {
     }
   },
   methods: {
-    submitForm(formName) {
+    submitForm(formName) {//用于提交文章表单
       // this.outerVisible = false;
       this.$refs[formName].validate((valid) => {
         console.log(this.ruleForm.class);
@@ -214,7 +217,7 @@ export default {
               addTime: Math.floor(new Date().getTime() / 1000),
               status: this.status,
               summary: this.ruleForm.summary,
-              classes: [{name: "safa"}],//this.ruleForm.class,
+              classes: arrayElementToObjectIsArticleType(this.ruleForm.class),//[{name: "safa"}],//this.ruleForm.class,
               articleFlag: this.ruleForm.articleFlag,//this.ruleForm.articleFlag,
               publishTime: dateToInt(this.date),
               tags: [{content: "sddf"}],//this.ruleForm.articleTag,

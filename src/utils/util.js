@@ -8,16 +8,46 @@ const { title, cookieExpires, useI18n } = config
  * @description 本地存储和获取标签导航列表
  */
 export const setAdminTagNavListInLocalstorage = list => {
-  localStorage.adminTagNaveList = JSON.stringify(list)
+  localStorage.adminTagList = JSON.stringify(list);
 }
 /**
  * @returns {Array} 其中的每个元素只包含路由原信息中的name, path, meta三项
  */
 export const getAdminTagNavListFromLocalstorage = () => {
-  const list = localStorage.adminTagNaveList
+  const list = localStorage.adminTagList;
+  // console.log("getValue:"+localStorage.adminTagNaveList);
+  // console.log("list:"+list);
   return list ? JSON.parse(list) : []
 }
 
+/**
+ * @description 本地存储和获取当前标签
+ */
+export const setAdminCurTagInLocalstorage = tag => {
+  // localStorage.adminTag = JSON.stringify(list)
+  // console.log("setValue"+localStorage.adminTagNaveList);
+  localStorage.adminCurTag = tag;
+}
+/**
+ * @returns {String} 
+ */
+export const getAdminCurTagFromLocalstorage = () => {
+  const tag = localStorage.adminCurTag;
+  return tag ? tag : "admin";
+}
+
+/**
+ * @returns {Array} 数组转文章类型数组
+ */
+export const arrayElementToObjectIsArticleType = array => {
+  let result = [];
+  array.forEach((element, index) => {
+    result.push({
+      name: element,
+    });
+  });
+  return result;
+}
 
 
 // ***********************************************************************

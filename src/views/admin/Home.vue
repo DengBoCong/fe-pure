@@ -314,8 +314,8 @@ export default {
       screenHeight:0,
       isCollapse: true,
       buttonIcon: "el-icon-s-fold",
-      editableTabsValue: this.$store.state.app.currentAdminTag,
-      editableTabs: this.$store.state.app.adminTagNaveList,
+      editableTabsValue: "",
+      editableTabs: [],
       // tabIndex: 1,
       // curTab: 'admin',
       map: new Map([
@@ -327,7 +327,7 @@ export default {
   methods: {
     ...mapMutations([
       'setAdminTagNaveList',
-      'setAdminTag'
+      'setAdminCurTag',
     ]),
     open() {
       this.isCollapse = !this.isCollapse;
@@ -350,11 +350,12 @@ export default {
         name: index,
       });
       // this.curTab = index;
-      this.setAdminTagNaveList(this.editableTabs);
+      
       var array = new Array(index);
-      this.setAdminTag(index);
       this.editableTabsValue = index;
       this.$router.push('/' + index);
+      this.setAdminTagNaveList(this.editableTabs);
+      this.setAdminCurTag(this.editableTabsValue);
     },
     removeTab(targetName) {//移出导航栏
       let tabs = this.editableTabs;
@@ -371,16 +372,17 @@ export default {
           }
         });
       }
-      
       this.editableTabsValue = activeName;
       // this.curTab = activeName;
-      this.setAdminTagNaveList(this.editableTabs, activeName);
       this.$router.push('/' + activeName);
       this.editableTabs = tabs.filter(tab => tab.name !== targetName);
+      this.setAdminTagNaveList(this.editableTabs);
+      this.setAdminCurTag(this.editableTabsValue);
     },
     clickTab(targetName) {
       this.editableTabsValue = targetName.name;
       this.$router.push('/' + targetName.name);
+      this.setAdminCurTag(this.editableTabsValue);
     },
     getFullCreeen(){
       this.n++;
@@ -425,8 +427,14 @@ export default {
   mounted() {
     this.screenWidth = document.body.clientWidth;
     this.screenHeight = document.body.clientHeight;
-    console.log(this.$store.state.app.currentAdminTag);
-    console.log(this.$store.state.app.adminTagNaveList);
+    this.editableTabs = this.$store.getters.getAdminTagNaveList;
+    this.editableTabsValue = this.$store.getters.getAdminCurTag
+    // console.log("homeTag:"+this.$store.state.app.currentAdminTag);
+    // console.log("homeList:"+this.$store.state.app.adminTagNaveList);
+    // console.log("homeNaveList:"+this.$store.getters.getAdminTagNaveList);
+    // let te = this.$store.getters.getAdminTagNaveList;
+    // console.log(JSON.stringify(te));
+    
   },
 }
 </script>
