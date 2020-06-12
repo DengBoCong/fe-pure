@@ -28,7 +28,7 @@
             </el-form-item>
             <el-form-item label="" label-width="40%">
               <el-switch
-                v-model="value1"
+                v-model="form.status"
                 active-text="启用"
                 inactive-text="不启用">
               </el-switch>
@@ -36,7 +36,7 @@
           </el-form>
           <div slot="footer" class="dialog-footer">
             <el-button @click="dialogFormVisible = false">取 消</el-button>
-            <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
+            <el-button type="primary" @click="submitArticleType">确 定</el-button>
           </div>
         </el-dialog>
       </el-container>
@@ -104,7 +104,7 @@
 </template>
 
 <script>
-import { getArticleType } from '@/api/article'
+import { getArticleType, setArticleTypeOne } from '@/api/article'
 
 export default {
   name: 'ArticleType',
@@ -113,7 +113,6 @@ export default {
   },
   data() {
     return {
-      value1: true,
       screenWidth: 0,
       screenHeight:0, 
       tableData: [],
@@ -121,17 +120,17 @@ export default {
       form: {
         name: '',
         description: '',
-        
-        region: '',
-        date1: '',
-        date2: '',
-        delivery: false,
-        type: [],
-        resource: '',
-        desc: ''
+        status: 0,
       },
       formLabelWidth: '120px'
     }
+  },
+  methods: {
+    submitArticleType() {
+      setArticleTypeOne(this.form).then(res => {
+        //
+      });
+    },
   },
   computed: {
     height(){

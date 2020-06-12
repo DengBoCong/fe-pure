@@ -31,3 +31,11 @@ export const getArticleType = () => {
     method: 'get'
   })
 }
+
+export const setArticleTypeOne = info => {
+  return axios.request({
+    url: '/articleType/oneInsert',
+    method: 'post',
+    data: info,
+  })
+}
