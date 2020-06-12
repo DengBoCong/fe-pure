@@ -64,8 +64,8 @@
               </el-form-item>
             </el-col>
           </el-form-item>
-          <el-form-item label="定时发布" required>
-            <el-form-item prop="date">
+          <el-form-item label="定时发布">
+            <el-form-item>
               <el-date-picker
                 v-model="date"
                 type="datetime"
@@ -119,6 +119,7 @@ import { oneInsert } from '@/api/article'
 import { oneOf,dateToInt } from 'utils/tools'
 import {
   arrayElementToObjectIsArticleType,
+  arrayElementToObjectIsArticleTag,
   } from 'utils/util';
 
 export default {
@@ -220,7 +221,7 @@ export default {
               classes: arrayElementToObjectIsArticleType(this.ruleForm.class),//[{name: "safa"}],//this.ruleForm.class,
               articleFlag: this.ruleForm.articleFlag,//this.ruleForm.articleFlag,
               publishTime: dateToInt(this.date),
-              tags: [{content: "sddf"}],//this.ruleForm.articleTag,
+              tags: arrayElementToObjectIsArticleTag(this.ruleForm.articleTag),
             }).then(res => {
               this.tableData = res.data;
             });

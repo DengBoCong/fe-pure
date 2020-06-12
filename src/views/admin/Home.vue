@@ -2,24 +2,33 @@
   <el-container class="size">
     <div :style="height">
       <el-scrollbar style="width:100%;height:100%;">
-        <el-menu default-active="1-4-1" class="el-menu-vertical-demo" :style="height"
-          @open="handleOpen" 
-          @close="handleClose" 
+        <el-menu
+          default-active="1-4-1"
+          class="el-menu-vertical-demo"
+          :style="height"
+          @open="handleOpen"
+          @close="handleClose"
           @select="addTab"
           background-color="#545c64"
           text-color="#fff"
           active-text-color="#ffd04b"
-          :collapse="isCollapse">
+          :collapse="isCollapse"
+        >
           <el-menu-item index="2">
             <i class="el-icon-position"></i>
             <span slot="title">DengBoCong</span>
           </el-menu-item>
           <el-submenu index="1">
             <template slot="title">
-              <i class="el-icon-location"></i>
+              <i class="el-icon-c-scale-to-original"></i>
               <span slot="title">技术中心</span>
             </template>
-            <el-menu-item index="admin/technique/blog">博客</el-menu-item>
+            <el-submenu index="technique-blog">
+              <template slot="title">博客</template>
+              <el-menu-item index="admin/technique/blog">我的博客</el-menu-item>
+              <el-menu-item index="admin/technique/editblog">编辑博客</el-menu-item>
+              <el-menu-item index="admin/technique/aboutblog">博客相关</el-menu-item>
+            </el-submenu>
             <el-menu-item index="1-2">技术学习</el-menu-item>
             <el-menu-item index="1-3">资源列表</el-menu-item>
             <el-menu-item index="1-4">API文档</el-menu-item>
@@ -62,10 +71,21 @@
     </div>
     <el-container>
       <el-header style="padding:0;">
-        <el-container class="header-border border-bottom"><!-- background:#000000; -->
+        <el-container class="header-border border-bottom">
+          <!-- background:#000000; -->
           <el-container>
-            <el-button type="text" :icon="buttonIcon" size="medium" style="margin-top:10px;margin-left:17px;" @click="open"></el-button>
-            <el-breadcrumb separator-class="el-icon-arrow-right" style="margin-top:25px;margin-left:17px;" class="font-size-all">
+            <el-button
+              type="text"
+              :icon="buttonIcon"
+              size="medium"
+              style="margin-top:10px;margin-left:17px;"
+              @click="open"
+            ></el-button>
+            <el-breadcrumb
+              separator-class="el-icon-arrow-right"
+              style="margin-top:25px;margin-left:17px;"
+              class="font-size-all"
+            >
               <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
               <el-breadcrumb-item>活动管理</el-breadcrumb-item>
               <el-breadcrumb-item>活动列表</el-breadcrumb-item>
@@ -75,8 +95,13 @@
           <el-card style="width:50%;border:0;" shadow="never">
             <el-dropdown class="header-float">
               <span class="el-dropdown-link">
-                <el-avatar :size="40" src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png" @error="true" style="margin-top:-11px;">
-                  <img src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png"/>
+                <el-avatar
+                  :size="40"
+                  src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
+                  @error="true"
+                  style="margin-top:-11px;"
+                >
+                  <img src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png" />
                 </el-avatar>
               </span>
               <el-dropdown-menu slot="dropdown">
@@ -86,7 +111,8 @@
             </el-dropdown>
             <el-dropdown class="header-float">
               <span class="el-dropdown-link">
-                语言<i class="el-icon-arrow-down el-icon--right"></i>
+                语言
+                <i class="el-icon-arrow-down el-icon--right"></i>
               </span>
               <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item>中文简体</el-dropdown-item>
@@ -100,7 +126,13 @@
         </el-container>
       </el-header>
       <el-main style="padding:0;">
-        <el-tabs v-model="editableTabsValue" type="card" @tab-click="clickTab" @tab-remove="removeTab"><!-- -->
+        <el-tabs
+          v-model="editableTabsValue"
+          type="card"
+          @tab-click="clickTab"
+          @tab-remove="removeTab"
+        >
+          <!-- -->
           <!-- <el-tab-pane
             key="1"
             label="工作台"
@@ -275,19 +307,15 @@
                 </el-card>
               </el-col>
             </el-row>
-          </el-tab-pane> -->
-         <el-tab-pane
-            key="admin"
-            label="工作台"
-            name="admin">
-          </el-tab-pane>
+          </el-tab-pane>-->
+          <el-tab-pane key="admin" label="工作台" name="admin"></el-tab-pane>
           <el-tab-pane
             v-for="(item, index) in editableTabs"
             :key="item.name"
             :label="item.title"
-            closable 
-            :name="item.name">
-          </el-tab-pane>
+            closable
+            :name="item.name"
+          ></el-tab-pane>
         </el-tabs>
         <!-- <component v-bind:is="currentTabComponent" class="tab" style="background:#efefef"></component> -->
         <router-view style="background:#efefef"></router-view>
@@ -299,19 +327,19 @@
 <script>
 // import Blog from './Blog';
 // import Main from './Main';
-import { mapMutations } from 'vuex'
+import { mapMutations } from "vuex";
 
 export default {
-  name: 'AdminHome',
+  name: "AdminHome",
   components: {
     // Blog,
     // Main,
   },
   data() {
     return {
-      activeName: 'second',
+      activeName: "second",
       screenWidth: 0,
-      screenHeight:0,
+      screenHeight: 0,
       isCollapse: true,
       buttonIcon: "el-icon-s-fold",
       editableTabsValue: "",
@@ -319,19 +347,19 @@ export default {
       // tabIndex: 1,
       // curTab: 'admin',
       map: new Map([
-        ['admin', '工作台'],
-        ['admin/technique/blog', '博客'],
-      ]),
-    }
+        ["admin", "工作台"],
+        ["admin/technique/blog", "我的博客"],
+        ["admin/technique/editblog", "编辑博客"],
+        ["admin/technique/aboutblog", "博客相关"]
+      ])
+    };
   },
   methods: {
-    ...mapMutations([
-      'setAdminTagNaveList',
-      'setAdminCurTag',
-    ]),
+    ...mapMutations(["setAdminTagNaveList", "setAdminCurTag"]),
     open() {
       this.isCollapse = !this.isCollapse;
-      if(this.buttonIcon === "el-icon-s-fold") this.buttonIcon = "el-icon-s-unfold";
+      if (this.buttonIcon === "el-icon-s-fold")
+        this.buttonIcon = "el-icon-s-unfold";
       else this.buttonIcon = "el-icon-s-fold";
     },
     handleOpen(key, keyPath) {
@@ -343,21 +371,25 @@ export default {
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
     },
-    addTab(index, indexPath) {//添加导航栏
+    addTab(index, indexPath) {
+      //添加导航栏
       // let newTabName = ++this.tabIndex + '';
-      this.editableTabs.push({
-        title: this.map.get(index),
-        name: index,
-      });
+      if (!this.editalTabsOneOf(index, this.editableTabs)) {
+        this.editableTabs.push({
+          title: this.map.get(index),
+          name: index
+        });
+      }
       // this.curTab = index;
-      
-      var array = new Array(index);
+
+      // var array = new Array(index);
       this.editableTabsValue = index;
-      this.$router.push('/' + index);
+      this.$router.push("/" + index);
       this.setAdminTagNaveList(this.editableTabs);
       this.setAdminCurTag(this.editableTabsValue);
     },
-    removeTab(targetName) {//移出导航栏
+    removeTab(targetName) {
+      //移出导航栏
       let tabs = this.editableTabs;
       let activeName = this.editableTabsValue;
       if (activeName === targetName) {
@@ -366,7 +398,7 @@ export default {
             let nextTab = tabs[index + 1] || tabs[index - 1];
             if (nextTab) {
               activeName = nextTab.name;
-            } else{
+            } else {
               activeName = "admin";
             }
           }
@@ -374,26 +406,30 @@ export default {
       }
       this.editableTabsValue = activeName;
       // this.curTab = activeName;
-      this.$router.push('/' + activeName);
+      this.$router.push("/" + activeName);
       this.editableTabs = tabs.filter(tab => tab.name !== targetName);
       this.setAdminTagNaveList(this.editableTabs);
       this.setAdminCurTag(this.editableTabsValue);
     },
     clickTab(targetName) {
       this.editableTabsValue = targetName.name;
-      this.$router.push('/' + targetName.name);
+      this.$router.push("/" + targetName.name);
       this.setAdminCurTag(this.editableTabsValue);
     },
-    getFullCreeen(){
+    getFullCreeen() {
       this.n++;
-      this.n%2==0? 
-      this.outFullCreeen(document):this.inFullCreeen(document.documentElement)
+      this.n % 2 == 0
+        ? this.outFullCreeen(document)
+        : this.inFullCreeen(document.documentElement);
     },
-    inFullCreeen(element){
+    inFullCreeen(element) {
       let el = element;
-      let rfs = el.requestFullScreen || el.webkitRequestFullScreen ||
-        el.mozRequestFullScreen || el.msRequestFullScreen;
-      if (typeof rfs != "undefined" && rfs) { 
+      let rfs =
+        el.requestFullScreen ||
+        el.webkitRequestFullScreen ||
+        el.mozRequestFullScreen ||
+        el.msRequestFullScreen;
+      if (typeof rfs != "undefined" && rfs) {
         rfs.call(el);
       } else if (typeof window.ActiveXObject != "undefined") {
         let wscript = new ActiveXObject("WScript.Shell");
@@ -402,11 +438,14 @@ export default {
         }
       }
     },
-    outFullCreeen(element){
+    outFullCreeen(element) {
       let el = element;
-      let cfs = el.cancelFullScreen || el.webkitCancelFullScreen ||
-        el.mozCancelFullScreen || el.exitFullScreen;
-      if (typeof cfs != "undefined" && cfs) { 
+      let cfs =
+        el.cancelFullScreen ||
+        el.webkitCancelFullScreen ||
+        el.mozCancelFullScreen ||
+        el.exitFullScreen;
+      if (typeof cfs != "undefined" && cfs) {
         cfs.call(el);
       } else if (typeof window.ActiveXObject != "undefined") {
         let wscript = new ActiveXObject("WScript.Shell");
@@ -415,9 +454,17 @@ export default {
         }
       }
     },
+    editalTabsOneOf(index, editableTabs) {
+      for (let i = 0; i < editableTabs.length; i++) {
+        if (index === editableTabs[i].name) {
+          return true;
+        }
+      }
+      return false;
+    }
   },
   computed: {
-    height(){
+    height() {
       return `height:${this.screenHeight + 20}px`;
     },
     currentTabComponent: function() {
@@ -428,82 +475,81 @@ export default {
     this.screenWidth = document.body.clientWidth;
     this.screenHeight = document.body.clientHeight;
     this.editableTabs = this.$store.getters.getAdminTagNaveList;
-    this.editableTabsValue = this.$store.getters.getAdminCurTag
+    this.editableTabsValue = this.$store.getters.getAdminCurTag;
+    this.$router.push("/" + this.$store.getters.getAdminCurTag);
     // console.log("homeTag:"+this.$store.state.app.currentAdminTag);
     // console.log("homeList:"+this.$store.state.app.adminTagNaveList);
     // console.log("homeNaveList:"+this.$store.getters.getAdminTagNaveList);
     // let te = this.$store.getters.getAdminTagNaveList;
     // console.log(JSON.stringify(te));
-    
-  },
-}
+  }
+};
 </script>
 
 <style lang="less">
-.size{
+.size {
   width: 100%;
   height: 100%;
 }
 
 .el-menu-vertical-demo:not(.el-menu--collapse) {
-  width: 250px;;
+  width: 250px;
   min-height: 400px;
 }
 
-.header-border{
-  width:100%;
-  height:100%;
-  font-size:20px;
+.header-border {
+  width: 100%;
+  height: 100%;
+  font-size: 20px;
 }
 
 .border-bottom {
-  border-bottom-style:solid;
-  border-width:1px;
-  border-bottom-color:#e6e6e6;
+  border-bottom-style: solid;
+  border-width: 1px;
+  border-bottom-color: #e6e6e6;
 }
 
 .font-size-all {
-  font-size:15px;
+  font-size: 15px;
 }
 
 .el-dropdown-link {
   cursor: pointer;
-  color: #409EFF;
+  color: #409eff;
 }
 .el-icon-arrow-down {
   font-size: 12px;
 }
 
 .header-float {
-  float:right;
-  margin-right:15px;
+  float: right;
+  margin-right: 15px;
 }
 
-
 .el-row {
-    margin-bottom: 20px;
-    &:last-child {
-      margin-bottom: 0;
-    }
+  margin-bottom: 20px;
+  &:last-child {
+    margin-bottom: 0;
   }
-  .el-col {
-    border-radius: 4px;
-  }
-  .bg-purple-dark {
-    background: #99a9bf;
-  }
-  .bg-purple {
-    background: #d3dce6;
-  }
-  .bg-purple-light {
-    background: #e5e9f2;
-  }
-  .grid-content {
-    border-radius: 4px;
-    min-height: 36px;
-  }
-  .row-bg {
-    padding: 10px 0;
-    background-color: #f9fafc;
-  }
+}
+.el-col {
+  border-radius: 4px;
+}
+.bg-purple-dark {
+  background: #99a9bf;
+}
+.bg-purple {
+  background: #d3dce6;
+}
+.bg-purple-light {
+  background: #e5e9f2;
+}
+.grid-content {
+  border-radius: 4px;
+  min-height: 36px;
+}
+.row-bg {
+  padding: 10px 0;
+  background-color: #f9fafc;
+}
 </style>

@@ -23,14 +23,15 @@
     </el-card>
     <el-card shadow="never" style="margin-top:10px;">
       <el-container>
-        <router-link :to="{ name: 'admineditblog', params: { userId: 1 }}"><el-button type="primary" plain>主要按钮</el-button></router-link>
+        <router-link :to="{ name: 'admineditblog', params: { userId: 1 }}"><el-button type="primary" size="medium" plain>更新列表</el-button></router-link>
+        <el-divider direction="vertical"></el-divider>
         <el-input
           v-model="search"
-          size="small "
+          size="medium "
           placeholder="输入关键字搜索"/>
         <el-divider direction="vertical"></el-divider>
         <el-dropdown>
-          <el-button type="primary" plain size="small ">
+          <el-button type="primary" plain size="medium ">
             时间<i class="el-icon-arrow-down el-icon--right"></i>
           </el-button>
           <el-dropdown-menu slot="dropdown">

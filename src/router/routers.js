@@ -28,7 +28,7 @@ export default [
           hideInMenu: true,
           notCache: true,
         },
-      },{
+      }, {
         path: '/article/:id',
         name: 'article',
         component: () => import('views/ContentDetail'),
@@ -36,7 +36,7 @@ export default [
           title: '博客',
           hideInMenu: true,
         },
-      },{
+      }, {
         path: '/interfile',
         name: 'interfile',
         // route level code-splitting
@@ -78,7 +78,7 @@ export default [
   },
 
   // **************************wiki系统***************************************
-// **************************系统***************************************
+  // **************************系统***************************************
   {
     path: '/wiki',
     meta: {
@@ -91,8 +91,8 @@ export default [
   },
 
 
-// **************************后台***************************************
-// **************************相关***************************************
+  // **************************后台***************************************
+  // **************************相关***************************************
   //后台首页
   {
     path: '/admin',
@@ -112,26 +112,36 @@ export default [
         // icon: 'el-icon-position'
       },
       component: () => import('views/admin/Main')
-    },{
+    }, {
       path: '/admin/technique/blog',
       name: 'adminblog',
       meta: {
         hideInMenu: true,
-        title: '',
+        title: '我的博客',
         notCache: true,
         // icon: 'el-icon-position'
       },
       component: () => import('views/admin/blog/Blog'),
-    },{
-      path: '/admin/technique/blog/editbolg',
+    }, {
+      path: '/admin/technique/editblog',
       name: 'admineditblog',
       meta: {
         hideInMenu: true,
-        title: '',
+        title: '编辑博客',
         notCache: true,
         // icon: 'el-icon-position'
       },
       component: () => import('views/admin/blog/EditBlog'),
+    }, {
+      path: '/admin/technique/aboutblog',
+      name: 'adminaboutblog',
+      meta: {
+        hideInMenu: true,
+        title: '博客相关',
+        notCache: true,
+        // icon: 'el-icon-position'
+      },
+      component: () => import('views/admin/blog/AboutBlog'),
     }],
   }
 ]

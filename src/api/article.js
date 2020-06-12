@@ -23,3 +23,11 @@ export const oneInsert = info => {
     data: info,
   })
 }
+
+//文章类型接口
+export const getArticleType = () => {
+  return axios.request({
+    url: '/articleType/findType',
+    method: 'get'
+  })
+}

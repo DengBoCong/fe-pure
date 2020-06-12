@@ -46,8 +46,6 @@ export default {
       setAdminTagNavListInLocalstorage([...list])
     },
     setAdminCurTag(state, tag) {
-      console.log(tag);
-      
       setAdminCurTagInLocalstorage(tag);
     }
   },
