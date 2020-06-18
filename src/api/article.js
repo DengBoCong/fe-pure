@@ -39,3 +39,11 @@ export const setArticleTypeOne = info => {
     data: info,
   })
 }
+
+export const deleteArticleTypeOne = info => {
+  return axios.request({
+    url: '/articleType/oneDelete',
+    method: 'post',
+    params: info,
+  })
+}
