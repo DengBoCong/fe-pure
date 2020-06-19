@@ -105,7 +105,8 @@ export default {
       form: {
         name: "",
         description: "",
-        status: 0
+        status: 0,
+        fontCover: "",//分类专栏封面url
       },
       formLabelWidth: "120px"
     };
@@ -156,8 +157,9 @@ export default {
     },
     uploadSuccess(response, file, fileList) {
       //文章分类专栏封面图片上传
-      console.log(JSON.stringify(response)+JSON.stringify(file)+JSON.stringify(fileList));
-      
+      if (response.code == 0) {
+        this.form.fontCover = response.data;
+      }
     }
   },
   computed: {
