@@ -2,13 +2,7 @@
   <div>
     <el-card shadow="never" style="margin-top:10px;width:99%;padding:0;">
       <el-container>
-        <el-button
-        style="margin:0;"
-          type="primary"
-          plain
-          @click="dialogFormVisible = true">
-          新建
-        </el-button>
+        <el-button type="primary" plain @click="dialogFormVisible = true">新建</el-button>
         <el-dialog title="添加文章类别" :visible.sync="dialogFormVisible" center>
           <el-form :model="form">
             <el-form-item label="分类专栏名称" :label-width="formLabelWidth">
@@ -26,8 +20,9 @@
               <el-upload
                 class="upload-demo"
                 drag
-                action="https://jsonplaceholder.typicode.com/posts/"
-                multiple>
+                :limit="1"
+                :on-success="uploadSuccess"
+                action="http://localhost:8080/upload/articleTypeCover">
                 <i class="el-icon-upload"></i>
                 <div class="el-upload__text">
                   将文件拖到此处，或
@@ -42,7 +37,11 @@
           </el-form>
           <div slot="footer" class="dialog-footer">
             <el-button @click="dialogFormVisible = false">取 消</el-button>
-            <el-button type="primary" @click="submitArticleType" :loading="addArticleButtonStatus">添 加</el-button>
+            <el-button
+              type="primary"
+              @click="submitArticleType"
+              :loading="addArticleButtonStatus"
+            >添 加</el-button>
           </div>
         </el-dialog>
       </el-container>
@@ -55,7 +54,8 @@
             <el-image
               src="https://img-blog.csdnimg.cn/20200522154246646.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0RCQ18xMjE=,size_16,color_FFFFFF,t_70"
               fit="fill"
-              style="width:100px;height:100px;">
+              style="width:100px;height:100px;"
+            >
               <div slot="error" class="image-slot">
                 <i class="el-icon-picture-outline"></i>
               </div>
@@ -70,7 +70,13 @@
         <template slot-scope="scope">
           <el-button @click="handleClick(scope.row)" type="text" size="small">文章</el-button>
           <el-button type="text" size="small">编辑</el-button>
-          <el-button type="text" style="color:red;" size="small" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+          <el-divider direction="vertical"></el-divider>
+          <el-button
+            @click="handleDelete(scope.$index, scope.row)"
+            type="text"
+            style="color:red;"
+            size="small"
+          >删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -78,7 +84,11 @@
 </template>
 
 <script>
-import { getArticleType, setArticleTypeOne, deleteArticleTypeOne } from "@/api/article";
+import {
+  getArticleType,
+  setArticleTypeOne,
+  deleteArticleTypeOne
+} from "@/api/article";
 
 export default {
   name: "ArticleType",
@@ -87,7 +97,7 @@ export default {
   },
   data() {
     return {
-      addArticleButtonStatus: false,//添加按钮状态
+      addArticleButtonStatus: false, //添加按钮状态
       screenWidth: 0,
       screenHeight: 0,
       tableData: [],
@@ -119,12 +129,35 @@ export default {
       });
     },
     handleDelete(index, row) {
-      deleteArticleTypeOne({
-        id: row.id,
-      }).then(res => {
-        console.log(res);
-        
-      });
+      //用于删除文章分类专栏
+      this.$confirm("此操作将永久删除该类目, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      })
+        .then(() => {
+          deleteArticleTypeOne({
+            id: row.id
+          }).then(res => {
+            if (res.data.code == 0) {
+              this.tableData = res.data.data;
+              this.$message({
+                message: "文章分类专栏删除成功, 已为您刷新数据",
+                type: "success"
+              });
+            } else {
+              this.$message.error(
+                "文章分类删除失败, 错误提示: " + res.data.msg
+              );
+            }
+          });
+        })
+        .catch(() => {});
+    },
+    uploadSuccess(response, file, fileList) {
+      //文章分类专栏封面图片上传
+      console.log(JSON.stringify(response)+JSON.stringify(file)+JSON.stringify(fileList));
+      
     }
   },
   computed: {
