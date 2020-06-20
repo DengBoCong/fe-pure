@@ -2,9 +2,9 @@
   <div>
     <el-card shadow="never" style="margin-top:10px;width:99%;padding:0;">
       <el-container>
-        <el-button type="primary" plain @click="dialogFormVisible = true">新建</el-button>
+        <el-button type="primary" plain @click="openNewDialog">新建</el-button>
         <el-dialog title="添加文章类别" :visible.sync="dialogFormVisible" center>
-          <el-form :model="form">
+          <el-form :model="form" rel="form">
             <el-form-item label="分类专栏名称" :label-width="formLabelWidth">
               <el-input v-model="form.name" autocomplete="on" placeholder="分类专栏名称 10 字以内" clearable></el-input>
             </el-form-item>
@@ -22,7 +22,8 @@
                 drag
                 :limit="1"
                 :on-success="uploadSuccess"
-                action="http://localhost:8080/upload/articleTypeCover">
+                action="http://localhost:8080/upload/articleTypeCover"
+              >
                 <i class="el-icon-upload"></i>
                 <div class="el-upload__text">
                   将文件拖到此处，或
@@ -44,6 +45,11 @@
             >添 加</el-button>
           </div>
         </el-dialog>
+        <el-dialog title="文章列表" :visible.sync="dialogTableVisible">
+          <el-table :data="articleTableData">
+            <el-table-column property="name" label="标题"></el-table-column>
+          </el-table>
+        </el-dialog>
       </el-container>
     </el-card>
     <el-table :data="tableData" border :max-height="height" style="width: 99%;">
@@ -51,11 +57,7 @@
       <el-table-column prop="fontCover" label="封面" header-align="center" align="center">
         <template slot-scope="scope">
           <div class="block">
-            <el-image
-              src="https://img-blog.csdnimg.cn/20200522154246646.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0RCQ18xMjE=,size_16,color_FFFFFF,t_70"
-              fit="fill"
-              style="width:100px;height:100px;"
-            >
+            <el-image :src="scope.row.fontCover" fit="fill" style="width:100px;height:100px;">
               <div slot="error" class="image-slot">
                 <i class="el-icon-picture-outline"></i>
               </div>
@@ -68,8 +70,9 @@
       <el-table-column prop="articleNum" label="文章数" header-align="center" align="center"></el-table-column>
       <el-table-column fixed="right" label="操作" header-align="center" align="center">
         <template slot-scope="scope">
-          <el-button @click="handleClick(scope.row)" type="text" size="small">文章</el-button>
-          <el-button type="text" size="small">编辑</el-button>
+          <el-button @click="handleClick(scope.$index, scope.row)" type="text" size="small">文章</el-button>
+          <el-divider direction="vertical"></el-divider>
+          <el-button type="text" size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
           <el-divider direction="vertical"></el-divider>
           <el-button
             @click="handleDelete(scope.$index, scope.row)"
@@ -87,7 +90,9 @@
 import {
   getArticleType,
   setArticleTypeOne,
-  deleteArticleTypeOne
+  deleteArticleTypeOne,
+  getArticleTypeById,
+  getArticleByTypeId
 } from "@/api/article";
 
 export default {
@@ -100,18 +105,29 @@ export default {
       addArticleButtonStatus: false, //添加按钮状态
       screenWidth: 0,
       screenHeight: 0,
-      tableData: [],
+      tableData: [],//文章分类列表
+      articleTableData: [], //文章列表
       dialogFormVisible: false,
+      dialogTableVisible: false,
       form: {
+        id: 0,
         name: "",
         description: "",
         status: 0,
-        fontCover: "",//分类专栏封面url
+        fontCover: "" //分类专栏封面url
       },
       formLabelWidth: "120px"
     };
   },
   methods: {
+    openNewDialog() {
+      //打开新建修改对话框
+      this.dialogFormVisible = true;
+      this.form.name = "";
+      this.form.description = "";
+      this.form.status = 0;
+      this.fontCover = "";
+    },
     submitArticleType() {
       //文章分类专栏新建按钮事件
       this.addArticleButtonStatus = true;
@@ -127,6 +143,23 @@ export default {
         } else {
           this.$message.error("文章分类添加失败, 错误提示: " + res.data.msg);
         }
+      });
+    },
+    handleClick(index, row) {
+      //根据类别ID查询所含的文章列表
+      this.dialogTableVisible = true;
+      getArticleByTypeId({ typeId: row.id }).then(res => {
+        this.articleTableData = res.data.data;
+      });
+    },
+    handleEdit(index, row) {
+      this.dialogFormVisible = true;
+      getArticleTypeById({ id: row.id }).then(res => {
+        this.form.id = res.data.data.id;
+        this.form.name = res.data.data.name;
+        this.form.description = res.data.data.description;
+        this.form.status = res.data.data.status;
+        this.fontCover = res.data.data.fontCover;
       });
     },
     handleDelete(index, row) {

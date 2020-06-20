@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-
+//测试接口
 export const getTableData = () => {
   return axios.request({
     url: '/hello',
@@ -16,6 +16,8 @@ export const insert = info => {
   })
 }
 
+
+//文章接口 - 单个插入接口
 export const oneInsert = info => {
   return axios.request({
     url: '/article/oneInsert',
@@ -24,7 +26,17 @@ export const oneInsert = info => {
   })
 }
 
-//文章类型接口
+//文章接口 - 更具typeId进行查询，即分类查询文章
+export const getArticleByTypeId = info => {
+  return axios.request({
+    url: '/article/findArticleByTypeId',
+    method: 'post',
+    params: info,
+  })
+}
+
+
+//文章类型接口 - 查询所有接口
 export const getArticleType = () => {
   return axios.request({
     url: '/articleType/findType',
@@ -32,14 +44,25 @@ export const getArticleType = () => {
   })
 }
 
+//文章类型接口 - 单个查询接口
+export const getArticleTypeById = info => {
+  return axios.request({
+    url: '/articleType/findTypeById',
+    method: 'post',
+    params: info,
+  })
+}
+
+//文章类型接口 - 单个插入接口
 export const setArticleTypeOne = info => {
   return axios.request({
-    url: '/articleType/oneInsert',
+    url: '/articleType/oneInsertAndUpdate',
     method: 'post',
     data: info,
   })
 }
 
+//文章类型接口 - 单个删除接口
 export const deleteArticleTypeOne = info => {
   return axios.request({
     url: '/articleType/oneDelete',
