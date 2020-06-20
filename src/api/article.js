@@ -26,7 +26,7 @@ export const oneInsert = info => {
   })
 }
 
-//文章接口 - 更具typeId进行查询，即分类查询文章
+//文章接口 - 根据typeId进行查询，即分类查询文章
 export const getArticleByTypeId = info => {
   return axios.request({
     url: '/article/findArticleByTypeId',
@@ -41,6 +41,15 @@ export const getArticleType = () => {
   return axios.request({
     url: '/articleType/findType',
     method: 'get'
+  })
+}
+
+//文章类型接口 - 查询指定status状态的文章类型
+export const getArticleTypeByStatus = info => {
+  return axios.request({
+    url: '/articleType/findTypeByStatus',
+    method: 'post',
+    params: info,
   })
 }
 

@@ -52,7 +52,7 @@
         </el-dialog>
       </el-container>
     </el-card>
-    <el-table :data="tableData" border :max-height="height" style="width: 99%;">
+    <el-table :data="tableData" border :max-height="height" style="width: 99%;" v-loading="articleTypeLoading">
       <el-table-column fixed prop="sort" label="排序" header-align="center" align="center"></el-table-column>
       <el-table-column prop="fontCover" label="封面" header-align="center" align="center">
         <template slot-scope="scope">
@@ -108,6 +108,7 @@ export default {
       tableData: [],//文章分类列表
       articleTableData: [], //文章列表
       dialogFormVisible: false,
+      articleTypeLoading: true,//文章分类列表加载
       dialogTableVisible: false,
       form: {
         id: 0,
@@ -170,9 +171,11 @@ export default {
         type: "warning"
       })
         .then(() => {
+          this.articleTypeLoading = true;
           deleteArticleTypeOne({
             id: row.id
           }).then(res => {
+            this.articleTypeLoading = false;
             if (res.data.code == 0) {
               this.tableData = res.data.data;
               this.$message({
@@ -205,6 +208,7 @@ export default {
     this.screenHeight = document.body.clientHeight;
     getArticleType().then(res => {
       this.tableData = res.data.data;
+      this.articleTypeLoading = false;
     });
   }
 };
