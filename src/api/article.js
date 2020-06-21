@@ -26,6 +26,15 @@ export const oneInsert = info => {
   })
 }
 
+//文章接口 - 根据ArticleId进行查询
+export const getArticleByArticleId = info => {
+  return axios.request({
+    url: '/article/findByArticleId',
+    method: 'post',
+    params: info,
+  })
+}
+
 //文章接口 - 根据typeId进行查询，即分类查询文章
 export const getArticleByTypeId = info => {
   return axios.request({
