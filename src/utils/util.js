@@ -15,8 +15,6 @@ export const setAdminTagNavListInLocalstorage = list => {
  */
 export const getAdminTagNavListFromLocalstorage = () => {
   const list = localStorage.adminTagList;
-  // console.log("getValue:"+localStorage.adminTagNaveList);
-  // console.log("list:"+list);
   return list ? JSON.parse(list) : []
 }
 
@@ -24,8 +22,6 @@ export const getAdminTagNavListFromLocalstorage = () => {
  * @description 本地存储和获取当前标签
  */
 export const setAdminCurTagInLocalstorage = tag => {
-  // localStorage.adminTag = JSON.stringify(list)
-  // console.log("setValue"+localStorage.adminTagNaveList);
   localStorage.adminCurTag = tag;
 }
 /**
@@ -43,7 +39,7 @@ export const arrayElementToObjectIsArticleType = array => {
   let result = [];
   array.forEach((element, index) => {
     result.push({
-      name: element,
+      id: element,
     });
   });
   return result;
@@ -63,6 +59,10 @@ export const arrayElementToObjectIsArticleTag = array => {
 }
 
 
+// ***********************************************************************
+// ***********************************************************************
+// ***********************************************************************
+// ***********************************************************************
 // ***********************************************************************
 // ***********************************************************************
 

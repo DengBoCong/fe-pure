@@ -121,7 +121,7 @@
         >{{ tipDialog }}</el-dialog>
         <div slot="footer" class="dialog-footer">
           <el-button @click="submitForm('ruleForm')">保存草稿</el-button>
-          <el-button type="primary" @click="submitForm('ruleForm')">发布文章</el-button>
+          <el-button type="primary" @click="submitForm('ruleForm')" :loading="submitArticleLoading">发布文章</el-button>
         </div>
       </el-dialog>
     </el-container>
@@ -151,6 +151,7 @@ export default {
   },
   data() {
     return {
+      submitArticleLoading: false,//发布文章按钮加载标记
       titleInput: "",
       content: "",
       tagInputValue: "",
@@ -226,9 +227,8 @@ export default {
   methods: {
     submitForm(formName) {
       //用于提交文章表单
-      // this.outerVisible = false;
+      this.submitArticleLoading = true;
       this.$refs[formName].validate(valid => {
-        return;
         if (valid) {
           if (this.titleInput === "") {
             this.tipDialog = "文章的标题不能为空";
@@ -238,21 +238,45 @@ export default {
             this.innerVisible = true;
           } else {
             oneInsert({
-              userId: 0,
-              addTime: dateToInt(new Date()),
-              modifyTime: dateToInt(new Date()),
-              title: this.titleInput,
-              subTitle: this.subTitleInput,
-              content: this.content,
-              addTime: Math.floor(new Date().getTime() / 1000),
-              status: this.status,
-              summary: this.ruleForm.summary,
+              articleEntity: {
+                userId: 0,
+                addTime: dateToInt(new Date()),
+                modifyTime: dateToInt(new Date()),
+                title: this.titleInput,
+                subTitle: this.subTitleInput,
+                content: this.content,
+                addTime: Math.floor(new Date().getTime() / 1000),
+                status: this.status,
+                summary: this.ruleForm.summary,
+                articleFlag: this.ruleForm.articleFlag, //this.ruleForm.articleFlag,
+                publishTime: dateToInt(this.date),
+              },
               classes: arrayElementToObjectIsArticleType(this.ruleForm.class), //[{name: "safa"}],//this.ruleForm.class,
-              articleFlag: this.ruleForm.articleFlag, //this.ruleForm.articleFlag,
-              publishTime: dateToInt(this.date),
               tags: arrayElementToObjectIsArticleTag(this.ruleForm.articleTag)
             }).then(res => {
-              this.tableData = res.data;
+              this.submitArticleLoading = false;
+              if(res.data.code == 0) {
+                this.outerVisible = false;
+                this.titleInput = "";
+                this.subTitleInput = "";
+                this.content = "";
+                this.ruleForm.summary = "";
+                this.ruleForm.articleFlag = "";
+                this.date = "";
+                this.ruleForm.class = [];
+                this.ruleForm.articleTag = [];
+                this.$message({
+                  showClose: true,
+                  message: '文章添加成功, 已为您刷新数据!',
+                  type: 'success'
+                });
+              } else {
+                this.$message({
+                  showClose: true,
+                  message: '文章添加失败, 服务器反馈错误信息为: ' + res.data.meg,
+                  type: 'error'
+                });
+              }
             });
           }
         } else {

@@ -3,8 +3,6 @@
  * @description 传入时间Date，返回时间戳
  */
 export const dateToInt = (date) => {
-  console.log(date);
-  
   return Math.floor(new Date(date).getTime() / 1000)
 }
 
