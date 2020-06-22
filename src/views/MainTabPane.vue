@@ -3,7 +3,7 @@
     <el-tab-pane v-for="item in articleTypeArray" :key="item.id" :label="item.name" :name="item.name"></el-tab-pane>
     <el-tab-pane label="-------------------" :disabled="true" name="second"></el-tab-pane>
     <el-container>
-      <el-scrollbar style="height:100%;width:100%;">
+      <el-scrollbar style="width:100%;" :style="tableHeight">
         <el-table
           :data="tableData.filter(data => !search || data.articleEntity.title.toLowerCase().includes(search.toLowerCase()))"
           style="width: 100%;height:100%;"
@@ -37,7 +37,7 @@
             </template>
           </el-table-column>
         </el-table>
-        <el-container style="margin:20px;">
+        <el-container style="margin:10px;">
           <div class="block" style="margin-left:auto; margin-right:auto">
             <el-pagination
               @size-change="handleSizeChange"
@@ -48,6 +48,7 @@
               layout="total, sizes, prev, pager, next, jumper"
               :total="articleTotalSize">
             </el-pagination>
+          <div class="block" style="height:30px;"></div>
           </div>
         </el-container>
       </el-scrollbar>
@@ -71,6 +72,9 @@ export default {
   computed: {
     height(){
       return `height:${this.screenHeight-61}px`;
+    },
+    tableHeight(){
+      return `height:${this.screenHeight-46}px`;
     }
   },
   data() {
@@ -110,10 +114,16 @@ export default {
     handleCurrentChange(val) {
       console.log(`当前页: ${val}`);
     },
-    handleClick(tab, event) {
-      console.log(tab, event);
+    handleClick(tab, event) {//右侧文章分类点击事件
+      this.articleLoading = true;
+      getArticleByTypeId({typeId:this.articleTypeArray[tab.index].id}).then(result => {
+        this.tableData = result.data.data;
+        this.articleTotalSize = result.data.map;
+        // console.log(JSON.stringify(result.data.data));
+        this.articleLoading = false;
+      });
     },
-    cliickArticleItem(row, column, event) {
+    cliickArticleItem(row, column, event) {//点击进入文章详情页
       // this.$router.push({path: '/article/1',query: {article: row.articleEntity}});
       this.$router.push("/article/" + row.articleEntity.id);
     }
