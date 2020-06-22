@@ -1,6 +1,6 @@
 <template>
   <el-container class="size">
-    <el-aside width="400px">
+    <el-aside width="400px" class="hiddenScrollbar">
       <PersonCard style="border-right:1px solid #D1D1D1;"></PersonCard>
     </el-aside>
     <el-container>

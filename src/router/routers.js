@@ -51,8 +51,21 @@ export default [
     }],
   },
 
+  // **************************搜索***************************************
+  // **************************相关***************************************
+  {
+    path: '/search',
+    meta: {
+      title: '搜索',
+      hideInMenu: true,
+      notCache: true,
+    },
+    component: () => import('views/Search'),
+    children: [],
+  },
 
-  //登录相关
+  // **************************登录***************************************
+  // **************************相关***************************************
   {
     path: '/login',
     name: 'login',
@@ -95,11 +108,21 @@ export default [
   {
     path: '/record',
     meta: {
-      title: '简历',
+      title: '文字版简历',
       hideInMenu: true,
       notCache: true,
     },
     component: () => import('views/about/Record'),
+    children: [],
+  },
+  {
+    path: '/advrecord',
+    meta: {
+      title: '炫酷版简历',
+      hideInMenu: true,
+      notCache: true,
+    },
+    component: () => import('views/about/AdvanceRecord'),
     children: [],
   },
 

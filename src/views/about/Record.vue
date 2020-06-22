@@ -1,6 +1,6 @@
 <template>
   <el-container class="size">
-    <el-main>
+    <el-main class="hiddenScrollbar">
       <el-card><!-- style="border:0;" shadow="never" -->
         <el-row>
           <el-col :span="6" style="text-align:center;">
@@ -21,14 +21,14 @@
               <el-col :span="12" style="text-align:center;">
                 <el-button type="text" icon="el-icon-picture-outline">照片组图</el-button>
                 <el-divider direction="vertical"></el-divider>
-                <el-button type="text" icon="el-icon-c-scale-to-original">切换效果</el-button>
+                <router-link to="/advrecord"><el-button type="text" icon="el-icon-c-scale-to-original">炫酷简历</el-button></router-link>
                 <el-divider direction="vertical"></el-divider>
                 <el-button type="text" icon="el-icon-postcard">联系方式</el-button>
               </el-col>
               <el-col :span="12" style="text-align:center;">
                 <router-link to="/home"><el-button type="text" icon="el-icon-house">首页</el-button></router-link>
                 <el-divider direction="vertical"></el-divider>
-                <el-button type="text" icon="el-icon-search">搜索</el-button>
+                <router-link to="/search"><el-button type="text" icon="el-icon-search">搜索</el-button></router-link>
                 <el-divider direction="vertical"></el-divider>
                 <el-dropdown>
                   <span class="el-dropdown-link">
@@ -96,10 +96,12 @@ export default {
   name: "Record",
   components: {
     PersonCard,
+    Markdown,
   },
   data() {
     return {
-      activeName: 'second'
+      activeName: 'second',
+      content: "dafs"
     }
   },
   methods: {
@@ -119,4 +121,6 @@ export default {
   .el-icon-arrow-down {
     font-size: 12px;
   }
+
+  
 </style>
