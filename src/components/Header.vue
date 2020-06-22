@@ -11,18 +11,18 @@
       <router-link to="/admin" class="noneDe"><el-menu-item index="admin">技术学习</el-menu-item></router-link>
       <router-link to="/admin" class="noneDe"><el-menu-item index="admin">资源列表</el-menu-item></router-link>
       <router-link to="/admin" class="noneDe"><el-menu-item index="admin">API文档</el-menu-item></router-link>
-      <router-link to="/admin" class="noneDe"><el-menu-item index="interfile">归档</el-menu-item></router-link>
+      <router-link to="/interfile" class="noneDe"><el-menu-item index="interfile">归档</el-menu-item></router-link>
     </el-submenu>
     <el-submenu index="2">
       <template slot="title">项目中心</template><!-- <i class="el-icon-bangzhu"></i> -->
-      <el-menu-item index="admin" @click="openLoading">wiki</el-menu-item>
+      <el-menu-item index="wiki" @click="openLoading">wiki</el-menu-item>
       <router-link to="/admin" class="noneDe"><el-menu-item index="admin">开源项目</el-menu-item></router-link>
       <router-link to="/admin" class="noneDe"><el-menu-item index="admin">入口3</el-menu-item></router-link>
     </el-submenu>
     <el-submenu index="3">
       <template slot="title">关于</template><!-- <i class="el-icon-user"></i> -->
       <router-link to="/admin" class="noneDe"><el-menu-item index="admin">吐槽说明</el-menu-item></router-link>
-      <router-link to="/admin" class="noneDe"><el-menu-item index="admin">个人履历</el-menu-item></router-link>
+      <router-link to="/record" class="noneDe"><el-menu-item index="record">个人履历</el-menu-item></router-link>
       <router-link to="/admin" class="noneDe"><el-menu-item index="admin">我的标签</el-menu-item></router-link>
       <router-link to="/admin" class="noneDe"><el-menu-item index="admin">生活和爱情</el-menu-item></router-link>
       <router-link to="/admin" class="noneDe"><el-menu-item index="admin">兴趣爱好</el-menu-item></router-link>

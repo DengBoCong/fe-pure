@@ -4,6 +4,7 @@
       <b>{{itemData.articleEntity.title}}</b>
     </div>
     <div style="margin-top:10px;">
+      <i class="el-icon-paperclip"></i>
       <b>
         <el-tag
           v-for="item in itemData.tags"

@@ -1,7 +1,7 @@
 <template>
   <div class="person">
     <div class="person-con">
-      <el-card style="width:95%;margin:2.5%;">
+      <el-card style="width:95%;margin:2.5%;border:0;" shadow="never">
         <div class="demo-type" style="text-align:center;">
           <el-avatar :size="70" src="https://img-blog.csdnimg.cn/20200522154246646.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0RCQ18xMjE=,size_16,color_FFFFFF,t_70" @error="true">
             <img src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png"/>
@@ -49,7 +49,7 @@ export default {
 
 <style  lang="less">
 .person{
-  width: 100%;
+  width: 99%;
   height: 100%;
   /* background-image: url('../../assets/img/login-bg.png'); */
   background-size: cover;

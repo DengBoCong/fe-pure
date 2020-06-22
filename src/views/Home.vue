@@ -1,7 +1,7 @@
 <template>
   <el-container class="size">
     <el-aside width="400px">
-      <PersonCard></PersonCard>
+      <PersonCard style="border-right:1px solid #D1D1D1;"></PersonCard>
     </el-aside>
     <el-container>
       <el-header>
