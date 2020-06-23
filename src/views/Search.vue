@@ -9,7 +9,7 @@
         background-color="#545c64"
         text-color="#fff"
         active-text-color="#ffd04b">
-        <el-menu-item index="1">DengBoCong - Wiki </el-menu-item>
+        <el-menu-item index="1">DengBoCong - 搜索页 </el-menu-item>
         <el-submenu index="2">
           <template slot="title">最近访问</template>
           <el-menu-item index="2-1" :disabled="true">无数据</el-menu-item>
@@ -65,21 +65,21 @@
           </el-table>
         </el-card>
       </el-main>
-      <el-aside width="500px" class="hiddenScrollbar">
-        <RebotSearch></RebotSearch>
+      <el-aside width="500px" :style="height" class="hiddenScrollbar">
+        <QuickSearch></QuickSearch>
       </el-aside>
     </el-container>
   </el-container>
 </template>
 
 <script>
-import RebotSearch from 'components/context/RebotSearch'
 import SearchItem from 'components/context/SearchItem'
+import QuickSearch from 'components/context/QuickSearch'
 
 export default {
   name: 'Search',
   components: {
-    RebotSearch,
+    QuickSearch,
     SearchItem,
   },
   methods: {
