@@ -16,7 +16,7 @@
     <el-submenu index="2">
       <template slot="title">项目中心</template><!-- <i class="el-icon-bangzhu"></i> -->
       <el-menu-item index="wiki" @click="openLoading">wiki</el-menu-item>
-      <router-link to="/admin" class="noneDe"><el-menu-item index="admin">开源项目</el-menu-item></router-link>
+      <router-link to="/project" class="noneDe"><el-menu-item index="project">开源项目</el-menu-item></router-link>
       <router-link to="/admin" class="noneDe"><el-menu-item index="admin">入口3</el-menu-item></router-link>
     </el-submenu>
     <el-submenu index="3">
