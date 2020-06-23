@@ -45,12 +45,21 @@
       <router-link to="/admin" class="noneDe"><el-menu-item index="admin">六小六系统</el-menu-item></router-link>
       <router-link to="/admin" class="noneDe"><el-menu-item index="admin">中心系统</el-menu-item></router-link>
     </el-submenu>
-
     <el-submenu index="6" style="float:right;">
       <template slot="title">中文</template>
       <router-link to="/admin" class="noneDe"><el-menu-item index="admin">中文</el-menu-item></router-link>
       <router-link to="/admin" class="noneDe"><el-menu-item index="admin">English</el-menu-item></router-link>
     </el-submenu>
+    <el-button type="text" icon="el-icon-search" style="float:right;margin-top:10px;" @click="openSearch"></el-button>
+    <el-dialog title="站内搜索仅支持对文章、项目、工具等已标记内容的搜索" :show-close="false" :visible.sync="searchDialogVisible" center>
+      <el-input placeholder="请输入搜索内容" v-model="searchInput" class="input-with-select">
+        <el-select v-model="searchTypeSelect" slot="prepend" placeholder="请选择">
+          <el-option label="站内搜索" value="1"></el-option>
+          <el-option label="站外搜索" value="2"></el-option>
+        </el-select>
+        <el-button slot="append" icon="el-icon-search" @click="searchContent"></el-button>
+      </el-input>
+    </el-dialog>
   </el-menu>
 </template>
 
@@ -63,7 +72,10 @@ export default {
   data() {
     return {
       activeIndex: '1-1',
-      loadingTip: '转接中，本系统未开启稳定设置，防止恶意点击，请耐心等待！'
+      loadingTip: '转接中，本系统未开启稳定设置，防止恶意点击，请耐心等待！',
+      searchDialogVisible: false,
+      searchTypeSelect: '',
+      searchInput: '',
     }
   },
   methods: {
@@ -81,6 +93,12 @@ export default {
         loading.close();
         this.$router.push('/wiki')
       }, 2000);
+    },
+    openSearch() {//打开搜索框
+      this.searchDialogVisible = true;
+    },
+    searchContent() {
+      this.$router.push("/search");
     }
   },
 }
