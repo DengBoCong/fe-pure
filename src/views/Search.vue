@@ -66,9 +66,7 @@
         </el-card>
       </el-main>
       <el-aside width="500px" class="hiddenScrollbar">
-        <div style="height:25px;"></div>
         <RebotSearch></RebotSearch>
-        <div style="height:50px;"></div>
       </el-aside>
     </el-container>
   </el-container>

@@ -39,7 +39,7 @@
     </el-submenu>
     <el-submenu index="5">
       <template slot="title">工作台</template><!-- <i class="el-icon-bank-card"></i> -->
-      <router-link to="/admin" class="noneDe"><el-menu-item index="admin">提交工单</el-menu-item></router-link>
+      <router-link to="/workorder" class="noneDe"><el-menu-item index="workorder">提交工单</el-menu-item></router-link>
       <router-link to="/admin" class="noneDe"><el-menu-item index="admin">账号空间</el-menu-item></router-link>
       <router-link to="/admin" class="noneDe"><el-menu-item index="admin">后台管理</el-menu-item></router-link>
       <router-link to="/admin" class="noneDe"><el-menu-item index="admin">六小六系统</el-menu-item></router-link>
