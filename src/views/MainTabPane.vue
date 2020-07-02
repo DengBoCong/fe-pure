@@ -95,6 +95,10 @@ export default {
     this.screenHeight = document.body.clientHeight;
     getArticleTypeByStatus({status:true}).then(res =>{
       this.articleTypeArray = res.data.data;
+      if(res.data.data.length == 0) {
+        this.articleLoading = false;
+        return;
+      }
       this.activeName = res.data.data[0].name;
       getArticleByTypeId({typeId:res.data.data[0].id}).then(result => {
         this.tableData = result.data.data;
