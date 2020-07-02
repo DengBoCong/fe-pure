@@ -10,7 +10,7 @@
       <router-link to="/home" class="noneDe"><el-menu-item index="home">博客</el-menu-item></router-link>
       <router-link to="/admin" class="noneDe"><el-menu-item index="admin">技术学习</el-menu-item></router-link>
       <router-link to="/admin" class="noneDe"><el-menu-item index="admin">资源列表</el-menu-item></router-link>
-      <router-link to="/admin" class="noneDe"><el-menu-item index="admin">API文档</el-menu-item></router-link>
+      <router-link to="/document" class="noneDe"><el-menu-item index="document">API文档</el-menu-item></router-link>
       <router-link to="/interfile" class="noneDe"><el-menu-item index="interfile">归档</el-menu-item></router-link>
     </el-submenu>
     <el-submenu index="2">
