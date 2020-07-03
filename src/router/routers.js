@@ -126,7 +126,23 @@ export default [
       notCache: true,
     },
     component: () => import('views/document/Home'),
-    children: [],
+    children: [{
+      path: '/',
+      component: () => import('views/document/Main'),
+      meta: {
+        title: '文档',
+        hideInMenu: true,
+        notCache: true,
+      },
+    },{
+      path: '/document/:id',
+      component: () => import('views/document/Document'),
+      meta: {
+        title: '文档',
+        hideInMenu: true,
+        notCache: true,
+      },
+    }],
   },
 
   // **************************关于***************************************

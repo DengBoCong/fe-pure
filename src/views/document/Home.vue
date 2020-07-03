@@ -3,16 +3,24 @@
     <el-header style="height:70px;">
       <el-button type="text" style="height:100%;"><p style="font-size:30px;color:#5CACFF;"><b><i class="el-icon-s-promotion"></i> DengBoCong</b></p></el-button>
       <el-dropdown trigger="click" style="height:100%;float:right;">
-        <el-button type="text" style="height:100%;margin-left:100px;"><p style="font-size:16px;color:#5CACFF;">中文 <i class="el-icon-arrow-down"></i></p></el-button>
+        <el-button type="text" style="height:100%;margin-left:20px;"><p style="font-size:16px;color:#959595;">中文 <i class="el-icon-arrow-down"></i></p></el-button>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item>中文</el-dropdown-item>
           <el-dropdown-item>English</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
+      <el-dropdown trigger="click" style="height:100%;float:right;">
+        <el-button type="text" style="height:100%;margin-left:100px;"><p style="font-size:16px;color:#959595;">快捷导航 <i class="el-icon-arrow-down"></i></p></el-button>
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item>Pure</el-dropdown-item>
+          <el-dropdown-item>fe-pure</el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
       <!-- <el-divider direction="vertical" style="float:right;"></el-divider> -->
       <el-button type="text" style="height:100%;float:right;margin-left:50px;"><p style="font-size:16px;">资源</p></el-button>
-      <el-button type="text" style="height:100%;float:right;margin-left:50px;"><p style="font-size:16px;">导航</p></el-button>
       <el-button type="text" style="height:100%;float:right;margin-left:50px;"><p style="font-size:16px;">指南</p></el-button>
+      <router-link to="/document"><el-button type="text" style="height:100%;float:right;margin-left:50px;"><p style="font-size:16px;">文档</p></el-button></router-link>
+      <router-link to="/home"><el-button type="text" style="height:100%;float:right;margin-left:50px;"><p style="font-size:16px;">首页</p></el-button></router-link>
       <el-autocomplete
         v-model="state"
         :fetch-suggestions="querySearchAsync"
@@ -22,20 +30,7 @@
       </el-autocomplete>
     </el-header>
     <div class="line"></div>
-    <el-container>
-      <el-aside width="200px">
-        <p>Aside</p>
-        <p>Aside</p>
-        <p>Aside</p>
-        <p>Aside</p>
-        <p>Aside</p>
-        <p>Aside</p>
-        <p>Aside</p>
-        <p>Aside</p>
-        <p>Aside</p>
-      </el-aside>
-      <el-main>Main</el-main>
-    </el-container>
+    <router-view></router-view>
   </el-container>
 </template>
 
