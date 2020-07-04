@@ -32,10 +32,10 @@
             </span>
           </div>
           <div style="margin-top:10px;">
-            分类专栏：
+            文章标签：
             <b>
               <el-tag
-                v-for="item in ['tsa','tga','tah']"
+                v-for="item in tagArray"
                 :key="item"
                 size="medium"
                 style="background: #fff;"
@@ -61,6 +61,7 @@
 import Markdown from 'components/Markdown';
 import { getArticleByArticleId } from '@/api/article';
 import { getDate } from "utils/tools";
+import { arrayArticleTagToArray } from "utils/util";
 
 export default {
   name: 'ContentDetail',
@@ -77,6 +78,7 @@ export default {
       readNum: 0,//阅读量
       pickNum: 0,//点赞量
       commentNum: 0,//评论量
+      tagArray: [],//文章标签数组
     }
   },
   methods: {
@@ -95,6 +97,7 @@ export default {
         this.readNum = res.data.data.articleEntity.readNum;
         this.pickNum = res.data.data.articleEntity.pickNum;
         this.commentNum = res.data.data.articleEntity.commentNum;
+        this.tagArray = arrayArticleTagToArray(res.data.data.tags);
       } else {
         this.$message({
           showClose: true,

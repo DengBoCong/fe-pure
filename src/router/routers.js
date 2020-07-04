@@ -204,6 +204,14 @@ export default [
       },
       component: () => import('views/admin/Main')
     }, {
+      path: '/admin/person',
+      meta: {
+        hideInMenu: true,
+        title: '个人中心',
+        notCache: true,
+      },
+      component: () => import('views/admin/Person'),
+    },{
       path: '/admin/technique/blog',
       name: 'adminblog',
       meta: {

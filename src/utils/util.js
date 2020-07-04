@@ -58,6 +58,17 @@ export const arrayElementToObjectIsArticleTag = array => {
   return result;
 }
 
+/**
+ * @returns {Array} 文章标签转标签数组
+ */
+export const arrayArticleTagToArray = array => {
+  let result = [];
+  array.forEach((element, index) => {
+    result.push(element.content);
+  });
+  return result;
+}
+
 
 // ***********************************************************************
 // ***********************************************************************

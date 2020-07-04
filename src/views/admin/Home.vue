@@ -66,6 +66,24 @@
             <el-menu-item index="4-4">六小六系统</el-menu-item>
             <el-menu-item index="4-5">中心系统</el-menu-item>
           </el-submenu>
+          <el-submenu index="5">
+            <template slot="title">
+              <i class="el-icon-location"></i>
+              <span slot="title">系统媒体</span>
+            </template>
+            <el-menu-item index="5-1">公告</el-menu-item>
+            <el-menu-item index="5-2">广告</el-menu-item>
+            <el-menu-item index="5-3">通知</el-menu-item>
+          </el-submenu>
+          <el-submenu index="6">
+            <template slot="title">
+              <i class="el-icon-location"></i>
+              <span slot="title">系统设置</span>
+            </template>
+            <el-menu-item index="6-1">公告</el-menu-item>
+            <el-menu-item index="6-2">广告</el-menu-item>
+            <el-menu-item index="6-3">通知</el-menu-item>
+          </el-submenu>
         </el-menu>
       </el-scrollbar>
     </div>
@@ -93,7 +111,7 @@
             </el-breadcrumb>
           </el-container>
           <el-card style="width:50%;border:0;" shadow="never">
-            <el-dropdown class="header-float">
+            <el-dropdown class="header-float" @command="addTab2">
               <span class="el-dropdown-link">
                 <el-avatar
                   :size="40"
@@ -105,6 +123,7 @@
                 </el-avatar>
               </span>
               <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item command="admin/person">个人中心</el-dropdown-item>
                 <el-dropdown-item>消息中心</el-dropdown-item>
                 <el-dropdown-item>退出登录</el-dropdown-item>
               </el-dropdown-menu>
@@ -348,6 +367,7 @@ export default {
       // curTab: 'admin',
       map: new Map([
         ["admin", "工作台"],
+        ["admin/person", "个人中心"],
         ["admin/technique/blog", "我的博客"],
         ["admin/technique/editblog", "编辑博客"],
         ["admin/technique/aboutblog", "博客相关"]
@@ -373,6 +393,23 @@ export default {
     },
     addTab(index, indexPath) {
       //添加导航栏
+      // let newTabName = ++this.tabIndex + '';
+      if (!this.editalTabsOneOf(index, this.editableTabs)) {
+        this.editableTabs.push({
+          title: this.map.get(index),
+          name: index
+        });
+      }
+      // this.curTab = index;
+
+      // var array = new Array(index);
+      this.editableTabsValue = index;
+      this.$router.push("/" + index);
+      this.setAdminTagNaveList(this.editableTabs);
+      this.setAdminCurTag(this.editableTabsValue);
+    },
+    addTab2(index) {
+      //添加导航栏 - 备用
       // let newTabName = ++this.tabIndex + '';
       if (!this.editalTabsOneOf(index, this.editableTabs)) {
         this.editableTabs.push({
