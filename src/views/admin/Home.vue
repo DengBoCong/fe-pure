@@ -6,8 +6,6 @@
           default-active="1-4-1"
           class="el-menu-vertical-demo"
           :style="height"
-          @open="handleOpen"
-          @close="handleClose"
           @select="addTab"
           background-color="#545c64"
           text-color="#fff"
@@ -49,7 +47,7 @@
               <span slot="title">关于</span>
             </template>
             <el-menu-item index="3-1">吐槽说明</el-menu-item>
-            <el-menu-item index="3-2">个人履历</el-menu-item>
+            <el-menu-item index="admin/about/record">个人履历</el-menu-item>
             <el-menu-item index="3-3">我的标签</el-menu-item>
             <el-menu-item index="3-4">生活和爱情</el-menu-item>
             <el-menu-item index="3-5">兴趣和爱好</el-menu-item>
@@ -370,7 +368,8 @@ export default {
         ["admin/person", "个人中心"],
         ["admin/technique/blog", "我的博客"],
         ["admin/technique/editblog", "编辑博客"],
-        ["admin/technique/aboutblog", "博客相关"]
+        ["admin/technique/aboutblog", "博客相关"],
+        ["admin/about/record", "个人履历"]
       ])
     };
   },
@@ -381,15 +380,6 @@ export default {
       if (this.buttonIcon === "el-icon-s-fold")
         this.buttonIcon = "el-icon-s-unfold";
       else this.buttonIcon = "el-icon-s-fold";
-    },
-    handleOpen(key, keyPath) {
-      console.log(key, keyPath);
-    },
-    handleClose(key, keyPath) {
-      console.log(key, keyPath);
-    },
-    handleSelect(key, keyPath) {
-      console.log(key, keyPath);
     },
     addTab(index, indexPath) {
       //添加导航栏

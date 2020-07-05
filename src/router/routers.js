@@ -241,6 +241,15 @@ export default [
         // icon: 'el-icon-position'
       },
       component: () => import('views/admin/blog/AboutBlog'),
+    }, {
+      path: '/admin/about/record',
+      meta: {
+        hideInMenu: true,
+        title: '个人履历',
+        notCache: true,
+        // icon: 'el-icon-position'
+      },
+      component: () => import('views/admin/about/Record'),
     }],
   }
 ]
