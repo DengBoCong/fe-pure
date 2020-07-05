@@ -1,7 +1,7 @@
 <template>
   <div>
     <div style="margin-top:10px;">
-      <b>{{itemData.articleEntity.title}}</b>
+      <el-button type="text" @click="cliickArticleItem(itemData.articleEntity.id)"><b>{{itemData.articleEntity.title}}</b></el-button>
     </div>
     <div style="margin-top:10px;">
       <i class="el-icon-paperclip"></i>
@@ -73,6 +73,12 @@ export default {
   },
   mounted() {
     //
+  },
+  methods: {
+    cliickArticleItem(id) {//点击进入文章详情页
+      // this.$router.push({path: '/article/1',query: {article: row.articleEntity}});
+      this.$router.push("/article/" + id);
+    }
   }
 };
 </script>

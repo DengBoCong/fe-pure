@@ -8,8 +8,7 @@
           :data="tableData.filter(data => !search || data.articleEntity.title.toLowerCase().includes(search.toLowerCase()))"
           style="width: 100%;height:100%;"
           max-height="100%"
-          v-loading="articleLoading"
-          @row-click="cliickArticleItem">
+          v-loading="articleLoading">
           <el-table-column>
             <template slot="header" slot-scope="scope">
               <el-container>
@@ -127,10 +126,6 @@ export default {
         this.articleLoading = false;
       });
     },
-    cliickArticleItem(row, column, event) {//点击进入文章详情页
-      // this.$router.push({path: '/article/1',query: {article: row.articleEntity}});
-      this.$router.push("/article/" + row.articleEntity.id);
-    }
   }
 }
 </script>
