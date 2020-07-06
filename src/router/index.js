@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import routes from './routers'
-// import store from '@/store'
+import store from '@/store'
 import VueRouter from 'vue-router'
-import { setToken, getToken, canTurnTo, setTitle } from 'utils/util'
+import { setToken, getToken, canTurnTo, canTurnToControl, setTitle } from 'utils/util'
 // import config from '@/config'
 import { hasOneOf } from 'utils/tools'
 // const { homeName } = config
@@ -17,6 +17,7 @@ const router = new VueRouter({
 })
 
 const NOACCESS_PAGE_NAME = '403'
+const PROHIBIT_PAGE_NAME = '403'
 
 // 解决跳转同一地址出错问题
 const originalPush = VueRouter.prototype.push;
@@ -24,26 +25,41 @@ VueRouter.prototype.push = function push(location) {
   return originalPush.call(this, location).catch(err => err)
 };
 
-const turnTo = (to, access, next) => {
+const turnTo = (to, access, next) => { //固定型跳转
   if (canTurnTo(to.name, access, routes)) next() // 有权限，可访问
-  else next({ replace: true, name: 'error_401' }) // 无权限，重定向到401页面
+  else next({ replace: true, name: PROHIBIT_PAGE_NAME }) // 无权限，重定向到401页面
 }
 
-var _TheArray = new Array("");
+const turnToControl = (to, access, next) => { //可控型跳转
+  if (canTurnToControl(to.path, access)) next() // 有权限，可访问
+  else next({ replace: true, name: PROHIBIT_PAGE_NAME }) // 无权限，重定向到401页面
+}
+
+// var _TheArray = new Array("");
 
 router.beforeEach((to, from, next) => {
-  // setToken('')
-  //   iView.LoadingBar.start()
-  // console.log(to);
-  // console.log(hasOneOf(_TheArray, new Array(to.name)));
-  
-  const token = getToken()
+  const accessList = getToken("ACCESS_LIST"); //权限列表
+  const userToken = getToken("USER_TOKEN"); //权限列表
 
-  if(!hasOneOf(_TheArray, new Array(to.name))){
-    // console.log("卧槽");
-    // 无需权限访问页面，直接跳转
+  if(!accessList) {
+    store.dispatch('getPublicAccessPath').then(data => {
+      //拉取公共访问地址权限，通过用户权限和跳转的页面的path来判断是否有权限访问;access必须是一个数组，如：['/login'] ['/login/sdf', '/df/s']
+      // turnToControl(to, user.access, next)
+      // console.log("数据：" + JSON.stringify(data.data));
+      // console.log(result);
+      // console.log(to.path);
+      // store.state.user.hasGetInfo
+      // turnToControl(to, result, next)
+    }).catch(() => {
+      setToken('')
+      next({
+        name: 'login'
+      })
+    })
+  }
+  if(hasOneOf(JSON.parse(getToken("ACCESS_LIST")), new Array(to.path))){
     next() // 跳转
-  }else if (!token) {
+  }else if (!userToken) {
     // 需要权限，未登录，跳转403页面
     next({
       name: NOACCESS_PAGE_NAME // 跳转到403

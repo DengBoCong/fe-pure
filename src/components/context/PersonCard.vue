@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import { getUserByAccess } from "@/api/user";
+import { getSuperInfo } from "@/api/user";
 
 export default {
   name: 'PersonCard',
@@ -57,14 +57,14 @@ export default {
     }
   },
   mounted() {
-    getUserByAccess({access: "SUPER"}).then(res => {
+    getSuperInfo().then(res => {
       if(res.data.code == 3) return;
-      this.userAvatar = res.data.data[0].avatar;
-      this.userNickName = res.data.data[0].nickName;
-      this.userFlag = res.data.data[0].flag;
-      this.userAddress = res.data.data[0].address;
-      this.userFeature = res.data.data[0].feature;
-      this.userPosition = res.data.data[0].position;
+      this.userAvatar = res.data.data.avatar;
+      this.userNickName = res.data.data.nickName;
+      this.userFlag = res.data.data.flag;
+      this.userAddress = res.data.data.address;
+      this.userFeature = res.data.data.feature;
+      this.userPosition = res.data.data.position;
     })
   }
 }

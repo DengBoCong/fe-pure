@@ -70,25 +70,38 @@ export const arrayArticleTagToArray = array => {
 }
 
 
-// ***********************************************************************
-// ***********************************************************************
-// ***********************************************************************
-// ***********************************************************************
-// ***********************************************************************
-// ***********************************************************************
+// export const TOKEN_KEY = 'token'
 
-
-export const TOKEN_KEY = 'token'
-
-export const setToken = (token) => {
+export const setToken = (TOKEN_KEY,token) => {
   Cookies.set(TOKEN_KEY, token, { expires: cookieExpires || 1 })
 }
 
-export const getToken = () => {
+export const getToken = (TOKEN_KEY) => {
   const token = Cookies.get(TOKEN_KEY)
   if (token) return token
   else return false
 }
+
+/**
+ * 权鉴 - 可控制
+ * @param {*} path 即将跳转的路由path
+ * @param {*} access 用户权限数组
+ * @description 用户是否可跳转到该页
+ */
+export const canTurnToControl = (path, access) => {
+  return access.some(item => {
+    return item.accessPath == path;
+  })
+}
+
+
+// ***********************************************************************
+// ***********************************************************************
+// ***********************************************************************
+// ***********************************************************************
+// ***********************************************************************
+// ***********************************************************************
+
 
 export const hasChild = (item) => {
   return item.children && item.children.length !== 0
