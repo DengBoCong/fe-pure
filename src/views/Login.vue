@@ -61,14 +61,18 @@ export default {
   methods: {
     ...mapActions([
       'handleLogin',
-      'getUserInfo'
     ]),
     submitForm(formName) {
+      let platform = this.from.platform;
+      let account = this.from.account;
+      let password = this.from.password;
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          // console.log(platform+" "+account+" "+password+" "+isStorage );
-          handleSubmit(this.from.platform, this.from.account, this.from.password, this.from.isStorage,
-          )
+          console.log(platform+" "+account+" "+password+" "+this.from.isStorage );
+          this.handleLogin({platform,account, password}).then(res => {
+            console.log("哈哈哈")
+          });
+          // handleSubmit(this.from.platform, this.from.account, this.from.password, this.from.isStorage)
         } else {
           console.log('提交失败');
           return false;
@@ -77,12 +81,6 @@ export default {
     },
     handleSubmit ({ platform, account, password, isStorage }) {
       this.handleLogin({ platform, account, password, isStorage }).then(res => {
-        // this.getUserInfo().then(res)
-        // this.getUserInfo().then(res => {
-        //   this.$router.push({
-        //     name: this.$config.homeName
-        //   })
-        // })
         this.$router.push({
           name: this.$config.homeName
         })

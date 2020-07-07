@@ -1,5 +1,14 @@
 import axios from 'axios'
 
+//用户登录
+export const login = info => {
+  return axios.request({
+    url: '/user/login',
+    method: 'post',
+    data: info,
+  })
+}
+
 //用户权限 - 通过用户权限查询用户信息
 export const getPublicAccessPath = info => {
   return axios.request({

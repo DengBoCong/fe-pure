@@ -65,6 +65,7 @@ router.beforeEach((to, from, next) => {
       name: NOACCESS_PAGE_NAME // 跳转到403
     })
   } else {
+    next() // 跳转
     // 需要权限，已登录，进一步权限验证
     // if (store.state.user.hasGetInfo) {
     //   turnTo(to, store.state.user.access, next)
