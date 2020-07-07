@@ -25,7 +25,7 @@
               <el-switch v-model="from.isStorage"></el-switch>
             </el-form-item>
             <el-form-item>
-              <el-button class="width" type="primary" @click="submitForm('ruleForm')">登录</el-button>
+              <el-button class="width" type="primary" @click="submitForm('ruleForm')" :loading="loginLoading">登录</el-button>
             </el-form-item>
           </el-form>
         </div>
@@ -36,6 +36,7 @@
 <script>
 import { mapActions } from 'vuex'
 import rules from 'utils/rules'
+
 export default {
   name: 'Login',
   components: {
@@ -43,6 +44,7 @@ export default {
   },
   data() {
     return {
+      loginLoading: false,
       from: {
         account: '',
         platform: '',
@@ -64,13 +66,25 @@ export default {
     ]),
     submitForm(formName) {
       let platform = this.from.platform;
-      let account = this.from.account;
-      let password = this.from.password;
+      let account = this.from.account.trim();
+      let pwd = this.from.password.trim();
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          console.log(platform+" "+account+" "+password+" "+this.from.isStorage );
+          this.loginLoading = true;
+          var bcrypt = require('bcryptjs');
+          var salt = bcrypt.genSaltSync(12);
+          var password = bcrypt.hashSync(pwd,salt);
           this.handleLogin({platform,account, password}).then(res => {
-            console.log("哈哈哈")
+            if(bcrypt.compareSync(pwd, res.data.password)) {
+              this.$router.push("/admin");
+            } else {
+              this.$message({
+                showClose: true,
+                message: '登录失败，账号或密码错误',
+                type: 'error'
+              });
+            }
+            this.loginLoading = false;
           });
           // handleSubmit(this.from.platform, this.from.account, this.from.password, this.from.isStorage)
         } else {

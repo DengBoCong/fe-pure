@@ -19,25 +19,24 @@ export default {
       accessList.forEach((element, index) => {
         result.push(element.accessPath);
       });
-      setToken("ACCESS_LIST", result)
+      setToken("ACCESS_LIST", result);
     },
+    setUserToken (state, userToken) {
+      state.userToken = userToken;
+      setToken("USER_TOKEN", userToken);
+    }
   },
   actions: {
     // 登录
     handleLogin ({ commit }, { platform, account, password }) {
-      account = account.trim()
-      password = password.trim();
       return new Promise((resolve, reject) => {
         login({
           platform: platform,
           account: account,
           password: password
         }).then(res => {
-          console.log(JSON.stringify(res.data));
-          
-          // const data = res.data
-          // commit('setToken', data.token)
-          resolve()
+          commit('setUserToken', res.data.data)
+          resolve(res.data)
         }).catch(err => {
           reject(err)
         })
