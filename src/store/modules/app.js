@@ -3,13 +3,16 @@ import {
   getAdminTagNavListFromLocalstorage,
   setAdminCurTagInLocalstorage,
   getAdminCurTagFromLocalstorage,
+  localRead,
+  localSave,
 } from 'utils/util';
 
 export default {
   state: {
     isTipOpen: false,
-    currentAdminTag: '',
-    adminTagNaveList: [],
+    currentAdminTag: '',//后台管理当前标签
+    adminTagNaveList: [],//后台管理标签
+    local: localRead('localLang'),//语言
   },
   getters: {
     getAdminTagNaveList: state => {
@@ -17,6 +20,9 @@ export default {
     },
     getAdminCurTag: state => {
       return getAdminCurTagFromLocalstorage();
+    },
+    getLocal: state => {
+      return state.local;
     },
   },
   mutations: {
@@ -47,7 +53,11 @@ export default {
     },
     setAdminCurTag(state, tag) {
       setAdminCurTagInLocalstorage(tag);
-    }
+    },
+    setLocal (state, lang) {//设置语言
+      localSave('localLang', lang);
+      state.local = lang;
+    },
   },
   actions: {
     //

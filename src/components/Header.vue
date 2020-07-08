@@ -45,10 +45,10 @@
       <router-link to="/admin" class="noneDe"><el-menu-item index="admin">六小六系统</el-menu-item></router-link>
       <router-link to="/admin" class="noneDe"><el-menu-item index="admin">中心系统</el-menu-item></router-link>
     </el-submenu>
-    <el-submenu index="6" style="float:right;">
-      <template slot="title">中文</template>
-      <router-link to="/admin" class="noneDe"><el-menu-item index="admin">中文</el-menu-item></router-link>
-      <router-link to="/admin" class="noneDe"><el-menu-item index="admin">English</el-menu-item></router-link>
+    <el-submenu v-if="$config.useI18n" index="6" style="float:right;">
+      <template slot="title">语言</template>
+      <el-menu-item index="zh-CN">中文</el-menu-item>
+      <el-menu-item index="en-US">English</el-menu-item>
     </el-submenu>
     <el-button type="text" icon="el-icon-search" style="float:right;margin-top:10px;" @click="openSearch"></el-button>
     <el-dialog title="站内搜索仅支持对文章、项目、工具等已标记内容的搜索" :show-close="false" :visible.sync="searchDialogVisible" center>
@@ -64,6 +64,8 @@
 </template>
 
 <script>
+import { mapMutations, mapActions, mapGetters } from 'vuex'
+
 export default {
   name: 'Header',
   components: {
@@ -71,6 +73,8 @@ export default {
   },
   data() {
     return {
+      // lang: '',
+      // localeData: '',
       activeIndex: '1-1',
       loadingTip: '转接中，本系统未开启稳定设置，防止恶意点击，请耐心等待！',
       searchDialogVisible: false,
@@ -79,8 +83,12 @@ export default {
     }
   },
   methods: {
+    ...mapMutations([
+      'setLocal',
+    ]),
     handleSelect(key, keyPath) {
-      // console.log(key, keyPath);
+      this.setLocal(key);
+      this.$i18n.locale = key;
     },
     openLoading() {
        const loading = this.$loading({
@@ -101,6 +109,23 @@ export default {
       this.$router.push("/search");
     }
   },
+  mounted() {
+    //设置国际化
+    if(this.$store.getters.getLocal == '') {
+      this.setLocal(this.$i18n.locale);
+    }
+    
+    // this.lang = this.$store.getters.getLocal;
+    // this.localeData = new Promise((resolve, reject) => {
+    //   const elementLang = () => import(`@/locale/lang/${this.lang}`); // import属于异步操作
+    //   elementLang().then((langRes) => {
+    //     const eleLang = langRes['default'];
+    //     resolve(eleLang);
+    //   }).catch(() => {
+    //     reject(lang);
+    //   })
+    // })
+  }
 }
 </script>
 

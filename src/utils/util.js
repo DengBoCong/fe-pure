@@ -95,6 +95,14 @@ export const canTurnToControl = (path, access) => {
 }
 
 
+export const localSave = (key, value) => {
+  localStorage.setItem(key, value)
+}
+
+export const localRead = (key) => {
+  return localStorage.getItem(key) || ''
+}
+
 // ***********************************************************************
 // ***********************************************************************
 // ***********************************************************************
@@ -413,14 +421,6 @@ export const routeHasExist = (tagNavList, routeItem) => {
     if (routeEqual(tagNavList[index], routeItem)) res = true
   })
   return res
-}
-
-export const localSave = (key, value) => {
-  localStorage.setItem(key, value)
-}
-
-export const localRead = (key) => {
-  return localStorage.getItem(key) || ''
 }
 
 // scrollTop animation

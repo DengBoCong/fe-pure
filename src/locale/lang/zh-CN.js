@@ -1,4 +1,5 @@
 export default {
+  main: 'MAIN本地国际化',
   home: '首页',
   login: '登录',
   dataTrend: '数据趋势分析',
