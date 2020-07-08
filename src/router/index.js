@@ -2,6 +2,11 @@ import Vue from 'vue'
 import routes from './routers'
 import store from '@/store'
 import VueRouter from 'vue-router'
+
+import NProgress from 'nprogress' //引入nprogress
+import 'nprogress/nprogress.css' //这个样式必须引入
+
+
 import { setToken, getToken, canTurnTo, canTurnToControl, setTitle } from 'utils/util'
 // import config from '@/config'
 import { hasOneOf } from 'utils/tools'
@@ -9,6 +14,9 @@ import { hasOneOf } from 'utils/tools'
 
 Vue.use(VueRouter)
 
+// 简单配置
+NProgress.inc(0.4)
+NProgress.configure({ easing: 'ease', speed: 500, showSpinner: false })
 
 const router = new VueRouter({
   mode: 'history',
@@ -38,6 +46,7 @@ const turnToControl = (to, access, next) => { //可控型跳转
 // var _TheArray = new Array("");
 
 router.beforeEach((to, from, next) => {
+  NProgress.start();
   const accessList = getToken("ACCESS_LIST"); //权限列表
   const userToken = getToken("USER_TOKEN"); //权限列表
 
@@ -84,6 +93,7 @@ router.beforeEach((to, from, next) => {
 })
 
 router.afterEach(to => {
+  NProgress.done();
   setTitle(to, router.app)
 //   iView.LoadingBar.finish()
   window.scrollTo(0, 0)
