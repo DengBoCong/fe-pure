@@ -8,6 +8,7 @@ export default {
   state: {
     accessList: getToken("ACCESS_LIST"),
     userToken: getToken("USER_TOKEN"),
+    userAccessList: getToken("USER_ACCESS_LIST"),
   },
   getters: {
     //
@@ -24,6 +25,14 @@ export default {
     setUserToken (state, userToken) {
       state.userToken = userToken;
       setToken("USER_TOKEN", userToken);
+    },
+    setUserAccessList(state, userAccessList) {
+      state.userAccessList = userAccessList;
+      let result = [];
+      userAccessList.forEach((element, index) => {
+        result.push(element.accessPath);
+      });
+      setToken("USER_ACCESS_LIST", result);
     }
   },
   actions: {
@@ -65,6 +74,21 @@ export default {
             const data = res.data;
             commit('setAccessList', data.data)
             resolve(data.data)
+          }).catch(err => {
+            reject(err)
+          })
+        } catch (error) {
+          reject(error)
+        }
+      })
+    },
+    getUserAccessPath({ state, commit }, { access }) {
+      return new Promise((resolve, reject) => {
+        try {
+          getPublicAccessPath({access:access}).then(res => {
+            const data = res.data;
+            commit('setUserAccessList', data.data);
+            resolve(data.data);
           }).catch(err => {
             reject(err)
           })

@@ -21,7 +21,6 @@ export default [
       component: () => import('views/Home'),
       children: [{
         path: '/',
-        name: 'main',
         component: () => import('views/MainTabPane'),
         meta: {
           title: '首页',
@@ -30,7 +29,6 @@ export default [
         },
       }, {
         path: '/article/:id',
-        name: 'article',
         component: () => import('views/ContentDetail'),
         meta: {
           title: '博客',
@@ -38,7 +36,6 @@ export default [
         },
       }, {
         path: '/interfile',
-        name: 'interfile',
         // route level code-splitting
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
@@ -195,7 +192,6 @@ export default [
     component: () => import('views/admin/Home'),
     children: [{
       path: '/',
-      name: 'admin',
       meta: {
         hideInMenu: true,
         title: '',
@@ -213,7 +209,6 @@ export default [
       component: () => import('views/admin/Person'),
     },{
       path: '/admin/technique/blog',
-      name: 'adminblog',
       meta: {
         hideInMenu: true,
         title: '我的博客',
@@ -223,7 +218,6 @@ export default [
       component: () => import('views/admin/blog/Blog'),
     }, {
       path: '/admin/technique/editblog',
-      name: 'admineditblog',
       meta: {
         hideInMenu: true,
         title: '编辑博客',
@@ -233,7 +227,6 @@ export default [
       component: () => import('views/admin/blog/EditBlog'),
     }, {
       path: '/admin/technique/aboutblog',
-      name: 'adminaboutblog',
       meta: {
         hideInMenu: true,
         title: '博客相关',

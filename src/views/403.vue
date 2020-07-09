@@ -4,7 +4,10 @@
     <div class="error-desc">啊哦~ 权限识别失败，你没有权限访问哦</div>
     <div class="error-acs">如果是误点进入的客官，请出门左拐返回上一页哦。有权限账号的客官，选择分流登录，将为你跳转分流系统登录</div>
     <div class="error-handle">
-      <el-button type="primary" size="medium" @click="goBack">返回上一页</el-button>
+      <!-- <el-button type="primary" size="medium" @click="goBack">返回上一页</el-button> -->
+      <router-link to="/home">
+        <el-button type="primary" size="medium">返回首页</el-button>
+      </router-link>
       <router-link to="/login">
         <el-button class="error-btn" type="primary" size="medium">分流登录</el-button>
       </router-link>

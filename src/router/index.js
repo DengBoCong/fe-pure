@@ -10,6 +10,7 @@ import 'nprogress/nprogress.css' //这个样式必须引入
 import { setToken, getToken, canTurnTo, canTurnToControl, setTitle } from 'utils/util'
 // import config from '@/config'
 import { hasOneOf } from 'utils/tools'
+import { getPublicAccessPath, getCheckAccess } from '@/api/user'
 // const { homeName } = config
 
 Vue.use(VueRouter)
@@ -39,7 +40,7 @@ const turnTo = (to, access, next) => { //固定型跳转
 }
 
 const turnToControl = (to, access, next) => { //可控型跳转
-  if (canTurnToControl(to.path, access)) next() // 有权限，可访问
+  if (canTurnToControl(to.path, access)) next(); // 有权限，可访问
   else next({ replace: true, name: PROHIBIT_PAGE_NAME }) // 无权限，重定向到401页面
 }
 
@@ -60,7 +61,7 @@ router.beforeEach((to, from, next) => {
       // store.state.user.hasGetInfo
       // turnToControl(to, result, next)
     }).catch(() => {
-      setToken('')
+      setToken('ACCESS_LIST', '');
       next({
         name: 'login'
       })
@@ -74,6 +75,30 @@ router.beforeEach((to, from, next) => {
       name: NOACCESS_PAGE_NAME // 跳转到403
     })
   } else {
+    const userAccessList = getToken("USER_ACCESS_LIST"); //用户权限列表
+    if(!userAccessList) {
+      store.dispatch('getUserAccessPath', {access:JSON.parse(getToken("USER_TOKEN")).access}).then(data => {
+        turnToControl(to, getToken("USER_ACCESS_LIST"), next);
+      }).catch(() => {
+        setToken('USER_ACCESS_LIST', '');
+        next({
+          name: 'login'
+        })
+      })
+    } else{
+      console.log(to.path+":"+userAccessList);
+      
+      turnToControl(to, userAccessList, next);
+    }
+    // getPublicAccessPath({access:JSON.parse(getToken("USER_TOKEN")).access}).then(res => {
+    //   console.log(JSON.stringify(res.data));
+    //   if(res.data.code == 0) next() // 跳转
+    //   else {
+
+    //   }
+    // })
+    // next() // 跳转
+    
     next() // 跳转
     // 需要权限，已登录，进一步权限验证
     // if (store.state.user.hasGetInfo) {

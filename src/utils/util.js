@@ -89,8 +89,8 @@ export const getToken = (TOKEN_KEY) => {
  * @description 用户是否可跳转到该页
  */
 export const canTurnToControl = (path, access) => {
-  return access.some(item => {
-    return item.accessPath == path;
+  return JSON.parse(access).some(item => {
+    return item == path;
   })
 }
 
