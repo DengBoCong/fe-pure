@@ -63,10 +63,19 @@ router.beforeEach((to, from, next) => {
     }).catch(() => {
       setToken('ACCESS_LIST', '');
       next({
-        name: 'login'
+        name: 'home'
       })
     })
   }
+  
+  if(!getToken("ACCESS_LIST")) {
+    setTimeout(() => {
+      next({
+        path: to.path
+      })
+    }, 3000);
+  }
+
   if(hasOneOf(JSON.parse(getToken("ACCESS_LIST")), new Array(to.path))){
     next() // 跳转
   }else if (!userToken) {
@@ -82,12 +91,10 @@ router.beforeEach((to, from, next) => {
       }).catch(() => {
         setToken('USER_ACCESS_LIST', '');
         next({
-          name: 'login'
+          name: 'home'
         })
       })
     } else{
-      console.log(to.path+":"+userAccessList);
-      
       turnToControl(to, userAccessList, next);
     }
     // getPublicAccessPath({access:JSON.parse(getToken("USER_TOKEN")).access}).then(res => {

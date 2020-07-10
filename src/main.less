@@ -5,7 +5,12 @@
 @menu-dark-active-bg: #000c17;
 @layout-sider-background: #001529;
 
+//chrome 和Safari
 .hiddenScrollbar::-webkit-scrollbar { width: 0 !important }
+//IE 10+
+.hiddenScrollbar { -ms-overflow-style: none; }
+//Firefox
+.hiddenScrollbar { overflow: -moz-scrollbars-none; }
 
 .line {
   width: 100%;

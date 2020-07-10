@@ -21,6 +21,7 @@ export default [
       component: () => import('views/Home'),
       children: [{
         path: '/',
+        name: 'home',
         component: () => import('views/MainTabPane'),
         meta: {
           title: '首页',

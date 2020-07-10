@@ -26,6 +26,7 @@ html,body{
   overflow: hidden;
   margin: 0;
   padding: 0;
+  background: #fff;
 }
 
 #app {

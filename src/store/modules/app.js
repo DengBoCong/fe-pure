@@ -12,7 +12,7 @@ export default {
     isTipOpen: false,
     currentAdminTag: '',//后台管理当前标签
     adminTagNaveList: [],//后台管理标签
-    local: localRead('localLang'),//语言
+    local: localRead('localeLang'),//语言
   },
   getters: {
     getAdminTagNaveList: state => {
@@ -55,7 +55,7 @@ export default {
       setAdminCurTagInLocalstorage(tag);
     },
     setLocal (state, lang) {//设置语言
-      localSave('localLang', lang);
+      localSave('localeLang', lang);
       state.local = lang;
     },
   },

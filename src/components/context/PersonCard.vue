@@ -6,7 +6,7 @@
           <el-avatar :size="70" :src="userAvatar" @error="true">
             <img src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png"/>
           </el-avatar>
-          <div style="text-align:center;margin-top:10px;"><b>{{userNickName}}</b></div>
+          <div style="text-align:center;margin-top:10px;"><el-button type="text" @click="setAccess">{{userNickName}}</el-button></div>
           <p style="text-align:center;margin-top:10px;fontSize:13px;color:#868686;">{{userFlag}}</p>
         </div>
         <el-divider content-position="center">介绍</el-divider>
@@ -40,6 +40,7 @@
 
 <script>
 import { getSuperInfo } from "@/api/user";
+import { setToken, getToken } from 'utils/util'
 
 export default {
   name: 'PersonCard',
@@ -66,11 +67,17 @@ export default {
       this.userFeature = res.data.data.feature;
       this.userPosition = res.data.data.position;
     })
+  },
+  methods: {
+    setAccess() {
+      setToken("USER_ACCESS_LIST", '');
+      setToken("ACCESS_LIST", '');
+    }
   }
 }
 </script>
 
-<style  lang="less">
+<style lang="less">
 .person{
   width: 99%;
   height: 100%;
