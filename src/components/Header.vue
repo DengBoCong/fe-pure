@@ -111,8 +111,8 @@ export default {
   },
   mounted() {
     //设置国际化
-    if(this.$store.getters.getLocal == '') {
-      this.setLocal(this.$i18n.locale);
+    if(this.$store.getters.getLocal == 'admin') {
+      this.setLocal('zh-CN');
     }
     
     // this.lang = this.$store.getters.getLocal;

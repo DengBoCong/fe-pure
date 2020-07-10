@@ -19,7 +19,7 @@ Vue.use(VueI18n)
 const navLang = navigator.language
 
 const localLang = (navLang === 'zh-CN' || navLang === 'en-US') ? navLang : false
-let lang = localRead('localeLang') || localLang || 'zh-CN'
+let lang = localRead('systemLanguage') || localLang || 'zh-CN'
 
 Vue.config.lang = lang
 
