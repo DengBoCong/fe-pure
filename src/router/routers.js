@@ -184,6 +184,17 @@ export default [
     component: () => import('views/about/AdvanceRecord'),
     children: [],
   },
+  {
+    path: '/summary',
+    name: 'summary',
+    meta: {
+      title: '诗和远方',
+      hideInMenu: true,
+      notCache: true,
+    },
+    component: () => import('views/about/Summary'),
+    children: [],
+  },
 
   // **************************提交***************************************
   // **************************工单***************************************

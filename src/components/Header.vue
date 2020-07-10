@@ -23,10 +23,10 @@
       <template slot="title">关于</template><!-- <i class="el-icon-user"></i> -->
       <router-link to="/explain" class="noneDe"><el-menu-item index="explain">吐槽说明</el-menu-item></router-link>
       <router-link to="/record" class="noneDe"><el-menu-item index="record">个人履历</el-menu-item></router-link>
-      <router-link to="/admin" class="noneDe"><el-menu-item index="admin">我的标签</el-menu-item></router-link>
-      <router-link to="/admin" class="noneDe"><el-menu-item index="admin">生活和爱情</el-menu-item></router-link>
+      <router-link to="/summary" class="noneDe"><el-menu-item index="summary">诗和远方</el-menu-item></router-link>
+      <!-- <router-link to="/admin" class="noneDe"><el-menu-item index="admin">生活和爱情</el-menu-item></router-link>
       <router-link to="/admin" class="noneDe"><el-menu-item index="admin">兴趣爱好</el-menu-item></router-link>
-      <router-link to="/admin" class="noneDe"><el-menu-item index="admin">创业那些事儿</el-menu-item></router-link>
+      <router-link to="/admin" class="noneDe"><el-menu-item index="admin">创业那些事儿</el-menu-item></router-link> -->
     </el-submenu>
     <el-submenu index="4">
       <template slot="title">友情链接</template><!-- <i class="el-icon-link"></i> -->
