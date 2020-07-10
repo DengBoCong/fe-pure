@@ -40,7 +40,7 @@ const turnTo = (to, access, next) => { //固定型跳转
 }
 
 const turnToControl = (to, access, next) => { //可控型跳转
-  if (canTurnToControl(to.path, access)) next(); // 有权限，可访问
+  if (canTurnToControl(to.name, access)) next(); // 有权限，可访问
   else next({ replace: true, name: PROHIBIT_PAGE_NAME }) // 无权限，重定向到401页面
 }
 
@@ -76,7 +76,7 @@ router.beforeEach((to, from, next) => {
     }, 3000);
   }
 
-  if(hasOneOf(JSON.parse(getToken("ACCESS_LIST")), new Array(to.path))){
+  if(hasOneOf(JSON.parse(getToken("ACCESS_LIST")), new Array(to.name))){
     next() // 跳转
   }else if (!userToken) {
     // 需要权限，未登录，跳转403页面

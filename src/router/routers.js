@@ -30,6 +30,7 @@ export default [
         },
       }, {
         path: '/article/:id',
+        name: 'articleId',
         component: () => import('views/ContentDetail'),
         meta: {
           title: '博客',
@@ -37,6 +38,7 @@ export default [
         },
       }, {
         path: '/interfile',
+        name: 'interfile',
         // route level code-splitting
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
@@ -53,6 +55,7 @@ export default [
   // **************************相关***************************************
   {
     path: '/search',
+    name: 'search',
     meta: {
       title: '搜索',
       hideInMenu: true,
@@ -92,6 +95,7 @@ export default [
   // **************************系统***************************************
   {
     path: '/wiki',
+    name: 'wiki',
     meta: {
       title: 'WiKi',
       hideInMenu: true,
@@ -105,6 +109,7 @@ export default [
   // **************************项目***************************************
   {
     path: '/project',
+    name: 'project',
     meta: {
       title: '项目',
       hideInMenu: true,
@@ -126,6 +131,7 @@ export default [
     component: () => import('views/document/Home'),
     children: [{
       path: '/',
+      name: 'document',
       component: () => import('views/document/Main'),
       meta: {
         title: '文档',
@@ -134,6 +140,7 @@ export default [
       },
     },{
       path: '/document/:id',
+      name: 'documentId',
       component: () => import('views/document/Document'),
       meta: {
         title: '文档',
@@ -144,9 +151,20 @@ export default [
   },
 
   // **************************关于***************************************
-  // **************************简历***************************************
+  {
+    path: '/explain',
+    name: 'explain',
+    meta: {
+      title: '吐槽说明',
+      hideInMenu: true,
+      notCache: true,
+    },
+    component: () => import('views/about/Explain'),
+    children: [],
+  },
   {
     path: '/record',
+    name: 'record',
     meta: {
       title: '文字版简历',
       hideInMenu: true,
@@ -157,6 +175,7 @@ export default [
   },
   {
     path: '/advrecord',
+    name: 'advrecord',
     meta: {
       title: '炫酷版简历',
       hideInMenu: true,
@@ -170,6 +189,7 @@ export default [
   // **************************工单***************************************
   {
     path: '/workorder',
+    name: 'workorder',
     meta: {
       title: '工单',
       hideInMenu: true,
@@ -193,6 +213,7 @@ export default [
     component: () => import('views/admin/Home'),
     children: [{
       path: '/',
+      name: 'admin',
       meta: {
         hideInMenu: true,
         title: '',
@@ -202,6 +223,7 @@ export default [
       component: () => import('views/admin/Main')
     }, {
       path: '/admin/person',
+      name: 'adminPerson',
       meta: {
         hideInMenu: true,
         title: '个人中心',
@@ -210,6 +232,7 @@ export default [
       component: () => import('views/admin/Person'),
     },{
       path: '/admin/technique/blog',
+      name: 'adminTechniqueBlog',
       meta: {
         hideInMenu: true,
         title: '我的博客',
@@ -219,6 +242,7 @@ export default [
       component: () => import('views/admin/blog/Blog'),
     }, {
       path: '/admin/technique/editblog',
+      name: 'adminTechniqueEditblog',
       meta: {
         hideInMenu: true,
         title: '编辑博客',
@@ -228,6 +252,7 @@ export default [
       component: () => import('views/admin/blog/EditBlog'),
     }, {
       path: '/admin/technique/aboutblog',
+      name: 'adminTechniqueAboutblog',
       meta: {
         hideInMenu: true,
         title: '博客相关',
@@ -237,6 +262,7 @@ export default [
       component: () => import('views/admin/blog/AboutBlog'),
     }, {
       path: '/admin/about/record',
+      name: 'adminAboutRecord',
       meta: {
         hideInMenu: true,
         title: '个人履历',
