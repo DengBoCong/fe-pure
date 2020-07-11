@@ -45,7 +45,7 @@
       <router-link to="/admin" class="noneDe"><el-menu-item index="admin">六小六系统</el-menu-item></router-link>
       <router-link to="/admin" class="noneDe"><el-menu-item index="admin">中心系统</el-menu-item></router-link>
     </el-submenu>
-    <el-submenu v-if="$config.useI18n" index="6" style="float:right;">
+    <el-submenu v-if="$config.useI18n" index="lang" style="float:right;">
       <template slot="title">语言</template>
       <el-menu-item index="zh-CN">中文</el-menu-item>
       <el-menu-item index="en-US">English</el-menu-item>
@@ -87,8 +87,12 @@ export default {
       'setLocal',
     ]),
     handleSelect(key, keyPath) {
-      this.setLocal(key);
-      this.$i18n.locale = key;
+      //语言切换
+      if(keyPath[0] == 'lang') {
+        this.setLocal(key);
+        this.$i18n.locale = key;
+      }
+      
     },
     openLoading() {
        const loading = this.$loading({
