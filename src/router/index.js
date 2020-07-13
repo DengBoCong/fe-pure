@@ -107,6 +107,7 @@ router.beforeEach((to, from, next) => {
 router.afterEach(to => {
   NProgress.done();
   setTitle(to, router.app)
+  //router.app就相当于templates中的this
   window.scrollTo(0, 0)
 })
 

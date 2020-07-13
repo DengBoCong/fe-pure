@@ -98,11 +98,26 @@ export default [
     path: '/403',
     name: '403',
     meta: {
-      title: '无权访问',
+      title: '禁止访问',
       hideInMenu: true,
       notCache: true,
     },
     component: () => import('views/code/403')
+  },
+
+  // **************************技术资源***************************************
+  // **************************中心***************************************
+
+  {
+    path: '/resources',
+    name: 'resources',
+    meta: {
+      title: '技术中心',
+      hideInMenu: true,
+      notCache: true,
+    },
+    component: () => import('views/technique/Home'),
+    children: [],
   },
 
   // **************************wiki系统***************************************

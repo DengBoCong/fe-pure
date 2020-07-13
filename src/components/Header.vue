@@ -9,7 +9,7 @@
       <template slot="title">技术中心</template><!-- <i class="el-icon-position"></i> -->
       <router-link to="/home" class="noneDe"><el-menu-item index="home">博客</el-menu-item></router-link>
       <!-- <router-link to="/admin" class="noneDe"><el-menu-item index="admin">技术学习</el-menu-item></router-link> -->
-      <router-link to="/admin" class="noneDe"><el-menu-item index="admin">资源列表</el-menu-item></router-link>
+      <router-link to="/resources" class="noneDe"><el-menu-item index="resources">资源列表</el-menu-item></router-link>
       <router-link to="/document" class="noneDe"><el-menu-item index="document">API文档</el-menu-item></router-link>
       <router-link to="/interfile" class="noneDe"><el-menu-item index="interfile">归档</el-menu-item></router-link>
     </el-submenu>
@@ -47,8 +47,9 @@
     </el-submenu>
     <el-submenu v-if="$config.useI18n" index="lang" style="float:right;">
       <template slot="title">语言</template>
-      <el-menu-item index="zh-CN">中文</el-menu-item>
+      <el-menu-item index="zh-CN">中文简体</el-menu-item>
       <el-menu-item index="en-US">English</el-menu-item>
+      <el-menu-item index="zh-TW">中文繁體</el-menu-item>
     </el-submenu>
     <el-button type="text" icon="el-icon-search" style="float:right;margin-top:10px;" @click="openSearch"></el-button>
     <el-dialog title="站内搜索仅支持对文章、项目、工具等已标记内容的搜索" :show-close="false" :visible.sync="searchDialogVisible" center>
@@ -91,8 +92,8 @@ export default {
       if(keyPath[0] == 'lang') {
         this.setLocal(key);
         this.$i18n.locale = key;
+        window.location.reload(true);
       }
-      
     },
     openLoading() {
        const loading = this.$loading({

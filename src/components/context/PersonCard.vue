@@ -25,7 +25,7 @@
           <span style="fontSize:13px;color:#868686;float:right;">赣ICP备20002291号</span>
         </div>
         </div>
-        <el-divider content-position="center">{{$t('dataTrend')}}</el-divider>
+        <el-divider content-position="center">{{$t('home.notice')}}</el-divider>
         <div class="block">
         <el-carousel height="120px">
           <el-carousel-item v-for="item in 4" :key="item">

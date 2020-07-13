@@ -5,6 +5,9 @@
     <div class="error-acs">所访问的资源可能处于维护或者其他原因被关闭，如果有任何疑问，可以前往提交工单联系我哦！</div>
     <div class="error-handle">
       <!-- <el-button type="primary" size="medium" @click="goBack">返回上一页</el-button> -->
+      <router-link to="/home">
+        <el-button type="primary" size="medium">返回首页</el-button>
+      </router-link>
       <router-link to="/workorder">
         <el-button class="error-btn" type="primary" size="medium">提交工单</el-button>
       </router-link>
