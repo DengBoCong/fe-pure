@@ -128,7 +128,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="less">
   .el-dropdown-link {
     cursor: pointer;
     font-size: 16px;

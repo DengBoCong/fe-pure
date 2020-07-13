@@ -110,14 +110,22 @@ export default [
 
   {
     path: '/resources',
-    name: 'resources',
     meta: {
       title: '技术中心',
       hideInMenu: true,
       notCache: true,
     },
     component: () => import('views/technique/Home'),
-    children: [],
+    children: [{
+      path: '/',
+      name: 'resources',
+      component: () => import('views/technique/Main'),
+      meta: {
+        title: '技术中心',
+        hideInMenu: true,
+        notCache: true,
+      },
+    }],
   },
 
   // **************************wiki系统***************************************
