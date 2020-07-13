@@ -25,7 +25,7 @@ const router = new VueRouter({
   routes
 })
 
-const NOACCESS_PAGE_NAME = '403'
+const NOACCESS_PAGE_NAME = '401'
 const PROHIBIT_PAGE_NAME = '403'
 
 // 解决跳转同一地址出错问题
@@ -67,8 +67,9 @@ router.beforeEach((to, from, next) => {
       })
     })
   }
-  
+
   if(!getToken("ACCESS_LIST")) {
+    
     setTimeout(() => {
       next({
         path: to.path
@@ -79,11 +80,12 @@ router.beforeEach((to, from, next) => {
   if(hasOneOf(JSON.parse(getToken("ACCESS_LIST")), new Array(to.name))){
     next() // 跳转
   }else if (!userToken) {
-    // 需要权限，未登录，跳转403页面
+    // 需要权限，未登录，跳转401页面
     next({
-      name: NOACCESS_PAGE_NAME // 跳转到403
+      name: NOACCESS_PAGE_NAME // 跳转到401
     })
   } else {
+    // 需要权限，已登录，进一步权限验证
     const userAccessList = getToken("USER_ACCESS_LIST"); //用户权限列表
     if(!userAccessList) {
       store.dispatch('getUserAccessPath', {access:JSON.parse(getToken("USER_TOKEN")).access}).then(data => {
@@ -97,37 +99,14 @@ router.beforeEach((to, from, next) => {
     } else{
       turnToControl(to, userAccessList, next);
     }
-    // getPublicAccessPath({access:JSON.parse(getToken("USER_TOKEN")).access}).then(res => {
-    //   console.log(JSON.stringify(res.data));
-    //   if(res.data.code == 0) next() // 跳转
-    //   else {
-
-    //   }
-    // })
-    // next() // 跳转
     
     next() // 跳转
-    // 需要权限，已登录，进一步权限验证
-    // if (store.state.user.hasGetInfo) {
-    //   turnTo(to, store.state.user.access, next)
-    // } else {
-    //   store.dispatch('getUserInfo').then(user => {
-        // 拉取用户信息，通过用户权限和跳转的页面的name来判断是否有权限访问;access必须是一个数组，如：['super_admin'] ['super_admin', 'admin']
-      //   turnTo(to, user.access, next)
-      // }).catch(() => {
-      //   setToken('')
-      //   next({
-      //     name: 'login'
-      //   })
-      // })
-    // }
   }
 })
 
 router.afterEach(to => {
   NProgress.done();
   setTitle(to, router.app)
-//   iView.LoadingBar.finish()
   window.scrollTo(0, 0)
 })
 

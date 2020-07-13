@@ -1,6 +1,6 @@
 <template>
   <div class="error-page">
-    <div class="error-code">4<span>0</span>3</div>
+    <div class="error-code">4<span>0</span>1</div>
     <div class="error-desc">啊哦~ 权限识别失败，你没有权限访问哦</div>
     <div class="error-acs">如果是误点进入的客官，请出门左拐返回上一页哦。有权限账号的客官，选择分流登录，将为你跳转分流系统登录</div>
     <div class="error-handle">
@@ -16,7 +16,7 @@
 </template>
 
 <script>
-export default {
+export default {//401未授权
   components: {
     //
   },

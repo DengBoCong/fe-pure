@@ -80,6 +80,20 @@ export default [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ 'views/Login')
   },
+
+
+  // **************************状态码***************************************
+  // **************************相关***************************************
+  {
+    path: '/401',
+    name: '401',
+    meta: {
+      title: '无权访问',
+      hideInMenu: true,
+      notCache: true,
+    },
+    component: () => import('views/code/401')
+  },
   {
     path: '/403',
     name: '403',
@@ -88,7 +102,7 @@ export default [
       hideInMenu: true,
       notCache: true,
     },
-    component: () => import('views/403')
+    component: () => import('views/code/403')
   },
 
   // **************************wiki系统***************************************
