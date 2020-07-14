@@ -1,24 +1,31 @@
 <template>
-  <el-row :gutter="10" style="margin-top:10px;">
-    <el-col :span="12">
-      <el-card>
-        <el-tabs v-model="activeName" @tab-click="handleClick">
-          <el-tab-pane label="空间" name="first"></el-tab-pane>
-          <el-tab-pane label="页面" name="second"></el-tab-pane>
-          <el-tab-pane label="社交" name="third"></el-tab-pane>
-        </el-tabs>
-      </el-card>
-    </el-col>
-    <el-col :span="12">
-      <el-card>
-        <el-tabs v-model="activeName" @tab-click="handleClick">
-          <el-tab-pane label="空间" name="first"></el-tab-pane>
-          <el-tab-pane label="页面" name="second"></el-tab-pane>
-          <el-tab-pane label="社交" name="third"></el-tab-pane>
-        </el-tabs>
-      </el-card>
-    </el-col>
-  </el-row>
+  <div>
+    <el-row style="margin-top:10px;">
+      <el-col :span="24">
+        <el-card></el-card>
+      </el-col>
+    </el-row>
+    <el-row :gutter="10">
+      <el-col :span="12">
+        <el-card>
+          <el-tabs v-model="activeName" @tab-click="handleClick">
+            <el-tab-pane label="空间" name="first"></el-tab-pane>
+            <el-tab-pane label="页面" name="second"></el-tab-pane>
+            <el-tab-pane label="社交" name="third"></el-tab-pane>
+          </el-tabs>
+        </el-card>
+      </el-col>
+      <el-col :span="12">
+        <el-card>
+          <el-tabs v-model="activeName" @tab-click="handleClick">
+            <el-tab-pane label="空间" name="first"></el-tab-pane>
+            <el-tab-pane label="页面" name="second"></el-tab-pane>
+            <el-tab-pane label="社交" name="third"></el-tab-pane>
+          </el-tabs>
+        </el-card>
+      </el-col>
+    </el-row>
+  </div>
 </template>
 
 <script>

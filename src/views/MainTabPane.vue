@@ -1,43 +1,47 @@
 <template>
   <el-tabs tab-position="right" v-model="activeName" @tab-click="handleClick" class="size" :style="height" style="margin-top:1px;">
     <el-tab-pane v-for="item in articleTypeArray" :key="item.id" :label="item.name" :name="item.name"></el-tab-pane>
-    <el-tab-pane label="-------------------" :disabled="true" name="second"></el-tab-pane>
+    <el-tab-pane label="............................." :disabled="true" name="second"></el-tab-pane>
     <el-container>
-      <el-scrollbar style="width:100%;" :style="tableHeight">
-        <el-table
-          :data="tableData.filter(data => !search || data.articleEntity.title.toLowerCase().includes(search.toLowerCase()))"
-          style="width: 100%;height:100%;"
-          max-height="100%"
-          v-loading="articleLoading">
-          <el-table-column>
-            <template slot="header" slot-scope="scope">
-              <el-container>
-                <el-input
-                  v-model="search"
-                  size="small "
-                  placeholder="输入关键字搜索"/>
-                <el-divider direction="vertical"></el-divider>
-                <el-dropdown>
-                  <el-button type="primary" plain size="small ">
-                    时间<i class="el-icon-arrow-down el-icon--right"></i>
-                  </el-button>
-                  <el-dropdown-menu slot="dropdown">
-                    <el-dropdown-item>阅读量</el-dropdown-item>
-                    <el-dropdown-item>点赞数</el-dropdown-item>
-                    <el-dropdown-item>收藏数</el-dropdown-item>
-                    <el-dropdown-item>评论数</el-dropdown-item>
-                    <el-dropdown-item>时间</el-dropdown-item>
-                  </el-dropdown-menu>
-                </el-dropdown>
-              </el-container>
-            </template>
-            <template slot-scope="scope">
-              <ArticleItem :itemData="scope.row"></ArticleItem>
-            </template>
-          </el-table-column>
-        </el-table>
-        <el-container style="margin:10px;">
-          <div class="block" style="margin-left:auto; margin-right:auto">
+      <el-main :style="tableHeight" class="hiddenScrollbar" style="padding:0">
+        <el-container>
+          <el-table
+            :data="tableData.filter(data => !search || data.articleEntity.title.toLowerCase().includes(search.toLowerCase()))"
+            style="width: 100%;height:100%;"
+            max-height="100%"
+            v-loading="articleLoading">
+            <el-table-column>
+              <template slot="header" slot-scope="scope">
+                <el-container>
+                  <el-input
+                    v-model="search"
+                    size="small "
+                    placeholder="输入关键字搜索"/>
+                  <el-divider direction="vertical"></el-divider>
+                  <el-dropdown>
+                    <el-button type="primary" plain size="small ">
+                      时间<i class="el-icon-arrow-down el-icon--right"></i>
+                    </el-button>
+                    <el-dropdown-menu slot="dropdown">
+                      <el-dropdown-item>阅读量</el-dropdown-item>
+                      <el-dropdown-item>点赞数</el-dropdown-item>
+                      <el-dropdown-item>收藏数</el-dropdown-item>
+                      <el-dropdown-item>评论数</el-dropdown-item>
+                      <el-dropdown-item>时间</el-dropdown-item>
+                    </el-dropdown-menu>
+                  </el-dropdown>
+                </el-container>
+              </template>
+              <template slot-scope="scope">
+                <ArticleItem :itemData="scope.row"></ArticleItem>
+              </template>
+            </el-table-column>
+          </el-table>
+        </el-container>
+      </el-main>
+      <el-footer>
+        <el-container>
+          <div class="block" style="margin-left:auto; margin-right:auto; margin-top:15px;">
             <el-pagination
               @size-change="handleSizeChange"
               @current-change="handleCurrentChange"
@@ -47,10 +51,9 @@
               layout="total, sizes, prev, pager, next, jumper"
               :total="articleTotalSize">
             </el-pagination>
-          <div class="block" style="height:30px;"></div>
           </div>
         </el-container>
-      </el-scrollbar>
+      </el-footer>
     </el-container>
   </el-tabs>
 </template>
@@ -73,7 +76,7 @@ export default {
       return `height:${this.screenHeight-61}px`;
     },
     tableHeight(){
-      return `height:${this.screenHeight-46}px`;
+      return `height:${this.screenHeight-121}px`;
     }
   },
   data() {
