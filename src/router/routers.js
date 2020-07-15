@@ -125,6 +125,15 @@ export default [
         hideInMenu: true,
         notCache: true,
       },
+    },{
+      path: '/resources/list',
+      name: 'resourcesList',
+      component: () => import('views/technique/ResourcesList'),
+      meta: {
+        title: '技术中心 - 资源列表',
+        hideInMenu: true,
+        notCache: true,
+      },
     }],
   },
 

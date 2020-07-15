@@ -11,7 +11,8 @@
       </el-dropdown>
       <!-- <el-divider direction="vertical" style="float:right;"></el-divider> -->
       <el-button type="text" style="height:100%;float:right;margin-left:50px;"><p style="font-size:16px;">说明</p></el-button>
-      <router-link to="/resources"><el-button type="text" style="height:100%;float:right;margin-left:50px;"><p style="font-size:16px;">资源列表</p></el-button></router-link>
+      <router-link to="/resources/list"><el-button type="text" style="height:100%;float:right;margin-left:50px;"><p style="font-size:16px;">资源列表</p></el-button></router-link>
+      <router-link to="/resources"><el-button type="text" style="height:100%;float:right;margin-left:50px;"><p style="font-size:16px;">通览</p></el-button></router-link>
       <router-link to="/home"><el-button type="text" style="height:100%;float:right;margin-left:50px;"><p style="font-size:16px;">首页</p></el-button></router-link>
       <el-autocomplete
         v-model="state"
