@@ -327,6 +327,16 @@ export default [
         // icon: 'el-icon-position'
       },
       component: () => import('views/admin/about/Record'),
+    }, {
+      path: '/admin/system/access',
+      name: 'adminSystemAccess',
+      meta: {
+        hideInMenu: true,
+        title: '权限控制',
+        notCache: true,
+        // icon: 'el-icon-position'
+      },
+      component: () => import('views/admin/system/Access'),
     }],
   }
 ]

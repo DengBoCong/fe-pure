@@ -23,7 +23,7 @@
     </el-card>
     <el-card shadow="never" style="margin-top:10px;">
       <el-container>
-        <router-link :to="{ name: 'admineditblog', params: { userId: 1 }}"><el-button type="primary" size="medium" plain>更新列表</el-button></router-link>
+        <router-link :to="{ name: 'adminTechniqueBlog', params: { userId: 1 }}"><el-button type="primary" size="medium" plain>更新列表</el-button></router-link>
         <el-divider direction="vertical"></el-divider>
         <el-input
           v-model="search"

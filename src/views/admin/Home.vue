@@ -3,20 +3,19 @@
     <div :style="height">
       <el-scrollbar style="width:100%;height:100%;">
         <el-menu
-          default-active="1-4-1"
+          :default-active="editableTabsValue"
           class="el-menu-vertical-demo"
           :style="height"
           @select="addTab"
           background-color="#545c64"
           text-color="#fff"
           active-text-color="#ffd04b"
-          :collapse="isCollapse"
-        >
-          <el-menu-item index="2">
+          :collapse="isCollapse">
+          <el-menu-item index="1" :disabled="true">
             <i class="el-icon-position"></i>
             <span slot="title">DengBoCong</span>
           </el-menu-item>
-          <el-submenu index="1">
+          <el-submenu index="2">
             <template slot="title">
               <i class="el-icon-c-scale-to-original"></i>
               <span slot="title">技术中心</span>
@@ -78,6 +77,7 @@
               <i class="el-icon-location"></i>
               <span slot="title">系统设置</span>
             </template>
+            <el-menu-item index="admin/system/access">权限控制</el-menu-item>
             <el-menu-item index="6-1">公告</el-menu-item>
             <el-menu-item index="6-2">广告</el-menu-item>
             <el-menu-item index="6-3">通知</el-menu-item>
@@ -357,7 +357,7 @@ export default {
       activeName: "second",
       screenWidth: 0,
       screenHeight: 0,
-      isCollapse: true,
+      isCollapse: false,
       buttonIcon: "el-icon-s-fold",
       editableTabsValue: "",
       editableTabs: [],
@@ -369,7 +369,8 @@ export default {
         ["admin/technique/blog", "我的博客"],
         ["admin/technique/editblog", "编辑博客"],
         ["admin/technique/aboutblog", "博客相关"],
-        ["admin/about/record", "个人履历"]
+        ["admin/about/record", "个人履历"],
+        ["admin/system/access", "权限控制"]
       ])
     };
   },
@@ -492,7 +493,7 @@ export default {
   },
   computed: {
     height() {
-      return `height:${this.screenHeight + 20}px`;
+      return `height:${this.screenHeight}px`;
     },
     currentTabComponent: function() {
       return this.curTab;
@@ -504,6 +505,7 @@ export default {
     this.editableTabs = this.$store.getters.getAdminTagNaveList;
     this.editableTabsValue = this.$store.getters.getAdminCurTag;
     this.$router.push("/" + this.$store.getters.getAdminCurTag);
+    // this.addTab("admin/person", "")
     // console.log("homeTag:"+this.$store.state.app.currentAdminTag);
     // console.log("homeList:"+this.$store.state.app.adminTagNaveList);
     // console.log("homeNaveList:"+this.$store.getters.getAdminTagNaveList);
