@@ -14,44 +14,45 @@
       <el-button @click="resetDateFilter">清除日期过滤器</el-button>
       <el-button @click="clearFilter">清除所有过滤器</el-button>
       <el-table
-        ref="filterTable"
         :data="tableData"
+        border
         style="width: 100%">
         <el-table-column
-          prop="date"
-          label="日期"
+          fixed
           sortable
-          width="180"
-          column-key="date"
-          :filters="[{text: '2016-05-01', value: '2016-05-01'}, {text: '2016-05-02', value: '2016-05-02'}, {text: '2016-05-03', value: '2016-05-03'}, {text: '2016-05-04', value: '2016-05-04'}]"
-          :filter-method="filterHandler"
-        >
-        </el-table-column>
-        <el-table-column
           prop="id"
           label="ID">
         </el-table-column>
         <el-table-column
+          sortable
           prop="accessPath"
-          label="路径地址"
-          :formatter="formatter">
+          label="权限路径">
         </el-table-column>
         <el-table-column
-          prop="accessPath"
-          label="路径地址"
-          :formatter="formatter">
-        </el-table-column>
-        <el-table-column
+          sortable
           prop="access"
-          label="标签"
-          width="100"
-          :filters="[{ text: '家', value: '家' }, { text: '公司', value: '公司' }]"
-          :filter-method="filterTag"
-          filter-placement="bottom-end">
+          label="权限级别">
+        </el-table-column>
+        <el-table-column
+          prop="description"
+          label="描述"
+          width="150">
+        </el-table-column>
+        <el-table-column
+          prop="sort"
+          label="排序">
+        </el-table-column>
+        <el-table-column
+          prop="status"
+          label="状态">
+        </el-table-column>
+        <el-table-column
+          fixed="right"
+          label="操作"
+          width="100">
           <template slot-scope="scope">
-            <el-tag
-              :type="scope.row.tag === '家' ? 'primary' : 'success'"
-              disable-transitions>{{scope.row.tag}}</el-tag>
+            <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
+            <el-button type="text" size="small">编辑</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -60,6 +61,8 @@
 </template>
 
 <script>
+import { getAllAcessPathOrderBySort } from '@/api/access'
+
 export default {
   name: 'Access',
   components: {
@@ -102,7 +105,9 @@ export default {
     }
   },
   mounted() {
-    //
+    getAllAcessPathOrderBySort().then(res => {
+      this.tableData = res.data.data;
+    })
   },
   computed: {
     //

@@ -1,7 +1,6 @@
-import {
-  login,
-  getPublicAccessPath,
-} from '@/api/user';
+import { login } from '@/api/user';
+import { getPublicAccessPath } from '@/api/access'
+
 import { setToken, getToken } from 'utils/util'
 
 export default {

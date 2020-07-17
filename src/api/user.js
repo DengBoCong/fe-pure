@@ -9,15 +9,6 @@ export const login = info => {
   })
 }
 
-//用户权限 - 通过用户权限查询用户信息
-export const getPublicAccessPath = info => {
-  return axios.request({
-    url: '/user/findPathByAccess',
-    method: 'get',
-    params: info,
-  })
-}
-
 //用户权限 - 通过用户权限等级检查用户是否有权限访问
 export const getCheckAccess = info => {
   return axios.request({

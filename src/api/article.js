@@ -21,7 +21,7 @@ export const insert = info => {
 export const oneInsert = info => {
   return axios.request({
     url: '/article/oneInsert',
-    method: 'post',
+    method: 'put',
     data: info,
   })
 }
@@ -30,7 +30,7 @@ export const oneInsert = info => {
 export const getArticleByArticleId = info => {
   return axios.request({
     url: '/article/findByArticleId',
-    method: 'post',
+    method: 'get',
     params: info,
   })
 }
@@ -75,7 +75,7 @@ export const getArticleTypeById = info => {
 export const setArticleTypeOne = info => {
   return axios.request({
     url: '/articleType/oneInsertAndUpdate',
-    method: 'post',
+    method: 'put',
     data: info,
   })
 }
@@ -84,7 +84,7 @@ export const setArticleTypeOne = info => {
 export const deleteArticleTypeOne = info => {
   return axios.request({
     url: '/articleType/oneDelete',
-    method: 'post',
+    method: 'delete',
     params: info,
   })
 }
