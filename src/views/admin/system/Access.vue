@@ -147,7 +147,7 @@ export default {
   },
   mounted() {
     getAllAcessPathOrderBySort().then(res => {
-      console.log(JSON.stringify(this.$route.meta));
+      // console.log(JSON.stringify(this.$route.meta));
       
       this.tableData = res.data.data;
     })

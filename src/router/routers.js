@@ -275,6 +275,7 @@ export default [
         hideInMenu: true,
         title: '',
         notCache: true,
+        tapNavPath: ['工作台']
         // icon: 'el-icon-position'
       },
       component: () => import('views/admin/Main')
@@ -285,6 +286,7 @@ export default [
         hideInMenu: true,
         title: '个人中心',
         notCache: true,
+        tapNavPath: ['个人中心']
       },
       component: () => import('views/admin/Person'),
     },{
@@ -294,6 +296,7 @@ export default [
         hideInMenu: true,
         title: '我的博客',
         notCache: true,
+        tapNavPath: ['技术中心', '博客', '我的博客']
         // icon: 'el-icon-position'
       },
       component: () => import('views/admin/blog/Blog'),
@@ -304,6 +307,7 @@ export default [
         hideInMenu: true,
         title: '编辑博客',
         notCache: true,
+        tapNavPath: ['技术中心', '博客', '编辑博客']
         // icon: 'el-icon-position'
       },
       component: () => import('views/admin/blog/EditBlog'),
@@ -314,6 +318,7 @@ export default [
         hideInMenu: true,
         title: '博客相关',
         notCache: true,
+        tapNavPath: ['技术中心', '博客', '博客相关']
         // icon: 'el-icon-position'
       },
       component: () => import('views/admin/blog/AboutBlog'),
@@ -323,6 +328,7 @@ export default [
       meta: {
         hideInMenu: true,
         title: '个人履历',
+        tapNavPath: ['关于', '个人履历'],
         notCache: true,
         // icon: 'el-icon-position'
       },
@@ -334,6 +340,7 @@ export default [
         hideInMenu: true,
         title: '权限控制',
         notCache: true,
+        tapNavPath: ['系统设置', '权限控制'],
         description: '后台的权限控制中心'
         // icon: 'el-icon-position'
       },

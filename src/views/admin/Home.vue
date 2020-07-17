@@ -103,9 +103,7 @@
               class="font-size-all"
             >
               <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-              <el-breadcrumb-item>活动管理</el-breadcrumb-item>
-              <el-breadcrumb-item>活动列表</el-breadcrumb-item>
-              <el-breadcrumb-item>活动详情</el-breadcrumb-item>
+              <el-breadcrumb-item v-for="(item, index) in tapNavPath" :key="index">{{item}}</el-breadcrumb-item>
             </el-breadcrumb>
           </el-container>
           <el-card style="width:50%;border:0;" shadow="never">
@@ -371,7 +369,8 @@ export default {
         ["admin/technique/aboutblog", "博客相关"],
         ["admin/about/record", "个人履历"],
         ["admin/system/access", "权限控制"]
-      ])
+      ]),
+      tapNavPath: [],//顶部导航路径
     };
   },
   methods: {
@@ -398,6 +397,7 @@ export default {
       this.$router.push("/" + index);
       this.setAdminTagNaveList(this.editableTabs);
       this.setAdminCurTag(this.editableTabsValue);
+      this.tapNavPath = this.$route.meta.tapNavPath;
     },
     addTab2(index) {
       //添加导航栏 - 备用
@@ -415,6 +415,7 @@ export default {
       this.$router.push("/" + index);
       this.setAdminTagNaveList(this.editableTabs);
       this.setAdminCurTag(this.editableTabsValue);
+      this.tapNavPath = this.$route.meta.tapNavPath;
     },
     removeTab(targetName) {
       //移出导航栏
@@ -443,6 +444,7 @@ export default {
       this.editableTabsValue = targetName.name;
       this.$router.push("/" + targetName.name);
       this.setAdminCurTag(this.editableTabsValue);
+      this.tapNavPath = this.$route.meta.tapNavPath;
     },
     getFullCreeen() {
       this.n++;
@@ -505,6 +507,7 @@ export default {
     this.editableTabs = this.$store.getters.getAdminTagNaveList;
     this.editableTabsValue = this.$store.getters.getAdminCurTag;
     this.$router.push("/" + this.$store.getters.getAdminCurTag);
+    this.tapNavPath = this.$route.meta.tapNavPath;
     // this.addTab("admin/person", "")
     // console.log("homeTag:"+this.$store.state.app.currentAdminTag);
     // console.log("homeList:"+this.$store.state.app.adminTagNaveList);
