@@ -334,6 +334,7 @@ export default [
         hideInMenu: true,
         title: '权限控制',
         notCache: true,
+        description: '后台的权限控制中心'
         // icon: 'el-icon-position'
       },
       component: () => import('views/admin/system/Access'),
