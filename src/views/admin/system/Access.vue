@@ -10,12 +10,13 @@
         :data="data">
       </el-transfer>
     </el-card>
-    <el-card>
+    <el-card class="hiddenScrollbar">
       <!-- <el-button @click="resetDateFilter">清除日期过滤器</el-button>
       <el-button @click="clearFilter">清除所有过滤器</el-button> -->
       <el-table
-        :data="tableData"
+        :data="tableData.filter(data => !search || data.accessPath.toLowerCase().includes(search.toLowerCase()))"
         border
+        max-height="700"
         style="width: 100%">
         <el-table-column
           fixed
@@ -57,7 +58,7 @@
           align="center"
           prop="description"
           label="描述"
-          width="300">
+          min-width="300">
         </el-table-column>
         <el-table-column
           prop="sort"
@@ -86,6 +87,12 @@
           label="操作"
           align="center"
           width="150">
+          <template slot="header" slot-scope="scope">
+            <el-input
+              v-model="search"
+              size="mini"
+              placeholder="输入关键字搜索"/>
+          </template>
           <template slot-scope="scope">
             <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
             <el-button type="text" size="small">编辑</el-button>
@@ -123,6 +130,7 @@ export default {
       accessInputVisible: false,//权限级别出现
       accessInputValue: '',//权限级别输入框
       accessFocusId: 0,
+      search: '',
       accessList: [{
         label: '超级管理员',
         value: 'SUPER',

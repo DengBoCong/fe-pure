@@ -140,7 +140,7 @@
           </el-card>
         </el-container>
       </el-header>
-      <el-main style="padding:0;">
+      <el-main style="padding:0;" class="hiddenScrollbar">
         <el-tabs
           v-model="editableTabsValue"
           type="card"
@@ -397,7 +397,9 @@ export default {
       this.$router.push("/" + index);
       this.setAdminTagNaveList(this.editableTabs);
       this.setAdminCurTag(this.editableTabsValue);
-      this.tapNavPath = this.$route.meta.tapNavPath;
+      setTimeout(() => {
+        this.tapNavPath = this.$route.meta.tapNavPath;
+      }, 500);
     },
     addTab2(index) {
       //添加导航栏 - 备用
@@ -415,7 +417,9 @@ export default {
       this.$router.push("/" + index);
       this.setAdminTagNaveList(this.editableTabs);
       this.setAdminCurTag(this.editableTabsValue);
-      this.tapNavPath = this.$route.meta.tapNavPath;
+      setTimeout(() => {
+        this.tapNavPath = this.$route.meta.tapNavPath;
+      }, 500);
     },
     removeTab(targetName) {
       //移出导航栏
@@ -439,12 +443,17 @@ export default {
       this.editableTabs = tabs.filter(tab => tab.name !== targetName);
       this.setAdminTagNaveList(this.editableTabs);
       this.setAdminCurTag(this.editableTabsValue);
+      setTimeout(() => {
+        this.tapNavPath = this.$route.meta.tapNavPath;
+      }, 500);
     },
     clickTab(targetName) {
       this.editableTabsValue = targetName.name;
       this.$router.push("/" + targetName.name);
       this.setAdminCurTag(this.editableTabsValue);
-      this.tapNavPath = this.$route.meta.tapNavPath;
+      setTimeout(() => {
+        this.tapNavPath = this.$route.meta.tapNavPath;
+      }, 500);
     },
     getFullCreeen() {
       this.n++;
