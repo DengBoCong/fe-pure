@@ -42,7 +42,7 @@
           <template slot-scope="scope">
             <el-select v-model="scope.row.access" :placeholder="scope.row.access"
               @change="accessChange"
-              @focus="accessChangeFlag(scope.row.id)">
+              @focus="accessChangeFlag(scope.row.id, scope.row.status)">
               <el-option
                 v-for="item in accessList"
                 :key="item.value"
@@ -104,7 +104,8 @@
 </template>
 
 <script>
-import { getAllAcessPathOrderBySort } from '@/api/access'
+import { getAllAcessPathOrderBySort,
+  insertAndUpdateAccessPath } from '@/api/access'
 
 export default {
   name: 'Access',
@@ -142,12 +143,22 @@ export default {
   },
   methods: {
     statusChange(id, status) {
-      console.log(id + " " + status);
-      
+      insertAndUpdateAccessPath({
+        id: id, 
+        status: status,
+      }).then(res => {
+        if(res.data.code != 0) this.$message.error("服务器响应出错");
+      })
     },
-    accessChange(id) {
-      console.log("value:"+id+ " "+this.accessFocusId);
-      
+    accessChange(id, status) {
+      // console.log("value:"+id+ " "+this.accessFocusId);
+      insertAndUpdateAccessPath({
+        id: this.accessFocusId, 
+        access: id,
+        status: status,
+      }).then(res => {
+        if(res.data.code != 0) this.$message.error("服务器响应出错");
+      })
     },
     accessChangeFlag(id) {
       this.accessFocusId = id

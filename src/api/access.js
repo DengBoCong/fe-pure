@@ -9,9 +9,19 @@ export const getPublicAccessPath = info => {
   })
 }
 
+//用户权限 - 查询所有用户访问权限信息，默认排序
 export const getAllAcessPathOrderBySort = () => {
   return axios.request({
     url: '/access/findAllOrderBySort',
     method: 'get'
+  })
+}
+
+//用户权限 - 单个插入或更新用户访问权限信息
+export const insertAndUpdateAccessPath = info => {
+  return axios.request({
+    url: '/access/oneInsertUpdate',
+    method: 'put',
+    data: info,
   })
 }
