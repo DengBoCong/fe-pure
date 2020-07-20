@@ -14,12 +14,13 @@ export default {
   },
   mutations: {
     setAccessList (state, accessList) {
-      state.accessList = accessList;
       let result = [];
       accessList.forEach((element, index) => {
-        result.push(element.accessPath);
+        let json = {accessPath:element.accessPath,status:element.status};
+        result.push(json);
       });
       setToken("ACCESS_LIST", result);
+      state.accessList = result;
     },
     setUserToken (state, userToken) {
       state.userToken = userToken;
@@ -66,7 +67,7 @@ export default {
         // resolve()
       })
     },
-    getPublicAccessPath({ state, commit }) {
+    getPublicAccessPath({ state, commit }) {//获取公共权限访问地址
       return new Promise((resolve, reject) => {
         try {
           getPublicAccessPath({access:"PUBLIC"}).then(res => {
