@@ -25,3 +25,12 @@ export const insertAndUpdateAccessPath = info => {
     data: info,
   })
 }
+
+//用户权限 - 批量添加用户访问权限信息
+export const insertManyAccessPath = info => {
+  return axios.request({
+    url: '/access/manyInsert',
+    method: 'put',
+    data: info,
+  })
+}

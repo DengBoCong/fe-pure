@@ -1,22 +1,15 @@
 <template>
   <div>
-    <el-card>
-      <el-transfer
-        v-model="value"
-        :props="{
-          key: 'value',
-          label: 'desc'
-        }"
-        :data="data">
-      </el-transfer>
+    <el-card shadow="never"  body-style="padding:0;">
+      <el-button type="primary" plain @click="refreshAccessPath">一键更新用户访问地址</el-button>
     </el-card>
-    <el-card class="hiddenScrollbar">
+    <el-card shadow="never" :style="height" body-style="padding:0;" class="hiddenScrollbar">
       <!-- <el-button @click="resetDateFilter">清除日期过滤器</el-button>
       <el-button @click="clearFilter">清除所有过滤器</el-button> -->
       <el-table
         :data="tableData.filter(data => !search || data.accessPath.toLowerCase().includes(search.toLowerCase()))"
         border
-        max-height="700"
+        :max-height="tableMaxHeight"
         style="width: 100%">
         <el-table-column
           fixed
@@ -105,7 +98,8 @@
 
 <script>
 import { getAllAcessPathOrderBySort,
-  insertAndUpdateAccessPath } from '@/api/access'
+  insertAndUpdateAccessPath,
+  insertManyAccessPath } from '@/api/access'
 
 export default {
   name: 'Access',
@@ -125,6 +119,8 @@ export default {
       return data;
     };
     return {
+      screenWidth: 0,
+      screenHeight:0,
       data: generateData(),
       value: [],
       tableData: [],//表格数据
@@ -162,17 +158,30 @@ export default {
     },
     accessChangeFlag(id) {
       this.accessFocusId = id
+    },
+    refreshAccessPath() {
+      console.log(this.$router.options.routes);
+      insertManyAccessPath(this.$router.options.routes).then(res => {
+        console.log(res.data.code);
+        
+      })
     }
   },
   mounted() {
+    this.screenWidth = document.body.clientWidth;
+    this.screenHeight = document.body.clientHeight;
     getAllAcessPathOrderBySort().then(res => {
       // console.log(JSON.stringify(this.$route.meta));
-      
       this.tableData = res.data.data;
     })
   },
   computed: {
-    //
+    height(){
+      return `height:${this.screenHeight-160}px;border:0;`;
+    },
+    tableMaxHeight(){
+      return this.screenHeight-160;
+    }
   }
 }
 </script>
