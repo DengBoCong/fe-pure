@@ -10,7 +10,7 @@ import 'nprogress/nprogress.css' //这个样式必须引入
 import { setToken, getToken, canTurnTo, canTurnToControl, setTitle } from 'utils/util'
 // import config from '@/config'
 import { hasOneOf } from 'utils/tools'
-import { getPublicAccessPath, getCheckAccess } from '@/api/user'
+import { getPublicAccessPath } from '@/api/access'
 // const { homeName } = config
 
 Vue.use(VueRouter)
@@ -78,56 +78,100 @@ router.beforeEach((to, from, next) => {
   //     })
   //   })
   // }
+  // store.dispatch('getPublicAccessPath').then(data => {
+  //   //拉取公共访问地址权限，通过用户权限和跳转的页面的path来判断是否有权限访问;access必须是一个数组，如：['/login'] ['/login/sdf', '/df/s']
+  // }).catch(() => {
+  //   setToken('ACCESS_LIST', '');
+  //   next({
+  //     name: 'home'
+  //   })
+  // })
+  getPublicAccessPath({access:"PUBLIC"}).then(res => {
+    const data = res.data.data;
+    let result = [];
+    data.forEach((element, index) => {
+      let json = {accessPath:element.accessPath,status:element.status};
+      result.push(json);
+    });
 
-  store.dispatch('getPublicAccessPath').then(data => {
-    //拉取公共访问地址权限，通过用户权限和跳转的页面的path来判断是否有权限访问;access必须是一个数组，如：['/login'] ['/login/sdf', '/df/s']
-  }).catch(() => {
-    setToken('ACCESS_LIST', '');
-    next({
-      name: 'home'
-    })
+    let ISCLOSE = ifClose(to.name, result);
+
+    if(ISCLOSE == 0){
+      next() // 跳转
+    }else if(ISCLOSE == 1) {
+      next({
+        name: PROHIBIT_PAGE_NAME // 跳转到403
+      })
+    }else if (!userToken) {
+      // 需要权限，未登录，跳转401页面
+      next({
+        name: NOACCESS_PAGE_NAME // 跳转到401
+      })
+    } else {
+      // 需要权限，已登录，进一步权限验证
+      const userAccessList = getToken("USER_ACCESS_LIST"); //用户权限列表
+      if(!userAccessList) {
+        store.dispatch('getUserAccessPath', {access:JSON.parse(getToken("USER_TOKEN")).access}).then(data => {
+          turnToControl(to, getToken("USER_ACCESS_LIST"), next);
+        }).catch(() => {
+          setToken('USER_ACCESS_LIST', '');
+          next({
+            name: 'home'
+          })
+        })
+      } else{
+        turnToControl(to, userAccessList, next);
+      }
+      
+      next() // 跳转
+    }
+
+    // setToken("ACCESS_LIST", result);
+  }).catch(err => {
+    reject(err)
   })
 
-  if(!getToken("ACCESS_LIST")) {
+  // if(!getToken("ACCESS_LIST")) {
+  //   console.log("实时");
     
-    setTimeout(() => {
-      next({
-        path: to.path
-      })
-    }, 3000);
-  }
+  //   setTimeout(() => {
+  //     next({
+  //       path: to.path
+  //     })
+  //   }, 3000);
+  // }
   
-  let ISCLOSE = ifClose(to.name, JSON.parse(getToken("ACCESS_LIST")));
-
-  if(ISCLOSE == 0){
-    next() // 跳转
-  }else if(ISCLOSE == 1) {
-    next({
-      name: PROHIBIT_PAGE_NAME // 跳转到403
-    })
-  }else if (!userToken) {
-    // 需要权限，未登录，跳转401页面
-    next({
-      name: NOACCESS_PAGE_NAME // 跳转到401
-    })
-  } else {
-    // 需要权限，已登录，进一步权限验证
-    const userAccessList = getToken("USER_ACCESS_LIST"); //用户权限列表
-    if(!userAccessList) {
-      store.dispatch('getUserAccessPath', {access:JSON.parse(getToken("USER_TOKEN")).access}).then(data => {
-        turnToControl(to, getToken("USER_ACCESS_LIST"), next);
-      }).catch(() => {
-        setToken('USER_ACCESS_LIST', '');
-        next({
-          name: 'home'
-        })
-      })
-    } else{
-      turnToControl(to, userAccessList, next);
-    }
+  // let ISCLOSE = ifClose(to.name, JSON.parse(getToken("ACCESS_LIST")));
+  
+  // if(ISCLOSE == 0){
+  //   next() // 跳转
+  // }else if(ISCLOSE == 1) {
+  //   next({
+  //     name: PROHIBIT_PAGE_NAME // 跳转到403
+  //   })
+  // }else if (!userToken) {
+  //   // 需要权限，未登录，跳转401页面
+  //   next({
+  //     name: NOACCESS_PAGE_NAME // 跳转到401
+  //   })
+  // } else {
+  //   // 需要权限，已登录，进一步权限验证
+  //   const userAccessList = getToken("USER_ACCESS_LIST"); //用户权限列表
+  //   if(!userAccessList) {
+  //     store.dispatch('getUserAccessPath', {access:JSON.parse(getToken("USER_TOKEN")).access}).then(data => {
+  //       turnToControl(to, getToken("USER_ACCESS_LIST"), next);
+  //     }).catch(() => {
+  //       setToken('USER_ACCESS_LIST', '');
+  //       next({
+  //         name: 'home'
+  //       })
+  //     })
+  //   } else{
+  //     turnToControl(to, userAccessList, next);
+  //   }
     
-    next() // 跳转
-  }
+  //   next() // 跳转
+  // }
 })
 
 router.afterEach(to => {
