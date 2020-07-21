@@ -62,7 +62,6 @@ export default [
       notCache: true,
     },
     component: () => import('views/Search'),
-    children: [],
   },
 
   // **************************登录***************************************
@@ -240,6 +239,16 @@ export default [
     },
     component: () => import('views/about/Summary'),
     children: [],
+  },
+  {
+    path: '/test',
+    name: 'test',
+    meta: {
+      title: '测试地址',
+      hideInMenu: true,
+      notCache: true,
+    },
+    component: () => import('views/about/Summary'),
   },
 
   // **************************提交***************************************

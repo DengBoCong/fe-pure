@@ -101,6 +101,9 @@ import { getAllAcessPathOrderBySort,
   insertAndUpdateAccessPath,
   insertManyAccessPath } from '@/api/access'
 
+import { getAllRouteServer } from 'utils/util'
+import { getUnion } from 'utils/tools'
+
 export default {
   name: 'Access',
   components: {
@@ -160,10 +163,8 @@ export default {
       this.accessFocusId = id
     },
     refreshAccessPath() {
-      console.log(this.$router.options.routes);
-      insertManyAccessPath(this.$router.options.routes).then(res => {
-        console.log(res.data.code);
-        
+      insertManyAccessPath(getAllRouteServer(this.$router.options.routes)).then(res => {
+        this.tableData = getUnion(this.tableData, res.data.data)
       })
     }
   },

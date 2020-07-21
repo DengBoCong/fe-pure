@@ -1,7 +1,7 @@
 import Cookies from 'js-cookie'
 // cookie保存的天数
 import config from '@/config'
-import { forEach, hasOneOf, objEqual } from 'utils/tools'
+import { forEach, hasOneOf, objEqual, getUnion } from 'utils/tools'
 const { title, cookieExpires, useI18n } = config
 
 /**
@@ -101,6 +101,27 @@ export const localSave = (key, value) => {
 
 export const localRead = (key) => {
   return localStorage.getItem(key) || ''
+}
+
+/**
+ * 遍历所有路由对象
+ * @param {*} routers 即路由对象
+ * @description 返回符合服务端PureAccessPathEntity的数据格式
+ */
+export const getAllRouteServer = (routers) => {
+  let i = -1;
+  let len = routers.length;
+  let result = [];
+  while (++i < len) {
+    let item = routers[i];
+    if (item.children && item.children.length) {
+      result = getUnion(result, getAllRouteServer(item.children));
+    } else {
+      // if (item.name === homeName) homeRoute = item
+      result.push({accessPath:item.name, description: item.meta.title})
+    }
+  }
+  return result
 }
 
 // ***********************************************************************
