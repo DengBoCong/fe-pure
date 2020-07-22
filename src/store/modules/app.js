@@ -5,11 +5,13 @@ import {
   getAdminCurTagFromLocalstorage,
   localRead,
   localSave,
+  setToken, 
+  getToken
 } from 'utils/util';
 
 export default {
   state: {
-    isTipOpen: false,
+    messageToken: getToken("MESSAGE_TOKEN"),
     currentAdminTag: '',//后台管理当前标签
     adminTagNaveList: [],//后台管理标签
     local: localRead('systemLanguage'),//语言
@@ -26,8 +28,9 @@ export default {
     },
   },
   mutations: {
-    setTipOpen(state) {
-      state.isTipOpen = true;
+    setMessageToken(state, messageToken) {
+      state.messageToken = messageToken;
+      setToken("MESSAGE_TOKEN", messageToken);
     },
     setAdminTag(state, list) {
       state.currentAdminTag = list;
