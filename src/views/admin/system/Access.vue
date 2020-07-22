@@ -7,6 +7,10 @@
       <!-- <el-button @click="resetDateFilter">清除日期过滤器</el-button>
       <el-button @click="clearFilter">清除所有过滤器</el-button> -->
       <el-table
+        v-loading="loading"
+        element-loading-text="拼命加载中"
+        element-loading-spinner="el-icon-loading"
+        element-loading-background="rgba(100, 100, 100, 0.8)"
         :data="tableData.filter(data => !search || data.accessPath.toLowerCase().includes(search.toLowerCase()))"
         border
         :max-height="tableMaxHeight"
@@ -80,15 +84,15 @@
           label="操作"
           align="center"
           width="150">
-          <template slot="header" slot-scope="scope">
+          <template slot="header">
             <el-input
               v-model="search"
               size="mini"
               placeholder="输入关键字搜索"/>
           </template>
           <template slot-scope="scope">
-            <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
-            <el-button type="text" size="small">编辑</el-button>
+            <el-button type="text" size="small">查看</el-button>
+            <el-button @click="deleteClick(scope.row.id)" type="text" size="small" style="color:#F56C6C;">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -99,7 +103,8 @@
 <script>
 import { getAllAcessPathOrderBySort,
   insertAndUpdateAccessPath,
-  insertManyAccessPath } from '@/api/access'
+  insertManyAccessPath,
+  deleteOneAccessPath } from '@/api/access'
 
 import { getAllRouteServer } from 'utils/util'
 import { getUnion } from 'utils/tools'
@@ -122,6 +127,7 @@ export default {
       return data;
     };
     return {
+      loading: true,
       screenWidth: 0,
       screenHeight:0,
       data: generateData(),
@@ -165,7 +171,41 @@ export default {
     refreshAccessPath() {
       insertManyAccessPath(getAllRouteServer(this.$router.options.routes)).then(res => {
         this.tableData = getUnion(this.tableData, res.data.data)
+        this.$message({
+          message: "加载成功, 已为您刷新数据",
+          type: "success"
+        });
       })
+    },
+    deleteClick(id) {
+      this.$confirm('此操作将永久删除该访问路径，可能导致系统访问问题, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        deleteOneAccessPath({id:id}).then(res => {
+          if (res.data.code == 0) {
+            this.tableData = res.data.data;
+            this.$message({
+              message: "用户访问地址删除成功, 已为您刷新数据",
+              type: "success"
+            });
+          } else {
+            this.$message.error(
+              "用户访问地址删除失败, 错误提示: " + res.data.msg
+            );
+          }
+        }).catch(() => {
+          this.$message.error(
+            "网络出现问题！ "
+          );
+        });
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        });          
+      });
     }
   },
   mounted() {
@@ -174,7 +214,12 @@ export default {
     getAllAcessPathOrderBySort().then(res => {
       // console.log(JSON.stringify(this.$route.meta));
       this.tableData = res.data.data;
-    })
+      this.loading = false;
+    }).catch(() => {
+      this.$message.error(
+        "网络出现问题！ "
+      );
+    });
   },
   computed: {
     height(){

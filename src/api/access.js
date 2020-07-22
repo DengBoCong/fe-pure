@@ -34,3 +34,12 @@ export const insertManyAccessPath = info => {
     data: info,
   })
 }
+
+//用户权限 - 单个插入或更新用户访问权限信息
+export const deleteOneAccessPath = info => {
+  return axios.request({
+    url: '/access/deleteOneById',
+    method: 'delete',
+    params: info,
+  })
+}
