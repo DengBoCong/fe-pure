@@ -27,6 +27,7 @@ export default [
           title: '首页',
           hideInMenu: true,
           notCache: true,
+          description: '首页'
         },
       }, {
         path: '/article/:id',
@@ -35,6 +36,7 @@ export default [
         meta: {
           title: '博客',
           hideInMenu: true,
+          description: '博客'
         },
       }, {
         path: '/interfile',
@@ -46,6 +48,7 @@ export default [
         meta: {
           title: '技术中心-归档',
           hideInMenu: true,
+          description: '技术中心-归档'
         },
       }]
     }],
@@ -60,6 +63,7 @@ export default [
       title: '搜索',
       hideInMenu: true,
       notCache: true,
+      description: '搜索'
     },
     component: () => import('views/Search'),
   },
@@ -73,6 +77,7 @@ export default [
       title: '登录',
       hideInMenu: true,
       notCache: true,
+      description: '登录'
     },
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
@@ -90,6 +95,7 @@ export default [
       title: '无权访问',
       hideInMenu: true,
       notCache: true,
+      description: '无权访问'
     },
     component: () => import('views/code/401')
   },
@@ -100,6 +106,7 @@ export default [
       title: '禁止访问',
       hideInMenu: true,
       notCache: true,
+      description: '禁止访问'
     },
     component: () => import('views/code/403')
   },
@@ -123,6 +130,7 @@ export default [
         title: '技术中心',
         hideInMenu: true,
         notCache: true,
+        description: '技术中心'
       },
     },{
       path: '/resources/list',
@@ -132,6 +140,7 @@ export default [
         title: '技术中心 - 资源列表',
         hideInMenu: true,
         notCache: true,
+        description: '技术中心 - 资源列表'
       },
     }],
   },
@@ -145,6 +154,7 @@ export default [
       title: 'WiKi',
       hideInMenu: true,
       notCache: true,
+      description: 'Wiki主模块'
     },
     component: () => import('views/wiki/Home'),
     children: [],
@@ -159,6 +169,7 @@ export default [
       title: '项目',
       hideInMenu: true,
       notCache: true,
+      description: '项目中心主模块'
     },
     component: () => import('views/project/Home'),
     children: [],
@@ -182,6 +193,7 @@ export default [
         title: '文档',
         hideInMenu: true,
         notCache: true,
+        description: '文档中心主模块'
       },
     },{
       path: '/document/:id',
@@ -191,6 +203,7 @@ export default [
         title: '文档',
         hideInMenu: true,
         notCache: true,
+        description: '文档内容'
       },
     }],
   },
@@ -203,6 +216,7 @@ export default [
       title: '吐槽说明',
       hideInMenu: true,
       notCache: true,
+      description: '吐槽说明'
     },
     component: () => import('views/about/Explain'),
     children: [],
@@ -214,6 +228,7 @@ export default [
       title: '文字版简历',
       hideInMenu: true,
       notCache: true,
+      description: '文字版简历'
     },
     component: () => import('views/about/Record'),
     children: [],
@@ -225,6 +240,7 @@ export default [
       title: '炫酷版简历',
       hideInMenu: true,
       notCache: true,
+      description: '炫酷版简历'
     },
     component: () => import('views/about/AdvanceRecord'),
     children: [],
@@ -236,19 +252,10 @@ export default [
       title: '诗和远方',
       hideInMenu: true,
       notCache: true,
+      description: '诗和远方主模块'
     },
     component: () => import('views/about/Summary'),
     children: [],
-  },
-  {
-    path: '/test',
-    name: 'test',
-    meta: {
-      title: '测试地址',
-      hideInMenu: true,
-      notCache: true,
-    },
-    component: () => import('views/about/Summary'),
   },
 
   // **************************提交***************************************
@@ -260,6 +267,7 @@ export default [
       title: '工单',
       hideInMenu: true,
       notCache: true,
+      description: '提交工单主模块'
     },
     component: () => import('views/WorkOrder'),
     children: [],
@@ -284,7 +292,8 @@ export default [
         hideInMenu: true,
         title: '',
         notCache: true,
-        tapNavPath: ['工作台']
+        tapNavPath: ['工作台'],
+        description: '后台的主控制台'
         // icon: 'el-icon-position'
       },
       component: () => import('views/admin/Main')
@@ -295,7 +304,8 @@ export default [
         hideInMenu: true,
         title: '个人中心',
         notCache: true,
-        tapNavPath: ['个人中心']
+        tapNavPath: ['个人中心'],
+        description: '后台的个人中心'
       },
       component: () => import('views/admin/Person'),
     },{
@@ -305,7 +315,8 @@ export default [
         hideInMenu: true,
         title: '我的博客',
         notCache: true,
-        tapNavPath: ['技术中心', '博客', '我的博客']
+        tapNavPath: ['技术中心', '博客', '我的博客'],
+        description: '后台的博客管理'
         // icon: 'el-icon-position'
       },
       component: () => import('views/admin/blog/Blog'),
@@ -316,7 +327,8 @@ export default [
         hideInMenu: true,
         title: '编辑博客',
         notCache: true,
-        tapNavPath: ['技术中心', '博客', '编辑博客']
+        tapNavPath: ['技术中心', '博客', '编辑博客'],
+        description: '后台的博客编辑'
         // icon: 'el-icon-position'
       },
       component: () => import('views/admin/blog/EditBlog'),
@@ -327,7 +339,8 @@ export default [
         hideInMenu: true,
         title: '博客相关',
         notCache: true,
-        tapNavPath: ['技术中心', '博客', '博客相关']
+        tapNavPath: ['技术中心', '博客', '博客相关'],
+        description: '后台的博客相关管理中心'
         // icon: 'el-icon-position'
       },
       component: () => import('views/admin/blog/AboutBlog'),
@@ -339,6 +352,7 @@ export default [
         title: '个人履历',
         tapNavPath: ['关于', '个人履历'],
         notCache: true,
+        description: '后台的个人履历管理中心'
         // icon: 'el-icon-position'
       },
       component: () => import('views/admin/about/Record'),
@@ -354,6 +368,42 @@ export default [
         // icon: 'el-icon-position'
       },
       component: () => import('views/admin/system/Access'),
+    }, {
+      path: '/admin/system/notice',
+      name: 'adminSystemNotice',
+      meta: {
+        hideInMenu: true,
+        title: '通告媒介',
+        notCache: true,
+        tapNavPath: ['系统设置', '通告媒介'],
+        description: '后台的通告媒介管理中心'
+        // icon: 'el-icon-position'
+      },
+      component: () => import('views/admin/system/Notice'),
+    }, {
+      path: '/admin/system/advertise',
+      name: 'adminSystemAdvertise',
+      meta: {
+        hideInMenu: true,
+        title: '广告管理',
+        notCache: true,
+        tapNavPath: ['系统设置', '广告管理'],
+        description: '后台的广告管理中心'
+        // icon: 'el-icon-position'
+      },
+      component: () => import('views/admin/system/Advertise'),
+    }, {
+      path: '/admin/system/log',
+      name: 'adminSystemLog',
+      meta: {
+        hideInMenu: true,
+        title: '日志服务',
+        notCache: true,
+        tapNavPath: ['系统设置', '日志服务'],
+        description: '后台的日志服务管理中心'
+        // icon: 'el-icon-position'
+      },
+      component: () => import('views/admin/system/Log'),
     }],
   }
 ]

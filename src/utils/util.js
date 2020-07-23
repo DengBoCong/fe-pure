@@ -118,7 +118,7 @@ export const getAllRouteServer = (routers) => {
       result = getUnion(result, getAllRouteServer(item.children));
     } else {
       // if (item.name === homeName) homeRoute = item
-      result.push({accessPath:item.name, description: item.meta.title})
+      result.push({accessPath:item.name, description: item.meta.description})
     }
   }
   return result

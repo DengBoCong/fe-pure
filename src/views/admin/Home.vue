@@ -63,24 +63,15 @@
             <el-menu-item index="4-4">六小六系统</el-menu-item>
             <el-menu-item index="4-5">中心系统</el-menu-item>
           </el-submenu>
-          <el-submenu index="5">
-            <template slot="title">
-              <i class="el-icon-location"></i>
-              <span slot="title">系统媒体</span>
-            </template>
-            <el-menu-item index="5-1">公告</el-menu-item>
-            <el-menu-item index="5-2">广告</el-menu-item>
-            <el-menu-item index="5-3">通知</el-menu-item>
-          </el-submenu>
           <el-submenu index="6">
             <template slot="title">
               <i class="el-icon-location"></i>
               <span slot="title">系统设置</span>
             </template>
             <el-menu-item index="admin/system/access">权限控制</el-menu-item>
-            <el-menu-item index="6-1">公告</el-menu-item>
-            <el-menu-item index="6-2">广告</el-menu-item>
-            <el-menu-item index="6-3">通知</el-menu-item>
+            <el-menu-item index="admin/system/log">日志服务</el-menu-item>
+            <el-menu-item index="admin/system/notice">通告媒介</el-menu-item>
+            <el-menu-item index="admin/system/advertise">广告管理</el-menu-item>
           </el-submenu>
         </el-menu>
       </el-scrollbar>
@@ -368,7 +359,10 @@ export default {
         ["admin/technique/editblog", "编辑博客"],
         ["admin/technique/aboutblog", "博客相关"],
         ["admin/about/record", "个人履历"],
-        ["admin/system/access", "权限控制"]
+        ["admin/system/access", "权限控制"],
+        ["admin/system/notice", "通告媒介"],
+        ["admin/system/advertise", "广告管理"],
+        ["admin/system/log", "日志服务"],
       ]),
       tapNavPath: [],//顶部导航路径
     };
