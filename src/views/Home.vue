@@ -47,25 +47,23 @@ import { getNoticeMessageTypeOne } from '@/api/message'
       };
     },
     mounted(){
-      console.log("app:"+getToken("MESSAGE_TOKEN"));
-    
+      let messageToken = this.$store.state.app.messageToken;
       const h = this.$createElement;
-      if(!getToken("MESSAGE_TOKEN")){
-      //   this.setTipOpen();
-        getNoticeMessageTypeOne({type:"system-notice"}).then(res => {
-          console.log(JSON.stringify(res.data.data));
-          
-          // this.$notify({
-          //   title: '系统未开放通知',
-          //   message: h('i', { style: 'color: teal'}, '系统处于开发测试中，线上版本系统已被设置全禁止权限，仅限部分授权账号进行登录'),
-          //   duration: 8500,
-          // });
+      if(!messageToken){
+        getNoticeMessageTypeOne({type:"systemNotice"}).then(res => {
+          if(res.data.code != 0) return;
+          this.setMessageToken(res.data.data.type);
+          this.$notify({
+            title: res.data.data.title,
+            message: h('i', { style: 'color: '+res.data.data.contentColor}, res.data.data.content),
+            duration: 8500,
+          });
         })
       }
     },
     methods: {
       ...mapMutations([
-        'setTipOpen'
+        'setMessageToken'
       ]),
     }
   }

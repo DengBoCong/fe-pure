@@ -28,8 +28,13 @@
         <el-divider content-position="center">{{$t('home.notice')}}</el-divider>
         <div class="block">
         <el-carousel height="120px">
-          <el-carousel-item v-for="item in 4" :key="item">
-          <h3 class="small">{{ item }}</h3>
+          <el-carousel-item v-for="item in advertiseArray" :key="item.id">
+            <h3 class="small" v-if="item.cover == ''">{{ item.description }}</h3>
+            <el-image v-if="item.cover != ''" :src="item.cover" fit="fill">
+              <div slot="placeholder" class="image-slot">
+                <h3 class="small" v-if="item.cover == ''">加载中<span class="dot">...</span></h3>
+              </div>
+            </el-image>
           </el-carousel-item>
         </el-carousel>
         </div>
@@ -39,7 +44,8 @@
 </template>
 
 <script>
-import { getSuperInfo } from "@/api/user";
+import { getSuperInfo } from "@/api/user"
+import { getAdvertiseTypeOne } from '@/api/message'
 import { setToken, getToken } from 'utils/util'
 
 export default {
@@ -55,6 +61,7 @@ export default {
       userAddress: "underline",//用户地址
       userFeature: "underline",//用户特征
       userPosition: "underline",//用户职位
+      advertiseArray: [],
     }
   },
   mounted() {
@@ -66,12 +73,17 @@ export default {
       this.userAddress = res.data.data.address;
       this.userFeature = res.data.data.feature;
       this.userPosition = res.data.data.position;
+    });
+    getAdvertiseTypeOne({type:"personCard"}).then(res => {
+      if(res.data.code != 0) return;
+      this.advertiseArray = res.data.data;
     })
   },
   methods: {
     setAccess() {
       setToken("USER_ACCESS_LIST", '');
       setToken("ACCESS_LIST", '');
+      setToken("MESSAGE_TOKEN", '');
     }
   }
 }
@@ -93,5 +105,22 @@ export default {
       transform: translateY(-50%) translateX(-50%);
       width: 400px;
   }
+}
+
+.el-carousel__item h3 {
+  color: #475669;
+  font-size: 14px;
+  opacity: 0.75;
+  line-height: 120px;
+  text-align: center;
+  margin: 0;
+}
+
+.el-carousel__item:nth-child(2n) {
+    background-color: #99a9bf;
+}
+
+.el-carousel__item:nth-child(2n+1) {
+    background-color: #d3dce6;
 }
 </style>
