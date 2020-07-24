@@ -18,6 +18,15 @@ export const getAllNoticeMessage = info => {
   })
 }
 
+//系统消息 - 通过id删除单个通告
+export const deleteOneNoticeMessage = info => {
+  return axios.request({
+    url: '/message/deleteOneById',
+    method: 'delete',
+    params: info,
+  })
+}
+
 //系统广告 - 通过广告的类型标记查询广告的信息
 export const getAdvertiseTypeOne = info => {
   return axios.request({
