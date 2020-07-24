@@ -1,7 +1,7 @@
 <template>
   <el-container class="size">
     <div :style="height">
-      <el-scrollbar style="width:100%;height:100%;">
+      <el-main style="width:100%;height:100%;padding:0;" class="hiddenScrollbar">
         <el-menu
           :default-active="editableTabsValue"
           class="el-menu-vertical-demo"
@@ -11,11 +11,11 @@
           text-color="#fff"
           active-text-color="#ffd04b"
           :collapse="isCollapse">
-          <el-menu-item index="1" :disabled="true">
+          <el-menu-item index="0" :disabled="true">
             <i class="el-icon-position"></i>
             <span slot="title">DengBoCong</span>
           </el-menu-item>
-          <el-submenu index="2">
+          <el-submenu index="1">
             <template slot="title">
               <i class="el-icon-c-scale-to-original"></i>
               <span slot="title">技术中心</span>
@@ -74,7 +74,7 @@
             <el-menu-item index="admin/system/advertise">广告管理</el-menu-item>
           </el-submenu>
         </el-menu>
-      </el-scrollbar>
+      </el-main>
     </div>
     <el-container>
       <el-header style="padding:0;">

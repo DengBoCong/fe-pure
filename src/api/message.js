@@ -9,6 +9,15 @@ export const getNoticeMessageTypeOne = info => {
   })
 }
 
+//系统消息 - 查询所有的通告，默认他通过类型标记排序
+export const getAllNoticeMessage = info => {
+  return axios.request({
+    url: '/message/findAllNotice',
+    method: 'get',
+    params: info,
+  })
+}
+
 //系统广告 - 通过广告的类型标记查询广告的信息
 export const getAdvertiseTypeOne = info => {
   return axios.request({
