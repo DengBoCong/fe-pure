@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-card shadow="never"  body-style="padding:0;">
-      <el-button type="primary" plain @click="addOneClick">新增通告</el-button>
+      <el-button type="primary" plain @click="openAddClick">新增通告</el-button>
     </el-card>
     <el-card shadow="never" :style="height" body-style="padding:0;" class="hiddenScrollbar">
       <!-- <el-button @click="resetDateFilter">清除日期过滤器</el-button>
@@ -44,20 +44,20 @@
           sortable
           align="center"
           prop="type"
-          width="300"
+          width="250"
           label="通知类型标识">
         </el-table-column>
         <el-table-column
           align="center"
           prop="contentColor"
-          label="内容颜色"
-          min-width="300">
+          width="150"
+          label="内容颜色">
         </el-table-column>
         <el-table-column
           align="center"
           prop="titleColor"
-          label="标题颜色"
-          min-width="300">
+          width="150"
+          label="标题颜色">
         </el-table-column>
         <el-table-column
           prop="sort"
@@ -67,10 +67,10 @@
           label="排序">
         </el-table-column>
         <el-table-column
-          prop="reserveTime"
+          prop="reserveTimeC"
           align="center"
           sortable
-          width="100"
+          width="300"
           label="预留时间">
         </el-table-column>
         <el-table-column
@@ -105,21 +105,71 @@
           </template>
         </el-table-column>
       </el-table>
-      <el-dialog title="收货地址" :visible.sync="dialogFormVisible">
-        <el-form :model="form">
-          <el-form-item label="活动名称" :label-width="formLabelWidth">
-            <el-input v-model="form.name" autocomplete="off"></el-input>
-          </el-form-item>
-          <el-form-item label="活动区域" :label-width="formLabelWidth">
-            <el-select v-model="form.region" placeholder="请选择活动区域">
-              <el-option label="区域一" value="shanghai"></el-option>
-              <el-option label="区域二" value="beijing"></el-option>
-            </el-select>
-          </el-form-item>
+      <el-dialog title="收货地址" 
+        :visible.sync="dialogFormVisible"
+        width="60%">
+        <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+          <el-row :gutter="10">
+            <el-col :span="12">
+              <el-form-item label="类型标识" prop="type">
+                <el-input v-model="ruleForm.type"></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="12">
+              <el-form-item label="标题" prop="title">
+                <el-input v-model="ruleForm.title"></el-input>
+              </el-form-item>
+            </el-col>
+          </el-row>
+          <el-row :gutter="10">
+            <el-col :span="8">
+              <el-form-item label="标题/内容">
+                <el-color-picker v-model="ruleForm.titleColor" style="margin-left:10px;"></el-color-picker>
+                <el-color-picker v-model="ruleForm.contentColor" style="margin-left:30px;"></el-color-picker>
+              </el-form-item>
+            </el-col>
+            <el-col :span="10">
+              <el-form-item label="标题/内容">
+                <el-date-picker
+                  v-model="ruleForm.reserveTime"
+                  type="datetime"
+                  placeholder="选择日期时间"
+                  align="right"
+                  style="width:100%;"
+                  :picker-options="pickerOptions">
+                </el-date-picker>
+              </el-form-item>
+            </el-col>
+            <el-col :span="6">
+              <el-form-item label="排序">
+                <el-input v-model="ruleForm.sort"></el-input>
+              </el-form-item>
+            </el-col>
+          </el-row>
+          <el-row :gutter="10">
+            <el-form-item label="通告内容">
+              <el-input
+                type="textarea"
+                :rows="5"
+                placeholder="请输入内容"
+                v-model="ruleForm.content">
+              </el-input>
+            </el-form-item>
+          </el-row>
+          <el-row :gutter="10">
+            <el-form-item label="通告链接">
+              <el-input v-model="ruleForm.url"></el-input>
+            </el-form-item>
+          </el-row>
+          <el-row :gutter="10">
+            <el-form-item label="备注说明">
+              <el-input v-model="ruleForm.description"></el-input>
+            </el-form-item>
+          </el-row>
         </el-form>
         <div slot="footer" class="dialog-footer">
           <el-button @click="dialogFormVisible = false">取 消</el-button>
-          <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
+          <el-button type="primary" :loading="submitLoading" @click="addOneClick">确 定</el-button>
         </div>
       </el-dialog>
     </el-card>
@@ -128,7 +178,8 @@
 
 <script>
 import { getAllNoticeMessage,
-  deleteOneNoticeMessage, } from '@/api/message'
+  deleteOneNoticeMessage,
+  addOrUpdateOneNoticeMessage } from '@/api/message'
 import { getDate } from 'utils/tools'
 
 export default {
@@ -171,29 +222,100 @@ export default {
       console.log(id);
       this.dialogFormVisible = true;
     },
-    addOneClick() {
+    openAddClick() {
       this.dialogFormVisible = true;
+    },
+    addOneClick() {
+      this.submitLoading = true;
+      addOrUpdateOneNoticeMessage(this.ruleForm).then(res => {
+        if(res.data.code == 0) {
+          this.tableData = res.data.data;
+          this.$message({
+            message: "通告添加成功, 已为您刷新数据",
+            type: "success"
+          });
+        } else {
+          this.$message.error(
+            "通告添加失败, 错误提示: " + res.data.msg
+          );
+        }
+        this.submitLoading = false;
+        this.dialogFormVisible = false;
+      }).catch(() => {
+        this.$message.error(
+          "网络出现问题！ "
+        );
+        this.submitLoading = false;
+        this.dialogFormVisible = false;
+      });
     }
   },
   data() {
     return {
       loading: true,
+      submitLoading: false,
       screenWidth: 0,
       screenHeight:0,
       search: '',
       tableData: [],//表格数据
       dialogFormVisible: false,
-      form: {
-        name: '',
-        region: '',
-        date1: '',
-        date2: '',
-        delivery: false,
-        type: [],
-        resource: '',
-        desc: ''
+      ruleForm: {
+        title: '',
+        type: '',
+        sort: 0,
+        content: '',
+        reserveTime: 1,
+        url: '',
+        description: '',
+        titleColor: '#666666',
+        contentColor: '#666666',
       },
-      formLabelWidth: '120px'
+      pickerOptions: {
+        shortcuts: [{
+          text: '今天',
+          onClick(picker) {
+            picker.$emit('pick', new Date());
+          }
+        }, {
+          text: '昨天',
+          onClick(picker) {
+            const date = new Date();
+            date.setTime(date.getTime() - 3600 * 1000 * 24);
+            picker.$emit('pick', date);
+          }
+        }, {
+          text: '一周前',
+          onClick(picker) {
+            const date = new Date();
+            date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
+            picker.$emit('pick', date);
+          }
+        }]
+      },
+      rules: {
+        // name: [
+        //   { required: true, message: '请输入活动名称', trigger: 'blur' },
+        //   { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+        // ],
+        // region: [
+        //   { required: true, message: '请选择活动区域', trigger: 'change' }
+        // ],
+        // date1: [
+        //   { type: 'date', required: true, message: '请选择日期', trigger: 'change' }
+        // ],
+        // date2: [
+        //   { type: 'date', required: true, message: '请选择时间', trigger: 'change' }
+        // ],
+        // type: [
+        //   { type: 'array', required: true, message: '请至少选择一个活动性质', trigger: 'change' }
+        // ],
+        // resource: [
+        //   { required: true, message: '请选择活动资源', trigger: 'change' }
+        // ],
+        // desc: [
+        //   { required: true, message: '请填写活动形式', trigger: 'blur' }
+        // ]
+      },
     }
   },
   mounted() {
@@ -211,7 +333,7 @@ export default {
     tableMaxHeight(){
       return this.screenHeight-160;
     },
-    reserveTime(timeStamp){
+    reserveTimeC(timeStamp){
       return getDate(timeStamp, 'year');
     }
   }

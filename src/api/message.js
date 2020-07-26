@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-//系统消息 - 通过通告的类型标记查询通告的信息
+//系统通告 - 通过通告的类型标记查询通告的信息
 export const getNoticeMessageTypeOne = info => {
   return axios.request({
     url: '/message/findNoticeByType',
@@ -9,7 +9,7 @@ export const getNoticeMessageTypeOne = info => {
   })
 }
 
-//系统消息 - 查询所有的通告，默认他通过类型标记排序
+//系统通告 - 查询所有的通告，默认他通过类型标记排序
 export const getAllNoticeMessage = info => {
   return axios.request({
     url: '/message/findAllNotice',
@@ -18,10 +18,19 @@ export const getAllNoticeMessage = info => {
   })
 }
 
-//系统消息 - 通过id删除单个通告
+//系统通告 - 针对单个实体添加或者更新
+export const addOrUpdateOneNoticeMessage = info => {
+  return axios.request({
+    url: '/message/addAndUpdateOneNotice',
+    method: 'put',
+    data: info,
+  })
+}
+
+//系统通告 - 通过id删除单个通告
 export const deleteOneNoticeMessage = info => {
   return axios.request({
-    url: '/message/deleteOneById',
+    url: '/message/deleteOneNoticeById',
     method: 'delete',
     params: info,
   })
