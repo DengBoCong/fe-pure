@@ -80,12 +80,18 @@
           width="100"
           label="状态">
           <template slot-scope="scope">
-            <el-switch
-              v-model="scope.row.status"
-              active-color="#ff4949"
-              inactive-color="#13ce66"
-              @change="statusChange(scope.row.id, scope.row.status)">
-            </el-switch>
+            <el-select v-model="scope.row.status"
+              @change="statusChange"
+              @focus="statusChangeFlag(scope.row.id, scope.row.status)">
+              <el-option
+                v-for="item in statusList"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value">
+                <span style="float: left">{{ item.label }}</span>
+                <span style="float: right; color: #8492a6; font-size: 13px">{{ item.value }}</span>
+              </el-option>
+            </el-select>
           </template>
         </el-table-column>
         <el-table-column
@@ -248,7 +254,32 @@ export default {
         this.submitLoading = false;
         this.dialogFormVisible = false;
       });
-    }
+    },
+    initFrom() {
+      this.ruleForm.id = 0;
+      this.ruleForm.title = '';
+      this.ruleForm.type = '';
+      this.ruleForm.sort = 0;
+      this.ruleForm.content = '';
+      this.ruleForm.reserveTime = 0;
+      this.ruleForm.url = '';
+      this.ruleForm.status = 0;
+      this.ruleForm.description = '';
+      this.ruleForm.titleColor = '#666666';
+      this.ruleForm.contentColor = '#666666';
+    },
+    statusChange(id, status) {
+      addOrUpdateOneNoticeMessage({id:this.statusFocusId,status:id,sort:-1}).then(res => {
+        if(res.data.code != 0) this.$message.error("服务器响应出错");
+      }).catch(() => {
+        this.$message.error(
+          "网络出现问题！ "
+        );
+      });
+    },
+    statusChangeFlag(id) {
+      this.statusFocusId = id
+    },
   },
   data() {
     return {
@@ -257,15 +288,25 @@ export default {
       screenWidth: 0,
       screenHeight:0,
       search: '',
+      statusFocusId: 0,//用于状态改变记录id
       tableData: [],//表格数据
       dialogFormVisible: false,
+      statusList: [{
+        label: '下线',
+        value: '0',
+      },{
+        label: '上线',
+        value: '1',
+      }],
       ruleForm: {
+        id: 0,
         title: '',
         type: '',
         sort: 0,
         content: '',
-        reserveTime: 1,
+        reserveTime: 0,
         url: '',
+        status: 0,
         description: '',
         titleColor: '#666666',
         contentColor: '#666666',
