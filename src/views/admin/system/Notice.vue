@@ -18,9 +18,6 @@
         <el-table-column type="expand">
           <template slot-scope="props">
             <el-form label-position="left" class="demo-table-expand">
-              <el-form-item label="标题">
-                <span>{{ props.row.title }}</span>
-              </el-form-item>
               <el-form-item label="内容">
                 <span>{{ props.row.content }}</span>
               </el-form-item>
@@ -39,6 +36,12 @@
           prop="id"
           width="100"
           label="ID">
+        </el-table-column>
+        <el-table-column
+          align="center"
+          prop="title"
+          width="300"
+          label="通知标题">
         </el-table-column>
         <el-table-column
           sortable
@@ -67,11 +70,13 @@
           label="排序">
         </el-table-column>
         <el-table-column
-          prop="reserveTimeC"
           align="center"
           sortable
           width="300"
           label="预留时间">
+          <template slot-scope="scope">
+            <span>{{reserveTimeC(scope.row.reserveTime)}}</span>
+          </template>
         </el-table-column>
         <el-table-column
           prop="status"
@@ -106,7 +111,7 @@
               placeholder="输入关键字搜索"/>
           </template>
           <template slot-scope="scope">
-            <el-button type="text" size="small" @click="editClick(scope.row.id)">编辑</el-button>
+            <el-button type="text" size="small" @click="editClick(scope.row)">编辑</el-button>
             <el-button @click="deleteClick(scope.row.id)" type="text" size="small" style="color:#F56C6C;">删除</el-button>
           </template>
         </el-table-column>
@@ -186,7 +191,7 @@
 import { getAllNoticeMessage,
   deleteOneNoticeMessage,
   addOrUpdateOneNoticeMessage } from '@/api/message'
-import { getDate } from 'utils/tools'
+import { getDate, dateToInt } from 'utils/tools'
 
 export default {
   name: 'Notice',
@@ -224,15 +229,27 @@ export default {
         });          
       });
     },
-    editClick(id) {
-      console.log(id);
+    editClick(object) {
+      this.ruleForm.id = object.id;
+      this.ruleForm.title = object.title;
+      this.ruleForm.type = object.type;
+      this.ruleForm.sort = object.sort;
+      this.ruleForm.content = object.content;
+      this.ruleForm.reserveTime = object.reserveTime;
+      this.ruleForm.url = object.utl;
+      this.ruleForm.status = object.status;
+      this.ruleForm.description = object.description;
+      this.ruleForm.titleColor = object.title;
+      this.ruleForm.contentColor = object.contentColor;
       this.dialogFormVisible = true;
     },
     openAddClick() {
+      this.initFrom()
       this.dialogFormVisible = true;
     },
     addOneClick() {
       this.submitLoading = true;
+      this.ruleForm.reserveTime = dateToInt(this.ruleForm.reserveTime);
       addOrUpdateOneNoticeMessage(this.ruleForm).then(res => {
         if(res.data.code == 0) {
           this.tableData = res.data.data;
@@ -280,6 +297,9 @@ export default {
     statusChangeFlag(id) {
       this.statusFocusId = id
     },
+    reserveTimeC(timeStamp){
+      return getDate(timeStamp, 'year');
+    }
   },
   data() {
     return {
@@ -304,7 +324,7 @@ export default {
         type: '',
         sort: 0,
         content: '',
-        reserveTime: 0,
+        reserveTime: '',
         url: '',
         status: 0,
         description: '',
@@ -373,9 +393,6 @@ export default {
     },
     tableMaxHeight(){
       return this.screenHeight-160;
-    },
-    reserveTimeC(timeStamp){
-      return getDate(timeStamp, 'year');
     }
   }
 }
