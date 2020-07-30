@@ -404,6 +404,18 @@ export default [
         // icon: 'el-icon-position'
       },
       component: () => import('views/admin/system/Log'),
+    },{
+      path: '/admin/system/language',
+      name: 'adminSystemLanguage',
+      meta: {
+        hideInMenu: true,
+        title: '语言设置',
+        notCache: true,
+        tapNavPath: ['系统设置', '语言设置'],
+        description: '后台的语言管理'
+        // icon: 'el-icon-position'
+      },
+      component: () => import('views/admin/system/Language'),
     }],
   }
 ]

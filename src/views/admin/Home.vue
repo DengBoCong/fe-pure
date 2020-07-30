@@ -72,6 +72,7 @@
             <el-menu-item index="admin/system/log">日志服务</el-menu-item>
             <el-menu-item index="admin/system/notice">通告媒介</el-menu-item>
             <el-menu-item index="admin/system/advertise">广告管理</el-menu-item>
+            <el-menu-item index="admin/system/language">语言设置</el-menu-item>
           </el-submenu>
         </el-menu>
       </el-main>
@@ -363,6 +364,7 @@ export default {
         ["admin/system/notice", "通告媒介"],
         ["admin/system/advertise", "广告管理"],
         ["admin/system/log", "日志服务"],
+        ["admin/system/language", "语言设置"],
       ]),
       tapNavPath: [],//顶部导航路径
     };
