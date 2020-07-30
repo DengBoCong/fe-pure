@@ -116,7 +116,7 @@
           </template>
         </el-table-column>
       </el-table>
-      <el-dialog title="收货地址" 
+      <el-dialog title="通告具体信息" 
         :visible.sync="dialogFormVisible"
         width="60%">
         <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
@@ -140,7 +140,7 @@
               </el-form-item>
             </el-col>
             <el-col :span="10">
-              <el-form-item label="标题/内容">
+              <el-form-item label="预留时间">
                 <el-date-picker
                   v-model="ruleForm.reserveTime"
                   type="datetime"

@@ -10,11 +10,10 @@ export const getNoticeMessageTypeOne = info => {
 }
 
 //系统通告 - 查询所有的通告，默认他通过类型标记排序
-export const getAllNoticeMessage = info => {
+export const getAllNoticeMessage = () => {
   return axios.request({
     url: '/message/findAllNotice',
     method: 'get',
-    params: info,
   })
 }
 
@@ -41,6 +40,32 @@ export const getAdvertiseTypeOne = info => {
   return axios.request({
     url: '/message/findAdvertiseByType',
     method: 'get',
+    params: info,
+  })
+}
+
+//系统广告 - 查询所有的广告，默认通过类型标记排序
+export const getAllAdvertiseMessage = () => {
+  return axios.request({
+    url: '/message/findAllAdvertise',
+    method: 'get',
+  })
+}
+
+//系统广告 - 针对单个实体添加或者更新
+export const addOrUpdateOneAdvertiseMessage = info => {
+  return axios.request({
+    url: '/message/addAndUpdateOneAdvertise',
+    method: 'put',
+    data: info,
+  })
+}
+
+//系统广告 - 通过id删除单个广告
+export const deleteOneAdvertiseMessage = info => {
+  return axios.request({
+    url: '/message/deleteOneAdvertiseById',
+    method: 'delete',
     params: info,
   })
 }
