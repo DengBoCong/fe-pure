@@ -81,9 +81,9 @@ export default {
   },
   methods: {
     setAccess() {
-      setToken("USER_ACCESS_LIST", '');
-      setToken("ACCESS_LIST", '');
-      setToken("MESSAGE_TOKEN", '');
+      // setToken("USER_ACCESS_LIST", '');
+      // setToken("ACCESS_LIST", '');
+      // setToken("MESSAGE_TOKEN", '');
     }
   }
 }
