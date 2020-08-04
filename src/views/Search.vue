@@ -14,12 +14,12 @@
           <template slot="title">最近访问</template>
           <el-menu-item index="2-1" :disabled="true">无数据</el-menu-item>
         </el-submenu>
-        <el-menu-item index="3"><router-link to="/admin" class="noneDe">用户中心</router-link></el-menu-item>
-        <el-menu-item index="4"><router-link to="/admin" class="noneDe">任务中心</router-link></el-menu-item>
+        <el-menu-item index="3"><router-link to="/home" class="noneDe">首页</router-link></el-menu-item>
         <el-submenu index="6" style="float:right;">
           <template slot="title">中文</template>
-          <router-link to="/admin" class="noneDe"><el-menu-item index="admin">中文</el-menu-item></router-link>
-          <router-link to="/admin" class="noneDe"><el-menu-item index="admin">English</el-menu-item></router-link>
+          <!-- <router-link to="/admin" class="noneDe"><el-menu-item index="admin">中文</el-menu-item></router-link> -->
+          <el-menu-item index="admin">中文</el-menu-item>
+          <el-menu-item index="admin">English</el-menu-item>
         </el-submenu>
       </el-menu>
     </el-header>
@@ -28,9 +28,9 @@
         <el-card shadow="never">
           <el-row>
             <el-col :span="24">
-              <i>找到约 239,000,000 条结果 （用时 0.47 秒）</i>
+              <i>找到约 0 条结果 （用时 0.17 秒）</i>
               <el-checkbox-group v-model="checkboxGroup1" style="float:right;">
-                <el-checkbox-button v-for="city in ['上海', '北京', '广州', '深圳']" :label="city" :key="city">{{city}}</el-checkbox-button>
+                <el-checkbox-button disabled="false" v-for="city in ['工具', '资源', 'API', '文章']" :label="city" :key="city">{{city}}</el-checkbox-button>
               </el-checkbox-group>
             </el-col>
           </el-row>
@@ -39,11 +39,11 @@
               <el-collapse>
                 <el-collapse-item title="条件筛选 Filter" name="1">
                   <el-checkbox-group v-model="checkList">
-                    <el-checkbox label="复选框 A" border></el-checkbox>
-                    <el-checkbox label="复选框 B" border></el-checkbox>
-                    <el-checkbox label="复选框 C" border></el-checkbox>
-                    <el-checkbox label="禁用" disabled border></el-checkbox>
-                    <el-checkbox label="选中且禁用" disabled border></el-checkbox>
+                    <el-checkbox label="工具" border></el-checkbox>
+                    <el-checkbox label="资源" border></el-checkbox>
+                    <el-checkbox label="文章" border></el-checkbox>
+                    <el-checkbox label="API" disabled border></el-checkbox>
+                    <el-checkbox label="全部" disabled border></el-checkbox>
                   </el-checkbox-group>
                 </el-collapse-item>
               </el-collapse>
@@ -108,34 +108,6 @@ export default {
         date: '2016-05-02',
         name: '王小虎',
         address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-04',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1517 弄'
-      }, {
-        date: '2016-05-01',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1519 弄'
-      }, {
-        date: '2016-05-03',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1516 弄'
-      },{
-        date: '2016-05-03',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1516 弄'
-      },{
-        date: '2016-05-03',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1516 弄'
-      },{
-        date: '2016-05-03',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1516 弄'
-      },{
-        date: '2016-05-03',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1516 弄'
       }]
     }
   }

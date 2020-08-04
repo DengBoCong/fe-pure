@@ -9,13 +9,13 @@
           <div style="text-align:center;margin-top:10px;"><el-button type="text" @click="setAccess">{{userNickName}}</el-button></div>
           <p style="text-align:center;margin-top:10px;fontSize:13px;color:#868686;">{{userFlag}}</p>
         </div>
-        <el-divider content-position="center">介绍</el-divider>
+        <el-divider content-position="center">{{$t('home.introduce')}}</el-divider>
         <div>
         <p style="fontSize:13px;color:#868686;"><i class="el-icon-user"></i>    {{userFeature}}</p></br>
         <p style="fontSize:13px;color:#868686;"><i class="el-icon-medal"></i>    {{userPosition}}</p></br>
         <p style="fontSize:13px;color:#868686;"><i class="el-icon-house"></i>    {{userAddress}}</p>
         </div>
-        <el-divider content-position="center">其他</el-divider>
+        <el-divider content-position="center">{{$t('home.other')}}</el-divider>
         <div>
         <div>
           <el-link :underline="false" type="primary" href="https://github.com/DengBoCong">GitHub</el-link>

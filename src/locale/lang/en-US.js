@@ -25,6 +25,8 @@ export default {
     adminAboutRecord: 'AboutRecord',
   },
   home: {
-    notice: 'Bulletin Board'
+    notice: 'Bulletin Board',
+    other: 'Other',
+    introduce: 'Introduce',
   }
 }

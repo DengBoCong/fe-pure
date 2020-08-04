@@ -7,6 +7,8 @@
             <span>快捷工具</span>
           </div>
           <div>
+            <el-button type="text" disabled="false">暂无工具上线</el-button>
+            <!-- <el-button type="text">文字按钮</el-button>
             <el-button type="text">文字按钮</el-button>
             <el-button type="text">文字按钮</el-button>
             <el-button type="text">文字按钮</el-button>
@@ -15,9 +17,7 @@
             <el-button type="text">文字按钮</el-button>
             <el-button type="text">文字按钮</el-button>
             <el-button type="text">文字按钮</el-button>
-            <el-button type="text">文字按钮</el-button>
-            <el-button type="text">文字按钮</el-button>
-            <el-button type="text">更多...</el-button>
+            <el-button type="text">更多...</el-button> -->
           </div>
         </el-card>
       </div>
@@ -62,7 +62,7 @@ export default {
       });
       setTimeout(() => {
         loading.close();
-        this.workorderDialogVisible = true;
+        // this.workorderDialogVisible = true;
       }, 2000);
     },
   },

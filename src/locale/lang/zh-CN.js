@@ -25,6 +25,8 @@ export default {
     adminAboutRecord: '个人履历',
   },
   home: {
-    notice: '公告'
+    notice: '公告',
+    other: '其他',
+    introduce: '介绍',
   }
 }

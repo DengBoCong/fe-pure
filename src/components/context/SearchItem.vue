@@ -1,14 +1,14 @@
 <template>
   <div>
-    <div>GitHub - Wikipediaen.wikipedia.org › wiki › GitHub</div>
+    <div>搜索维护说明 - Pure › wiki › Search</div>
     <div>
       <router-link to="/admin" class="noneDe">GitHub - DengBoCong</router-link>
     </div>
-    <div>GitHub是通过Git进行版本控制的软件源代码托管服务平台，由GitHub公司（曾称Logical Awesome）的开发者Chris Wanstrath、PJ Hyett和Tom Preston-Werne</div>
+    <div>非常抱歉，由于目前系统版本搜索部分出现bug，搜索功能暂停使用，已关闭相关API，此搜索项仅为临时数据返回项</div>
     <div>
       相关：
-      <el-tag>标签一</el-tag>
-      <el-tag>标签一</el-tag>
+      <el-tag>维护</el-tag>
+      <el-tag>公告</el-tag>
     </div>
   </div>
 </template>

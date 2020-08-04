@@ -9,13 +9,13 @@
           </el-avatar>
         </el-col>
         <el-col :span="20">
-          <p style="font-size:13px;color:#B5B5B5;">2020-06-23 16:06:16</p>
+          <!-- <p style="font-size:13px;color:#B5B5B5;">2020-06-23 16:06:16</p> -->
           <el-card>
-            <p style="font-size:13px;">Hi，18870125082，中午好，很高兴跟你做朋友，以后请多多指教！</p>
+            <p style="font-size:13px;">Hi，我是Pure，目前智能服务正在开发中，希望能早日为你服务！</p>
           </el-card>
         </el-col>
       </el-row>
-      <el-row>
+      <!-- <el-row>
         <el-col :span="20">
           <p style="font-size:13px;color:#B5B5B5;">2020-06-23 16:06:16</p>
           <el-card>
@@ -29,7 +29,7 @@
             src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png">
           </el-avatar>
         </el-col>
-      </el-row>
+      </el-row> -->
     </el-main>
     <el-divider></el-divider>
     <el-footer style="padding:0;height:150px;">
