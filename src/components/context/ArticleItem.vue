@@ -30,7 +30,7 @@
         发布于 {{publishDate}}
       </span>
     </div>
-    <div style="margin-top:10px;">
+    <!-- <div style="margin-top:10px;">
       <span>
         <i class="el-icon-view">{{itemData.articleEntity.readNum}}</i>
       </span>
@@ -42,7 +42,7 @@
       <span>
         <i class="el-icon-chat-dot-round">{{itemData.articleEntity.commentNum}}</i>
       </span>
-    </div>
+    </div> -->
   </div>
 </template>
 

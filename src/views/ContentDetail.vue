@@ -17,7 +17,7 @@
           <span>
             {{publishTime}}
           </span>
-          <el-divider direction="vertical"></el-divider>
+          <!-- <el-divider direction="vertical"></el-divider>
           <div style="float:right;">
             <span>
               <i class="el-icon-view">{{readNum}}</i>
@@ -30,7 +30,7 @@
             <span>
               <i class="el-icon-chat-dot-round">{{commentNum}}</i>
             </span>
-          </div>
+          </div> -->
           <div style="margin-top:10px;">
             文章标签：
             <b>
@@ -50,7 +50,7 @@
       <el-container :style="height" style="width:100%;">
         <el-scrollbar style="height:100%;width:100%;" >
           <Markdown v-bind:content="content"></Markdown>
-          <div style="height:100px;"></div>
+          <div style="height:250px;"></div>
         </el-scrollbar>
       </el-container>
     </el-card>
@@ -91,7 +91,7 @@ export default {
     this.screenHeight = document.body.clientHeight;
     getArticleByArticleId({articleId:this.$route.params.id}).then(res => {//通过文章id加载文章信息
       if(res.data.code == 0) {
-        this.content = res.data.data.articleEntity.content;
+        this.content = res.data.data.articleEntity.contentHtml;
         this.title = res.data.data.articleEntity.title + " - " + res.data.data.articleEntity.subTitle;
         this.publishTime = getDate(parseInt(res.data.data.articleEntity.publishTime), "year");
         this.readNum = res.data.data.articleEntity.readNum;
